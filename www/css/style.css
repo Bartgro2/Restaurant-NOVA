@@ -1,45 +1,52 @@
 * {
-    margin: 0;
-    padding: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 70px; 
+  width: 100%; 
+  position: fixed; 
+  background-color: #333;
+  top: 0; 
 }
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    display: flex; /* Flex container */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: #333;
+  width: 100%;
+  justify-content: center; 
 }
-  
-li {
-    flex: 1; /* Gelijkmatig verdeelde ruimte voor elk item */
+
+li:last-child {
+  margin-right: 0; 
 }
 
 li a {
-    display: flex; /* Flex container voor de anker-elementen */
-    justify-content: center; /* Centreer de inhoud horizontaal */
-    align-items: center; /* Centreer de inhoud verticaal */
-    color: white;
-    text-decoration: none;
-    padding: 10px 14px; /* Aangepaste padding */
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  color: white;
+  text-align: center;
+  padding: 25px 30px; 
+  text-decoration: none;
 }
 
-/* Verander de achtergrondkleur naar #111 (zwart) bij hover */
 li a:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
-  
+.active {
+  background-color: #04AA6D; 
+}
 
-
-
-
-
-/*
-dropdown nav
-
-<style>
 .dropdown {
   position: relative;
   display: inline-block;
@@ -48,9 +55,11 @@ dropdown nav
 .dropdown-content {
   display: none;
   position: absolute;
+  top: 100%; /* Position the dropdown content below the dropdown button */
+  left: 0; /* Align the left edge of the dropdown content with the left edge of the dropdown button */
   background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  width: 125px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
 }
@@ -58,12 +67,18 @@ dropdown nav
 .dropdown:hover .dropdown-content {
   display: block;
 }
-</style>
 
-<div class="dropdown">
-  <span>Mouse over me</span>
-  <div class="dropdown-content">
-    <p>Hello World!</p>
-  </div>
-</div>
-/*
+footer {
+  height: 70px;
+  background-color: #333;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  padding: 10px; 
+  text-align: center; 
+}
+
+
+
+
+

@@ -16,11 +16,9 @@ require 'database.php';
 </head>
 
 <body>
-    <?php include 'header.php' ?>
-   
+    <?php include 'nav.php' ?>
+    <?php include 'footer.php' ?>
     
-
-   
 </body>
 
 </html>
