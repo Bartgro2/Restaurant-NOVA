@@ -22,9 +22,9 @@ require 'footer.php';
 <main>
     <div class="account-pagina">
         <div class="form-panel">    
-            <h1>menugang maken</h1> <!-- Form title -->
+            <h1>categorie maken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="menugang_create_process.php" method="POST">
+            <form action="categorieën_create_process.php" method="POST">
                     <div class="input-groep">
                         <label for="naam">naam</label>
                         <input type="text" id="naam" name="naam">

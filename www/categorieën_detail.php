@@ -6,13 +6,13 @@ require 'footer.php';
 require 'nav.php';
 
 if (isset($_GET['id'])) {
-    $menugang_id = $_GET['id'];
+    $categorie_id = $_GET['id'];
 
     
-  $stmt = $conn->prepare("SELECT * FROM menugangen WHERE menugang_id = :menugang_id");
-  $stmt->bindParam(':menugang_id', $menugang_id);
+  $stmt = $conn->prepare("SELECT * FROM categorieen WHERE categorie_id = :categorie_id");
+  $stmt->bindParam(':categorie_id', $categorie_id);
   $stmt->execute();
-  $menugang = $stmt->fetch(PDO::FETCH_ASSOC);
+  $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
     
 }
 
@@ -29,10 +29,10 @@ if (isset($_GET['id'])) {
 <body>
     <main>
     <div class="container">
-        <?php if (isset($menugang)) : ?>          
-                        <p><?php echo $menugang['naam'] ?></p> <!-- Corrected variable name --> 
+        <?php if (isset($categorie)) : ?>          
+                        <p><?php echo $categorie['naam'] ?></p> <!-- Corrected variable name --> 
         <?php else : ?>
-            <p>menugang not found.</p>
+            <p>categorie not found.</p>
         <?php endif; ?>
     </div>
 </main>

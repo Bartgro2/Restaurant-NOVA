@@ -1,10 +1,11 @@
 <?php
 require 'database.php';
 
-$stmt = $conn->prepare("SELECT menugang_id, naam FROM menugangen");
+
+$stmt = $conn->prepare("SELECT * FROM categorieen");
 $stmt->execute();
 // set the resulting array to associative
-$menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -33,14 +34,14 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($menugangen as $menugang) : ?>
+                <?php foreach ($categories as $categorie) : ?>
                     <tr>
-                        <td><?php echo $menugang['menugang_id'] ?></td>
-                        <td><?php echo $menugang['naam'] ?></td>
+                        <td><?php echo $categorie['categorie_id'] ?></td>
+                        <td><?php echo $categorie['naam'] ?></td>
                         <td>
-                            <a href="menugang_detail.php?id=<?php echo $menugang['menugang_id'] ?>">Bekijk</a>
-                            <a href="menugang_edit.php?id=<?php echo $menugang['menugang_id'] ?>">Wijzig</a>
-                            <a href="menugang_delete.php?id=<?php echo $menugang['menugang_id'] ?>">Verwijder</a>
+                            <a href="categorieën_detail.php?id=<?php echo $categorie['categorie_id'] ?>">Bekijk</a>
+                            <a href="categorieën_edit.php?id=<?php echo $categorie['categorie_id'] ?>">Wijzig</a>
+                            <a href="categorieën_delete.php?id=<?php echo $categorie['categorie_id'] ?>">Verwijder</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
