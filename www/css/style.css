@@ -193,7 +193,15 @@ section{
   height: 1100px;
   border-radius: 4px;
   width: 600px;
-  
+}
+
+.account-pagina2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  border-radius: 4px;
+  width: 600px;
 }
 
 .form-panel {

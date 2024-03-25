@@ -20,7 +20,7 @@ require 'footer.php';
 </body>
 </html>
 <main>
-    <div class="account-pagina">
+    <div class="account-pagina2">
         <div class="form-panel">
            <!-- New div wrapper for vertical centering -->
                 <h1>categorie maken</h1> <!-- Form title -->
