@@ -48,22 +48,23 @@ require 'nav.php';
 </head>
 <body>
 <main>
-        <div class="account-pagina">
-            <div class="form-panel">
-                <h1>workouts aanmaken</h1>
-                <form action="verwerk-nieuwe-workout.php" method="post">
-
+    <div class="account-pagina">
+        <div class="form-panel">    
+            <h1>menugang bijwerken</h1> <!-- Form title -->
+            <hr class="separator"> <!-- Add horizontal line as a separator -->
+            <form action="menugang_update.php?id=<?php echo $menugang_id ?>" method="POST">
                     <div class="input-groep">
-                        <label for="omschrijving">omschrijving</label>
-                        <input type="text" name="omschrijving" id="omschrijving">
+                        <label for="naam">naam</label>
+                        <input type="text" id="naam" name="naam" value="<?php echo $menugang['naam'] ?>">
                     </div>
-
                     <div class="input-groep">
-                        <button type="submit" class="input-button"> Aanmaken</button>
-                    </div>
-            </div>
+                        <button type="submit" class="input-button"> bijwerken </button>
+                    </div> 
+            </form>
         </div>
-    </main>
+    </div>
+</main>
+
 
 
 <?php require 'footer.php' ?>

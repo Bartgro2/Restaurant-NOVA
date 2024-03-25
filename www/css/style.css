@@ -100,25 +100,6 @@ main {
   justify-content: center; /* Horizontally center the container */
 }
 
-button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  background-color: black;
-  position: relative; /* Maak de positie relatief */
-  top: -10px; /* Verplaats de knoppen 10 pixels omhoog */
-}
-
-button:hover {
-  background-color: #333; /* Slightly less black */
-}
-
 /* table styling  */
 
 table {
@@ -161,6 +142,25 @@ section{
   font-family:  Times New Roman;
 }
 
+.white-section button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: black;
+  position: relative; /* Maak de positie relatief */
+  top: -10px; /* Verplaats de knoppen 10 pixels omhoog */
+}
+
+.white-section button:hover {
+  background-color: #333; /* Slightly less black */
+}
+
 .hero-image {
   height: 200px;
   width: 1500px;
@@ -181,6 +181,68 @@ section{
   width: 100%; 
 }
 
+.account-pagina {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(80vh - 10px);
+  border-radius: 4px;
+  width: 600px;
+}
+
+.form-panel {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.form-panel h1 {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.input-groep {
+  width: 100%; /* Full width for input group */
+  margin-bottom: 10px;
+}
+
+.input-groep button{
+  width: 100%;
+  height: 40px; /* Adjust height as needed */
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.input-groep button:hover{
+  background-color: lightblue;
+}
+
+.input-groep label {
+  display: block;
+  padding-bottom: 5px;
+  font-size: 20px; /* Adjust the font size as needed */
+  font-weight: bold; /* Optionally make the label text bold */
+}
+
+.input-groep input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.separator {
+  border-top: 1px solid #ccc; /* Add a border-top to create a horizontal line */
+  margin: 20px 0; /* Adjust margin as needed */
+}
 
 
 
