@@ -1,7 +1,7 @@
 <?php
 require 'database.php';
 
-$stmt = $conn->prepare("SELECT menugangen.menugang_id, menugangen.naam AS menugang_naam, producten.naam AS menu_item FROM menugangen JOIN producten ON menugangen.product_id = producten.product_id");
+$stmt = $conn->prepare("SELECT menugang_id, naam FROM menugangen");
 $stmt->execute();
 // set the resulting array to associative
 $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,16 +29,14 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <th>id</th>
                         <th>naam</th>
-                        <th>gerecht</th>
-                        <th>Acties</th> <!-- Added column for actions -->
+                        <th>Acties</th> 
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($menugangen as $menugang) : ?>
                     <tr>
                         <td><?php echo $menugang['menugang_id'] ?></td>
-                        <td><?php echo $menugang['menugang_naam'] ?></td>
-                        <td><?php echo $menugang['menu_item'] ?></td>
+                        <td><?php echo $menugang['naam'] ?></td>
                         <td>
                             <a href="menugang_detail.php?id=<?php echo $menugang['menugang_id'] ?>">Bekijk</a>
                             <a href="menugang_edit.php?id=<?php echo $menugang['menugang_id'] ?>">Wijzig</a>

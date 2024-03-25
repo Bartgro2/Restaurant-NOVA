@@ -1,9 +1,12 @@
 <?php
-
-
 require 'database.php';
 
+$stmt = $conn->prepare("SELECT * FROM producten"); // Fetch only one row
+$stmt->execute();
+$product = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the single row
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +21,27 @@ require 'database.php';
 <body>
     <?php include 'nav.php' ?>
     <?php include 'footer.php' ?>
-    
+    <main>
+    <section>
+        <div class="hero-image" style="background-image: url(<?php echo isset($product['image']) ? 'images/' . $product['image'] : 'https://placehold.co/200' ?>);">
+            <div class="container">
+                <div class="hero-text">
+                    <h1>Over ons</h1>
+                </div>
+            </div>
+        </div>
+        <section class="white-section">
+            <div class="container">
+            <p>"Australian Delights" is gelegen in Alkmaar en opende haar deuren in 2022.</p>
+<p>Wij bieden een eigentijdse benadering van de Australische keuken, waarbij we de diverse smaken van Australië combineren met invloeden uit Europa, Azië en de Middellandse Zee.</p>
+<p>Bij ons kunt u niet alleen genieten van heerlijke gerechten, maar ook ontspannen op ons terras onder het genot van een verfrissend drankje.</p>
+<p>We streven ernaar om een gastvrije omgeving te creëren waar iedereen zich thuis voelt.</p>
+            <button type="button">reservering</button>
+            <button type="button">menu</button>
+            </div>       
+        </section>   
+    </section>    
+</main>
 </body>
 
 </html>
