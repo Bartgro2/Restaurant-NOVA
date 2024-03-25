@@ -12,7 +12,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="" class="dropbtn">menugang</a>
              <div class="dropdown-content">
                  <a href="menugang_index.php">bekijken</a>
-                 <a href="#">toevoegen</a>
+                 <a href="menugang_create.php">toevoegen</a>
              </div>
             </li>
             <li class="dropdown"> 
