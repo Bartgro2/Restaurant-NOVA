@@ -23,8 +23,9 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'footer.php' ?>
 
 
-    <div class="container">
+  
         <main>
+              <div class="container">
             <table>
                 <thead>
                     <tr>
@@ -36,9 +37,9 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                 <?php foreach ($categories as $categorie) : ?>
                     <tr>
-                        <td><?php echo $categorie['categorie_id'] ?></td>
-                        <td><?php echo $categorie['naam'] ?></td>
-                        <td>
+                        <td> <?php echo $categorie['categorie_id'] ?></td>
+                        <td> <?php echo $categorie['naam'] ?></td>
+                        <td> 
                             <a href="categorieën_detail.php?id=<?php echo $categorie['categorie_id'] ?>">Bekijk</a>
                             <a href="categorieën_edit.php?id=<?php echo $categorie['categorie_id'] ?>">Wijzig</a>
                             <a href="categorieën_delete.php?id=<?php echo $categorie['categorie_id'] ?>">Verwijder</a>

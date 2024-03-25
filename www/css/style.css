@@ -98,14 +98,19 @@ footer {
 main {
   display: flex;
   justify-content: center; /* Horizontally center the container */
+  height: auto;
 }
 
 /* table styling  */
 
+.container table{
+  margin-top: 40px;
+}
+
 table {
-  width: 100%;
+  width: 60%;
   border-collapse: collapse;
-  margin-top: 20px; /* Add margin to separate the table from the content above */
+   /* Add margin to separate the table from the content above */
 }
 
 th, td {
@@ -118,9 +123,7 @@ th {
   text-align: left;
 }
 
-
 /* index.php  */ 
-
 section{
   width: 1500px;
   text-align: center; 
@@ -181,13 +184,16 @@ section{
   width: 100%; 
 }
 
+
+
 .account-pagina {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(80vh - 10px);
+  height: 1100px;
   border-radius: 4px;
   width: 600px;
+  
 }
 
 .form-panel {
@@ -204,7 +210,7 @@ section{
 
 .input-groep {
   width: 100%; /* Full width for input group */
-  margin-bottom: 10px;
+  padding: 6px 0px;
 }
 
 .input-groep button{
@@ -224,25 +230,34 @@ section{
 .input-groep label {
   display: block;
   padding-bottom: 5px;
-  font-size: 20px; /* Adjust the font size as needed */
+  font-size: 18px; /* Adjust the font size as needed */
   font-weight: bold; /* Optionally make the label text bold */
 }
 
-.input-groep input[type="text"],
+.input-groep textarea{
+  resize:  none;
+  height: 75px;
+}
+
+.input-groep input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="email"], textarea,
 select {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
+  display: block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
 .separator {
-  border-top: 1px solid #ccc; /* Add a border-top to create a horizontal line */
-  margin: 20px 0; /* Adjust margin as needed */
+  border-top: 1px solid #ccc; 
 }
+
+
+
+
+
+
 
 
 

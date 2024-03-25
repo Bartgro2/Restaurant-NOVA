@@ -1,13 +1,12 @@
 <?php
 require 'database.php';
 
-
-$stmt = $conn->prepare("SELECT * FROM categorieen");
+$stmt = $conn->prepare("SELECT *, producten.naam as naam, menugangen.naam as menugang, categorieen.naam as categorie FROM producten 
+JOIN categorieen ON categorieen.categorie_id = producten.categorie_id
+JOIN menugangen ON menugangen.menugang_id = producten.menugang_id");
 $stmt->execute();
 // set the resulting array to associative
-$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
+$producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +21,6 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'nav.php' ?>
     <?php include 'footer.php' ?>
 
-
     <div class="container">
         <main>
             <table>
@@ -30,18 +28,33 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <th>id</th>
                         <th>naam</th>
+                        <th>menugang</th>
+                        <th>categorie</th>
+                        <th>beschrijving</th>
+                        <th>inkoopprijs</th>
+                        <th>verkoopprijs</th>
+                        <th>vega</th>
+                        <th>aantal</th>
                         <th>Acties</th> 
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($categories as $categorie) : ?>
+                <?php foreach ($producten as $product) : ?>
                     <tr>
-                        <td><?php echo $categorie['categorie_id'] ?></td>
-                        <td><?php echo $categorie['naam'] ?></td>
+                        <td><?php echo $product['product_id'] ?></td>
+                        <td><?php echo $product['naam'] ?></td>
+                        <td><?php echo $product['menugang'] ?></td>
+                        <td><?php echo $product['categorie'] ?></td>
+                        <td><?php echo $product['beschrijving'] ?></td>
+                        <td><?php echo $product['inkoopprijs'] ?></td>
+                        <td><?php echo $product['verkoopprijs'] ?></td>
+                        <td><?php echo $product['vega'] ?></td>
+                        <td><?php echo $product['aantal_voorraad'] ?></td>
+                        <!-- Geen Acties kolom omdat deze niet wordt geselecteerd in de query -->
                         <td>
-                            <a href="categorieën_detail.php?id=<?php echo $categorie['categorie_id'] ?>">Bekijk</a>
-                            <a href="categorieën_edit.php?id=<?php echo $categorie['categorie_id'] ?>">Wijzig</a>
-                            <a href="categorieën_delete.php?id=<?php echo $categorie['categorie_id'] ?>">Verwijder</a>
+                            <a href="producten_detail.php?id=<?php echo $product['product_id'] ?>">Bekijk</a>
+                            <a href="producten_edit.php?id=<?php echo $product['product_id'] ?>">Wijzig</a>
+                            <a href="producten_delete.php?id=<?php echo $product['product_id'] ?>">Verwijder</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -51,5 +64,6 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </body>
 </html>
+
 
 

@@ -22,8 +22,9 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'footer.php' ?>
 
 
-    <div class="container">
+    
         <main>
+            <div class="container">
             <table>
                 <thead>
                     <tr>
@@ -46,8 +47,9 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
                 </tbody>
             </table>
+        </div>
         </main>
-    </div>
+    
 </body>
 </html>
 

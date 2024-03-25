@@ -21,10 +21,11 @@ require 'footer.php';
 </html>
 <main>
     <div class="account-pagina">
-        <div class="form-panel">    
-            <h1>categorie maken</h1> <!-- Form title -->
-            <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="categorieën_create_process.php" method="POST">
+        <div class="form-panel">
+           <!-- New div wrapper for vertical centering -->
+                <h1>categorie maken</h1> <!-- Form title -->
+                <hr class="separator"> <!-- Add horizontal line as a separator -->
+                <form action="categorieën_create_process.php" method="POST">
                     <div class="input-groep">
                         <label for="naam">naam</label>
                         <input type="text" id="naam" name="naam">
@@ -32,7 +33,8 @@ require 'footer.php';
                     <div class="input-groep">
                         <button type="submit" class="input-button"> aanmaken </button>
                     </div> 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+ 
 </main>

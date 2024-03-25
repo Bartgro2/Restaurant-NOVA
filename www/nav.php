@@ -22,6 +22,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <a href="categorieën_create.php">toevoegen</a>
                 </div>
             </li>
+            <li class="dropdown"> 
+                <a href="" class="dropbtn">producten</a>
+                <div class="dropdown-content">
+                    <a href="producten_index.php">bekijken</a>
+                    <a href="producten_create.php">toevoegen</a>
+                </div>
+                </li>
             <li> <a href="#">dashboard</a></li>
             <li class="dropdown"> 
                 <a href="#" class="dropbtn">gebruikers</a>
