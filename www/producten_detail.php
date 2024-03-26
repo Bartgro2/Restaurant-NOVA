@@ -1,21 +1,21 @@
 <?php
-session_start();
+
 
 require 'database.php';
 require 'footer.php';
 require 'nav.php';
 
 if (isset($_GET['id'])) {
-    $categorie_id = $_GET['id'];
+    $product_id = $_GET['id'];
 
-    
-  $stmt = $conn->prepare("SELECT * FROM categorieen WHERE categorie_id = :categorie_id");
-  $stmt->bindParam(':categorie_id', $categorie_id);
-  $stmt->execute();
-  $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+    $stmt = $conn->prepare("SELECT *, menugangen.naam as menugang, categorieen.naam as categorie, producten.naam as naam FROM producten
+    JOIN menugangen ON producten.menugang_id = menugangen.menugang_id
+    JOIN categorieen ON producten.categorie_id = categorieen.categorie_id
+    WHERE producten.product_id = :product_id");
+    $stmt->bindParam(':product_id', $product_id); // Bind the product_id parameter
+    $stmt->execute();
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -28,16 +28,19 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <main>
-    <div class="container">
-        <?php if (isset($categorie)) : ?>          
-                        <p><?php echo $categorie['naam'] ?></p> <!-- Corrected variable name --> 
-        <?php else : ?>
-            <p>categorie not found.</p>
-        <?php endif; ?>
-    </div>
-</main>
+        <div class="container">
+            <?php if (isset($product)) : ?>          
+                <p><?php echo $product['menugang'] ?></p>
+                <p><?php echo $product['categorie'] ?></p>
+                <!-- Display other product details here -->
+            <?php else : ?>
+                <p>Product not found.</p>
+            <?php endif; ?>
+        </div>
+    </main>
 </body>
 </html>
+
 
 
 
