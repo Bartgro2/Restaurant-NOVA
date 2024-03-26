@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 
 require 'database.php';
 
@@ -12,7 +11,6 @@ if (isset($_GET['id'])) {
     // Prepare the SQL statement
     $sql = "SELECT * FROM menugangen WHERE menugang_id = :menugang_id";
     $stmt = $conn->prepare($sql);
-    
 
     // Bind the parameter
     $stmt->bindParam(":menugang_id", $menugang_id);
@@ -48,7 +46,7 @@ require 'nav.php';
 </head>
 <body>
 <main>
-    <div class="account-pagina">
+    <div class="account-pagina2">
         <div class="form-panel">    
             <h1>menugang bijwerken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->

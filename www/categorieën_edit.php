@@ -48,7 +48,7 @@ require 'nav.php';
 </head>
 <body>
 <main>
-    <div class="account-pagina">
+    <div class="account-pagina2">
         <div class="form-panel">    
             <h1>categorie bijwerken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
