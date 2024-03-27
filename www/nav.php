@@ -34,11 +34,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <a href="#" class="dropbtn">gebruikers</a>
                 <div class="dropdown-content">
                     <a href="#">bekijken</a>
-                    <a href="#">toevoegen</a>
+                    <a href="gebruikers_create.php">toevoegen</a>
                 </div>
             </li>
             <li> <a href="#">inloggen</a></li>
-            <li> <a href="#">registeren</a></li>
         </ul>
     </div>
 </nav>
