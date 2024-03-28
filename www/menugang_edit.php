@@ -1,9 +1,20 @@
 <?php
 
-
 require 'database.php';
 
+session_start();
 
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+    echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
+    echo " login als een andere rol, hier <a href='login.php'> login </a>";
+    exit;
+}
 
 if (isset($_GET['id'])) {
     $menugang_id = $_GET['id'];
@@ -62,9 +73,6 @@ require 'nav.php';
         </div>
     </div>
 </main>
-
-
-
 <?php require 'footer.php' ?>
 </body>
 </html>

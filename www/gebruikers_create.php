@@ -20,7 +20,7 @@ require 'footer.php';
     <div class="account-pagina">
         <div class="form-panel">       
             <h1>registeren</h1> 
-            <hr class="separator"> <
+            <hr class="separator">
             <form action="gebruikers_create_process.php" method="POST">
     <div class="input-groep">
         <label for="voornaam">Voornaam</label>

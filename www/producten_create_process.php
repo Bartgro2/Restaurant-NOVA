@@ -1,5 +1,22 @@
 <?php
-ob_start(); 
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+    echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
+    echo " login als een andere rol, hier <a href='login.php'> login </a>";
+    exit;
+}
+
+// Check if the request method is not POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug <a href='gebruikers_create.php'> menugang aanmaken </a>";
+    exit;
+}
 
 
 require 'database.php';
@@ -42,8 +59,7 @@ if ($target_file) {
 } else {
     echo "No file uploaded.";
 }
-
-ob_end_flush(); 
+ 
 ?>
 
 

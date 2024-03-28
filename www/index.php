@@ -1,4 +1,6 @@
 <?php
+
+
 require 'database.php';
 
 $stmt = $conn->prepare("SELECT * FROM producten"); // Fetch only one row

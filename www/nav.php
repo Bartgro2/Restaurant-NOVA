@@ -1,6 +1,18 @@
 <?php
 // Get the current page file name
 $current_page = basename($_SERVER['PHP_SELF']);
+
+if (isset($_SESSION['user_id'])) {
+    // If logged in, display "Logout" link
+    $login_link = '<a href="logout.php">Logout</a>';
+} else {
+    // If not logged in, display "Login" link
+    $login_link = '<a href="login.php">Login</a>';
+}
+
+
+
+
 ?>
 
 <nav>
@@ -37,7 +49,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <a href="gebruikers_create.php">toevoegen</a>
                 </div>
             </li>
-            <li> <a href="#">inloggen</a></li>
+            <li><?php echo $login_link; ?></li>
         </ul>
     </div>
 </nav>
