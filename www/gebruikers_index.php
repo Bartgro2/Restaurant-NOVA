@@ -7,15 +7,17 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Check if role is not admin, manager or medewerker
 if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
     echo " login als een andere rol, hier <a href='login.php'> login </a>";
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo "<a href='gebruikers_index.php'> ga terug </a>";
+    echo " ga terug naar <a href='dashboard.php'> dashboard </a>";
     exit;
 }
 
@@ -71,7 +73,7 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo $gebruiker['rol'] ?></td>
                             <td>
                                 <?php if ($_SESSION['role'] === 'admin' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || $gebruiker['rol'] !== 'admin')) : ?>
-                                    <!-- View, Edit, and delete all users except for other admins -->
+                                    <!-- Admin actions: View, Edit, and delete all users except for other admins -->
                                     <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
                                     <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Wijzig</a>
                                     <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>

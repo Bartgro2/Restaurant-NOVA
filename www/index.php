@@ -3,9 +3,9 @@
 
 require 'database.php';
 
-$stmt = $conn->prepare("SELECT * FROM producten"); // Fetch only one row
+$stmt = $conn->prepare("SELECT * FROM producten");
 $stmt->execute();
-$product = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the single row
+$product = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 

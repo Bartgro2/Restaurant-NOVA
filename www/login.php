@@ -1,5 +1,12 @@
 <?php
 
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug naar <a href='dashboard.php'> dashboard </a>";
+    exit;
+}
+
 require 'nav.php';
 require 'footer.php';
 

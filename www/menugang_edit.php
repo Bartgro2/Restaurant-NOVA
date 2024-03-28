@@ -1,6 +1,6 @@
 <?php
 
-require 'database.php';
+
 
 session_start();
 
@@ -10,23 +10,30 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+// Check if role is not admin, manager or medewerker
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
-    echo " login als een andere rol, hier <a href='login.php'> login </a>";
+    echo " ga terug naar <a href='login.php'> menugang </a>";
     exit;
 }
+
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug naar <a href='menugang.php'> menugang </a>";
+    exit;
+}
+
+require 'database.php';
 
 if (isset($_GET['id'])) {
     $menugang_id = $_GET['id'];
 
-    // Prepare the SQL statement
     $sql = "SELECT * FROM menugangen WHERE menugang_id = :menugang_id";
     $stmt = $conn->prepare($sql);
 
-    // Bind the parameter
     $stmt->bindParam(":menugang_id", $menugang_id);
 
-    // Execute the statement
     if ($stmt->execute()) {
         if ($stmt->rowCount() > 0) {
             $menugang = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -35,12 +42,12 @@ if (isset($_GET['id'])) {
             // No category found with the given ID
             echo "No category found with this ID <br>";
             echo "<a href='tool_index.php'>Go back</a>";
-            exit; // You may want to exit here to prevent further execution
+            exit; 
         }
     } else {
         // Error in executing SQL statement
         echo "Error executing SQL statement";
-        exit; // You may want to exit here to prevent further execution
+        exit; 
     }
 }
 

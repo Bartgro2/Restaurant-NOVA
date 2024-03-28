@@ -8,17 +8,19 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Check if role is not admin, manager or medewerker
 if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
     echo " login als een andere rol, hier <a href='login.php'> login </a>";
     exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "You are not allowed to view this page ";
-    echo " ga terug <a href='gebruikers_create.php'> login </a>";
-    exit;
-}
+  }
+  
+  // Check if the request method is not POST
+  if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+      echo "You are not allowed to view this page ";
+      echo " ga terug naar <a href='producten_index.php'> producten </a>";
+      exit;
+  }
 
 require 'database.php';
 

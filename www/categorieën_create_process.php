@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Check if role is not admin, manager or medewerker
 if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
     echo " login als een andere rol, hier <a href='login.php'> login </a>";
@@ -23,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require 'database.php';
 
-$name = $_POST['naam']; // Correct variable name
+$name = $_POST['naam']; 
 
 $stmt = $conn->prepare("INSERT INTO categorieen (naam) VALUES (:naam)");
 
-$stmt->bindParam(':naam', $name); // Use the correct variable name here
+$stmt->bindParam(':naam', $name); 
 
 $stmt->execute();
 

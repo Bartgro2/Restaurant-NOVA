@@ -8,16 +8,17 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+// Check if role is not admin, manager or medewerker
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
-    echo " login als een andere rol, hier <a href='login.php'> login </a>";
+    echo " ga terug naar <a href='login.php'> menugang </a>";
     exit;
 }
 
+// Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
-    echo " ga terug <a href='gebruikers_create.php'> login </a>";
-    exit;
+    echo " ga terug <a href='menugang.php'> menugang </a>";
 }
 
 $naam = $_POST['naam'];
@@ -34,10 +35,10 @@ $stmt->bindParam(':naam', $naam);
 $stmt->bindParam(':menugang_id', $id);
 
 if ($stmt->execute()) {
-    header("Location: menugang_index.php"); // Redirect to menugang_index.php
-    exit; // Make sure to exit after redirecting
+    header("Location: menugang_index.php"); 
+    exit; 
 } else {
-    echo "Error updating menugang"; // Add error handling if needed
+    echo "Error updating menugang";
 }
 ?>
 

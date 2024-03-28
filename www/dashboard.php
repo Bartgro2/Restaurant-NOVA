@@ -2,9 +2,7 @@
 
 session_start();
 
-require 'database.php';
-require 'nav.php';
-require 'footer.php';
+
 
 
 if (!isset($_SESSION['user_id'])) {
@@ -12,6 +10,10 @@ if (!isset($_SESSION['user_id'])) {
     echo "<a href='login.php'>Login here</a>";
     exit;
 }
+
+require 'database.php';
+require 'nav.php';
+require 'footer.php';
 
 ?>
 
@@ -27,9 +29,6 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <main>
          <div class="dashboard-container">
-
-
-        
 
         <div class="dashboard-details">
 
