@@ -37,6 +37,8 @@ if (isset($_GET['id'])) {
     if ($stmt->execute()) {
         if ($stmt->rowCount() > 0) {
             $menugang = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            
             // Process the retrieved data (if needed)
         } else {
             // No category found with the given ID

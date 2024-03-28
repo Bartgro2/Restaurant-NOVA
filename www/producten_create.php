@@ -1,9 +1,7 @@
 <?php
 
 
-require 'database.php';
-require 'nav.php';
-require 'footer.php';
+
 
 session_start();
 
@@ -27,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
+require 'database.php';
+require 'nav.php';
+require 'footer.php';
 
 $sql = "SELECT * FROM categorieen";
 $stmt = $conn->prepare($sql);

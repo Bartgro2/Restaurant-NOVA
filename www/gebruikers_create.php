@@ -3,11 +3,10 @@
 // Check if the request method is not GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo "<a href='login.php'> login </a>";
+    echo "<a href='index.php'> ga terug </a>";
     exit;
 }
 
-require 'database.php';
 require 'nav.php';
 require 'footer.php';
 

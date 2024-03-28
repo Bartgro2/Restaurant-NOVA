@@ -29,17 +29,17 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // Select the record to delete
-    $sql_select = "SELECT * FROM menugangen WHERE menugang_id = :id";
-    $stmt_select = $conn->prepare($sql_select);
-    $stmt_select->bindParam(":id", $id);
-    $stmt_select->execute();
+    $sql = "SELECT * FROM menugangen WHERE menugang_id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 
-    if ($stmt_select->rowCount() > 0) {
+    if ($stmt->rowCount() > 0) {
         // Delete the record
-        $sql_delete = "DELETE FROM menugangen WHERE menugang_id = :id";
-        $stmt_delete = $conn->prepare($sql_delete);
-        $stmt_delete->bindParam(":id", $id);
-        if ($stmt_delete->execute()) {
+        $sql = "DELETE FROM menugangen WHERE menugang_id = :id";
+        $stmt = $conn->prepare($sql2);
+        $stmt->bindParam(":id", $id);
+        if ($stmt->execute()) {
             header("Location: menugang_index.php"); // Redirect to menugang_index.php
             exit; // Make sure to exit after redirecting
         } else {

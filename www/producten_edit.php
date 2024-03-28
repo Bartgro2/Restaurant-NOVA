@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
         } else {
             // No product found with the given ID
             echo "No product found with this ID <br>";
-            echo "<a href='tool_index.php'>Go back</a>";
+            echo "<a href='prodocuten_index.php'>Go back</a>";
             exit; // You may want to exit here to prevent further execution
         }
     } else {

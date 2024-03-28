@@ -101,8 +101,8 @@ if (empty($errors)) {
                 exit;
             } else {
                 $errors[] = "Error inserting user data.";
-                sleep(5);
                 header("Location: login.php");
+                exit;
             }
         } else {
             $errors[] = "Error inserting address data.";

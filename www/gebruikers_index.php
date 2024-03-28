@@ -17,7 +17,7 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
 // Check if the request method is not GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='dashboard.php'> dashboard </a>";
+    echo " ga terug naar <a href='gebruikers_index.php'> gebruikers </a>";
     exit;
 }
 
