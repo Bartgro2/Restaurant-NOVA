@@ -7,21 +7,13 @@ require 'nav.php';
 require 'footer.php';
 
 
-
 if (!isset($_SESSION['user_id'])) {
     echo "You are not logged in, please login. ";
     echo "<a href='login.php'>Login here</a>";
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "You are not allowed to view this page ";
-    echo "<a href='login.php'> login hier </a>";
-    exit;
-}
-
 ?>
-
 
 
 <!DOCTYPE html>

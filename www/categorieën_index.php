@@ -14,6 +14,11 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug <a href='login.php'> login </a>";
+    exit;
+}
 
 require 'database.php';
 
