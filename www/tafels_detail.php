@@ -19,31 +19,32 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
 // Check if the request method is not GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='gebruiker_index.php'> gebruikers </a>";
+    echo " ga terug naar <a href='tafels_index.php'> tafel </a>";
     exit;
 }
 
 require 'database.php';
 
-if (isset($_GET['id'])) {
-    $gebruiker_id = $_GET['id'];
 
-    $sql = "SELECT * FROM gebruiker_id WHERE gebruiker_id = :gebruiker_id";
+if (isset($_GET['id'])) {
+    $tafel_id = $_GET['id'];
+
+    $sql = "SELECT * FROM tafels WHERE tafel_id = :tafel_id";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':gebruiker_id', $gebruiker_id);
+    $stmt->bindParam(':tafel_id', $tafel_id);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+        $tafel = $stmt->fetch(PDO::FETCH_ASSOC);
     } else {
-        // No gebruiker found with the given ID
-        echo "No gebruiker found with this ID <br>";
-        echo "<a href='gebruikers_index.php'> Ga terug</a>";
+        // No tafel found with the given ID
+        echo "No tafel found with this ID <br>";
+        echo "<a href='tafels_index.php'>Ga terug</a>";
         exit;
     }
 } else {
-    // Redirect to gebruiker_index.php if ID parameter is not set
-    header("Location: gebruikers_index.php");
+    // Redirect to menugang_index.php if ID parameter is not set
+    header("Location: menugang_index.php");
     exit;
 }
 ?>
@@ -57,19 +58,19 @@ if (isset($_GET['id'])) {
     <title>Menugang Detail</title>
 </head>
 <body>
-<?php require 'nav.php'; ?>
+<?php require 'nav.php' ?>
     <main>
         <div class="container">
-            <?php if (isset($gebruiker)) : ?>          
-                <h2><?php echo $gebruiker['voornaam'] ?></h2>
-                <p> <?php echo $gebruiker['achternaam'] ?></p>
+            <?php if (isset($tafel)) : ?>          
+                <h2><?php echo $tafel['aantal_personen'] ?></h2>
+                <p> <?php echo $tafel['tafelnummer'] ?></p>
                 <!-- Add other fields you want to display -->
             <?php else : ?>
-                <p>gebruiker not found.</p>
+                <p>tafel not found.</p>
             <?php endif; ?>
         </div>
     </main>
-<?php require 'footer.php'; ?>
+<?php require 'footer.php' ?>    
 </body>
 </html>
 

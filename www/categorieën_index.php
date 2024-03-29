@@ -42,11 +42,8 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Document</title>
 </head>
 <body>
-    <?php include 'nav.php' ?>
-    <?php include 'footer.php' ?>
+<?php include 'nav.php' ?>
 
-
-  
         <main>
               <div class="container">
             <table>
@@ -73,6 +70,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </main>
     </div>
+<?php include 'footer.php' ?> 
 </body>
 </html>
 

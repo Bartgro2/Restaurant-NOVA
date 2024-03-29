@@ -18,9 +18,10 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
 // Check if the request method is not GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='gebruikers_index.php'> gebruikers </a>";
+    echo " ga terug <a href='login.php'> login </a>";
     exit;
 }
+
 
 require 'database.php';
 
@@ -38,19 +39,17 @@ if (isset($_GET['id'])) {
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bindParam(":id", $id);
         
-        if ($stmt2->execute()) {
-            header("Location: gebruikers_index.php"); // Redirect to gebruikers_index.php
-            exit; // Make sure to exit after redirecting
-        } else {
-            echo "Error deleting adres"; // Display an error message if deletion fails
-        }
+    if ($stmt2->execute()) {
+        header("Location: gebruikers_index.php"); // Redirect to tafels_index.php
+        exit; // Make sure to exit after redirecting
     } else {
-        echo "Error deleting gebruikers"; // Display an error message if deletion fails
+        echo "Error deleting gebruiker"; // Display an error message if deletion fails
     }
+} else {
+    echo "gebruiker not found"; // Display a message if the record is not found
+}
+} else {
+header("Location: gebruikers_index.php");
+exit;
 }
 ?>
-
-
-
-
-

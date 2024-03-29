@@ -18,7 +18,7 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
-    echo " ga terug <a href='login.php'> login </a>";
+    echo " ga terug naar <a href='categorieën_index.php'> categorieën </a>";
     exit;
 }
 

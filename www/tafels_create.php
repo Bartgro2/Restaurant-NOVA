@@ -15,7 +15,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
-require 'database.php';
 
 
 ?>
@@ -29,27 +28,29 @@ require 'database.php';
     <title>Document</title>
 </head>
 <body>
-<?php require 'nav.php'; ?>
+<?php require 'nav.php' ?>
     <main>
     <div class="account-pagina2">
-        <div class="form-panel">
-           <!-- New div wrapper for vertical centering -->
-                <h1>categorie maken</h1> <!-- Form title -->
-                <hr class="separator"> <!-- Add horizontal line as a separator -->
-                <form action="categorieën_create_process.php" method="POST">
+        <div class="form-panel">    
+            <h1>tafel maken</h1> <!-- Form title -->
+            <hr class="separator"> <!-- Add horizontal line as a separator -->
+            <form action="tafels_create_process.php" method="POST">
                     <div class="input-groep">
-                        <label for="naam">naam</label>
-                        <input type="text" id="naam" name="naam">
+                        <label for="personen">personen</label>
+                        <input type="number" id="personen" name="personen">
                     </div>
+                    <div class="input-groep">
+                        <label for="nummer">nummer</label>
+                        <input type="number" id="nummer" name="nummer">
+                    </div>                    
                     <div class="input-groep">
                         <button type="submit" class="input-button"> aanmaken </button>
                     </div> 
-                </form>
-            </div>
+            </form>
         </div>
+    </div>
 </main>
 <?php require 'footer.php' ?>
 </body>
 </html>
-
 

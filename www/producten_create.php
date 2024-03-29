@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 session_start();
 
 // Check if the user is not logged in
@@ -18,16 +15,8 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
-// Check if the request method is not GET
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='producten_index.php'> producten </a>";
-    exit;
-}
-
 require 'database.php';
-require 'nav.php';
-require 'footer.php';
+
 
 $sql = "SELECT * FROM categorieen";
 $stmt = $conn->prepare($sql);
@@ -50,6 +39,7 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php'; ?>
     <main>
     <div class="account-pagina">
         <div class="form-panel">       
@@ -107,8 +97,10 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </main>
+<?php require 'footer.php'; ?>
 </body>
 </html>
+
 
 
 

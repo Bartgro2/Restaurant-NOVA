@@ -18,7 +18,7 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='login.php'> categorieën </a>";
+    echo " ga terug naar <a href='categorieën_index.php'> categorieën </a>";
     exit;
 }
 
@@ -39,7 +39,8 @@ if ($stmt->execute()) {
     header("Location: categorieën_index.php"); 
     exit; 
 } else {
-    echo "Error updating categorie"; 
+    echo "Error updating categorie "; 
+    echo " ga terug naar categorieën_edit.php"; 
 }
 ?>
 

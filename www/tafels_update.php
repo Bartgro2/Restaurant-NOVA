@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 // Check if the user is not logged in
@@ -18,29 +17,31 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
-    echo " ga terug <a href='menugang.php'> menugang </a>";
+    echo " ga terug <a href='tafels_index.php'> tafel </a>";
+    exit;
 }
-
-$naam = $_POST['naam'];
-$id = $_GET['id'];
 
 require 'database.php';
 
-$sql = "UPDATE menugangen
-        SET naam = :naam
-        WHERE menugang_id = :menugang_id";
+$tafelnummer = $_POST['nummer'];
+$aantal_personen = $_POST['personen'];
+$tafel_id = $_GET['id'];
+
+$sql = "UPDATE tafels
+        SET tafelnummer = :tafelnummer,
+        aantal_personen = :aantal_personen
+        WHERE tafel_id = :tafel_id";
 
 $stmt = $conn->prepare($sql);
-$stmt->bindParam(':naam', $naam);
-$stmt->bindParam(':menugang_id', $id);
+$stmt->bindParam(':tafelnummer', $tafelnummer); // Corrected parameter name
+$stmt->bindParam(':aantal_personen', $aantal_personen); // Corrected parameter name
+$stmt->bindParam(':tafel_id', $tafel_id);
 
 if ($stmt->execute()) {
-    header("Location: menugang_index.php"); 
+    header("Location: tafels_index.php"); 
     exit; 
 } else {
-    echo "Error updating menugang";
-    echo " ga terug naar <a href='menugang_index.php'> menugang </a>";
+    echo "Error updating tafel";
+    echo " ga terug naar <a href='tafels_index.php'> tafel </a>";
 }
 ?>
-
-

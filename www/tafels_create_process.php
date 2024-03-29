@@ -18,22 +18,25 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
-    echo " ga terug <a href='menugang_create.php'> menugang </a>";
+    echo " ga terug <a href='login.php'> login </a>";
     exit;
 }
 
 require 'database.php';
 
-$name = $_POST['naam']; // Correct variable name
+$tafelnummer = $_POST['nummer'];
+$aantal_personen = $_POST['personen'];
 
-$stmt = $conn->prepare("INSERT INTO menugangen (naam) VALUES (:naam)");
 
-$stmt->bindParam(':naam', $name); // Use the correct variable name here
+$stmt = $conn->prepare("INSERT INTO tafels (tafelnummer, aantal_personen) VALUES (:tafelnummer, :aantal_personen)");
+
+$stmt->bindParam(':tafelnummer', $tafelnummer);
+$stmt->bindParam(':aantal_personen', $aantal_personen);
 
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-    header("Location: menugang_index.php");
+    header("Location: tafels_index.php");
     exit;
 } else {
     echo "Something went wrong";

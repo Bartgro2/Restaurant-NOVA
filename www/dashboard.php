@@ -2,9 +2,6 @@
 
 session_start();
 
-
-
-
 if (!isset($_SESSION['user_id'])) {
     echo "You are not logged in, please login. ";
     echo "<a href='login.php'>Login here</a>";
@@ -12,11 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 require 'database.php';
-require 'nav.php';
-require 'footer.php';
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +21,7 @@ require 'footer.php';
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php' ?>
     <main>
          <div class="dashboard-container">
 
@@ -40,8 +35,8 @@ require 'footer.php';
         </div>
         <div class="empty-space"></div>
     </div>
-
     </main>
+<?php require 'footer.php' ?>
 </body>
 </html>
 

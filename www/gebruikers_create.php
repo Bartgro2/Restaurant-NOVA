@@ -1,17 +1,3 @@
-<?php
-
-// Check if the request method is not GET
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo "You are not allowed to view this page ";
-    echo "<a href='index.php'> ga terug </a>";
-    exit;
-}
-
-require 'nav.php';
-require 'footer.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +7,7 @@ require 'footer.php';
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php'; ?>
     <main>
     <div class="account-pagina">
         <div class="form-panel">       
@@ -80,9 +67,9 @@ require 'footer.php';
         <button type="submit" class="input-button">Aanmaken</button>
     </div>
 </form>
-
         </div>
     </div>
 </main>
+<?php require 'footer.php'; ?>
 </body>
 </html>

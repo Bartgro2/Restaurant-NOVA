@@ -7,9 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
-require 'nav.php';
-require 'footer.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +18,7 @@ require 'footer.php';
     <title>Login</title>
 </head>
 <body>
+<?php require 'nav.php' ?>
    <main>
     <div class="account-pagina2">
         <div class="form-panel">    
@@ -42,5 +40,6 @@ require 'footer.php';
         </div>
     </div>
    </main>
+<?php require 'footer.php' ?>
 </body>
 </html>

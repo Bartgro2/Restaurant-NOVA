@@ -52,11 +52,14 @@ if (isset($_GET['id'])) {
     } else {
         // Error in executing SQL statement
         echo "Error executing SQL statement";
-        exit; // You may want to exit here to prevent further execution
+        echo "<a href='producten_index.php'>Ga terug</a>";
+        exit; // Exit to prevent further execution
     }
+} else {
+    // Redirect to menugang_index.php if ID parameter is not set
+    header("Location: producten_index.php");
+    exit; // Exit to prevent further execution
 }
-
-require 'nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +71,7 @@ require 'nav.php';
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php' ?>
 <main>
     <div class="account-pagina">
         <div class="form-panel">    
@@ -125,9 +129,6 @@ require 'nav.php';
         </div>
     </div>
 </main>
-
-
-
 <?php require 'footer.php' ?>
 </body>
 </html>

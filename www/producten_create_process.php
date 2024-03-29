@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 
 session_start();
 
@@ -63,7 +64,8 @@ if ($target_file) {
 } else {
     echo "No file uploaded.";
 }
- 
+
+ob_end_flush(); 
 ?>
 
 

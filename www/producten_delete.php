@@ -13,14 +13,15 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
     echo " login als een andere rol, hier <a href='login.php'> login </a>";
     exit;
-  }
+}
+
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug <a href='login.php'> login </a>";
+    exit;
+}
   
-  // Check if the request method is not POST
-  if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      echo "You are not allowed to view this page ";
-      echo " ga terug naar <a href='producten_index.php'> producten </a>";
-      exit;
-  }
 
 require 'database.php';
 
@@ -48,6 +49,9 @@ if (isset($_GET['id'])) {
     } else {
         echo "Product not found"; // Display a message if the record is not found
     }
+} else {
+    header("Location: producten_index.php");
+    exit;
 }
 ?>
 

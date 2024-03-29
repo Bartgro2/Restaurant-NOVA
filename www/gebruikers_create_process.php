@@ -1,12 +1,5 @@
 <?php
 
-// Check if the request method is not POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "You are not allowed to view this page ";
-    echo "<a href='gebruikers_create.php'> registeer je hier </a>";
-    exit;
-}
-
 // Include database connection
 require 'database.php';
 
@@ -90,7 +83,7 @@ if (empty($errors)) {
             $stmt2->bindParam(':voornaam', $_POST['voornaam']);
             $stmt2->bindParam(':achternaam', $_POST['achternaam']);
             $stmt2->bindParam(':tussenvoegsel', $_POST['tussenvoegsel']);
-            $stmt2->bindParam(':email', $email);
+            $stmt2->bindParam(':email', $_POST['email']);
             $stmt2->bindParam(':gebruikersnaam', $_POST['gebruikersnaam']);
             $stmt2->bindParam(':wachtwoord', $hashed_password);
             $stmt2->bindParam(':rol', $_POST['role']);
@@ -100,12 +93,13 @@ if (empty($errors)) {
                 header("Location: login.php");
                 exit;
             } else {
-                $errors[] = "Error inserting user data.";
-                header("Location: login.php");
+                $errors[] = "Error inserting user data. ";
+                echo " ga terug naar <a href='gebruikers_index.php'> registeren </a> ";
                 exit;
             }
         } else {
-            $errors[] = "Error inserting address data.";
+            $errors[] = "Error inserting address data. ";
+            echo " ga terug naar <a href='gebruikers_create.php'> registeren </a> ";
         }
     }
 }

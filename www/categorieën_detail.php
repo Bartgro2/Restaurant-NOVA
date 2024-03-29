@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 
 session_start();
 
@@ -23,8 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 require 'database.php';
-require 'footer.php';
-require 'nav.php';
+
 
 if (isset($_GET['id'])) {
     $categorie_id = $_GET['id'];
@@ -33,11 +33,24 @@ if (isset($_GET['id'])) {
   $stmt = $conn->prepare("SELECT * FROM categorieen WHERE categorie_id = :categorie_id");
   $stmt->bindParam(':categorie_id', $categorie_id);
   $stmt->execute();
-  $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-}
+  
 
+  if ($stmt->rowCount() > 0) {
+    $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
+} else {
+    // No categorie found with the given ID
+    echo "No categorie found with this ID <br>";
+    echo "<a href='categorieën_index.php'> Ga terug</a>";
+    exit;
+}
+} else {
+// Redirect to categorieën_index.php if ID parameter is not set
+header("Location: categorieën_index.php.php");
+exit;
+}
 ?>
+    
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +61,7 @@ if (isset($_GET['id'])) {
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php'  ?>
     <main>
     <div class="container">
         <?php if (isset($categorie)) : ?>          
@@ -57,8 +71,11 @@ if (isset($_GET['id'])) {
         <?php endif; ?>
     </div>
 </main>
+<?php require 'footer.php' ?>
 </body>
 </html>
+
+<?php ob_end_flush(); // End output buffering and flush the buffer ?>
 
 
 

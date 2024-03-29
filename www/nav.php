@@ -44,15 +44,15 @@ if (isset($_SESSION['user_id'])) {
             <li class="dropdown"> 
                 <a href="" class="dropbtn">Tafel</a>
                 <div class="dropdown-content">
-                    <a href="#">Bekijken</a>
-                    <a href="#">Toevoegen</a>
+                    <a href="tafels_index.php">Bekijken</a>
+                    <a href="tafels_create.php">Toevoegen</a>
                 </div>
             </li>
             <li class="dropdown"> 
                 <a href="" class="dropbtn">Reservering</a>
                 <div class="dropdown-content">
-                    <a href="#">Bekijken</a>
-                    <a href="#">Toevoegen</a>
+                    <a href="reserveringen_index.php">Bekijken</a>
+                    <a href="reserveringen_create.php">Toevoegen</a>
                 </div>
             </li>
             <li> <a href="dashboard.php">Dashboard</a></li>

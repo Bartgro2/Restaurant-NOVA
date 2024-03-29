@@ -11,14 +11,14 @@ if (!isset($_SESSION['user_id'])) {
 // Check if role is not admin, manager or medewerker
 if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
     echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
-    echo " ga terug naar <a href='login.php'> menugang </a>";
+    echo " ga terug naar <a href='login.php'> tafel </a>";
     exit;
 }
 
 // Check if the request method is not GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='menugang.php'> menugang </a>";
+    echo " ga terug naar <a href='tafels_index.php'> tafel </a>";
     exit;
 }
 
@@ -26,36 +26,36 @@ require 'database.php';
 
 
 if (isset($_GET['id'])) {
-    $menugang_id = $_GET['id'];
+    $tafel_id = $_GET['id'];
 
     // Prepare the SQL statement
-    $sql = "SELECT * FROM menugangen WHERE menugang_id = :menugang_id";
+    $sql = "SELECT * FROM tafels WHERE tafel_id = :tafel_id";
     $stmt = $conn->prepare($sql);
 
     // Bind the parameter
-    $stmt->bindParam(":menugang_id", $menugang_id);
+    $stmt->bindParam(":tafel_id", $tafel_id);
 
     // Execute the statement
     if ($stmt->execute()) {
         // Check if a menugang record is found
         if ($stmt->rowCount() > 0) {
             // Fetch the menugang record
-            $menugang = $stmt->fetch(PDO::FETCH_ASSOC);
+            $tafel = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
-            // No menugang found with the given ID
-            echo "No menugang found with this ID <br>";
-            echo "<a href='menugang_index.php'>Ga terug</a>";
+            // No tafel found with the given ID
+            echo "No tafel found with this ID <br>";
+            echo "<a href='tafels_index.php'>Ga terug</a>";
             exit; // Exit to prevent further execution
         }
     } else {
         // Error in executing SQL statement
         echo "Error executing SQL statement";
-        echo "<a href='menugang_index.php'>Ga terug</a>";
+        echo "<a href='tafels_index.php'>Ga terug</a>";
         exit; // Exit to prevent further execution
     }
 } else {
-    // Redirect to menugang_index.php if ID parameter is not set
-    header("Location: menugang_index.php");
+    // Redirect to tafels_index.php if ID parameter is not set
+    header("Location: tafels_index.php");
     exit; // Exit to prevent further execution
 }
 ?>
@@ -73,12 +73,16 @@ if (isset($_GET['id'])) {
 <main>
     <div class="account-pagina2">
         <div class="form-panel">    
-            <h1>menugang bijwerken</h1> <!-- Form title -->
+            <h1>tafel bijwerken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="menugang_update.php?id=<?php echo $menugang_id ?>" method="POST">
+            <form action="tafels_update.php?id=<?php echo $tafel_id ?>" method="POST">
                     <div class="input-groep">
-                        <label for="naam">naam</label>
-                        <input type="text" id="naam" name="naam" value="<?php echo $menugang['naam'] ?>">
+                        <label for="personen">personen</label>
+                        <input type="number" id="personen" name="personen" value="<?php echo $tafel['aantal_personen'] ?>">
+                    </div>
+                    <div class="input-groep">
+                        <label for="nummer">nummer</label>
+                        <input type="number" id="nummer" name="nummer" value="<?php echo $tafel['tafelnummer'] ?>">
                     </div>
                     <div class="input-groep">
                         <button type="submit" class="input-button"> bijwerken </button>
@@ -90,5 +94,3 @@ if (isset($_GET['id'])) {
 <?php require 'footer.php' ?>
 </body>
 </html>
-
-

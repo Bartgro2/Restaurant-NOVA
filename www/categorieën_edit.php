@@ -15,13 +15,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
-// Check if the request method is not GET
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo "You are not allowed to view this page ";
-    echo " ga terug naar de <a href='categorieën.index.php'> categorieën </a>";
-    exit;
-}
-
 require 'database.php';
 
 
@@ -31,7 +24,6 @@ if (isset($_GET['id'])) {
     // Prepare the SQL statement
     $sql = "SELECT * FROM categorieen WHERE categorie_id = :categorie_id";
     $stmt = $conn->prepare($sql);
-    
 
     // Bind the parameter
     $stmt->bindParam(":categorie_id", $categorie_id);
@@ -43,8 +35,8 @@ if (isset($_GET['id'])) {
             // Process the retrieved data (if needed)
         } else {
             // No category found with the given ID
-            echo "No category found with this ID <br>";
-            echo "<a href='tool_index.php'>Go back</a>";
+            echo "No categorie found with this ID <br>";
+            echo "<a href='categorieën_index.php'> ga terug</a>";
             exit; // You may want to exit here to prevent further execution
         }
     } else {
@@ -52,10 +44,13 @@ if (isset($_GET['id'])) {
         echo "Error executing SQL statement";
         exit; // You may want to exit here to prevent further execution
     }
+} else {
+    // Redirect to the index page if 'id' parameter is not set
+    header("Location: categorieën_index.php");
+    exit;
 }
-
-require 'nav.php';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +61,7 @@ require 'nav.php';
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php' ?>  
 <main>
     <div class="account-pagina2">
         <div class="form-panel">    
@@ -83,9 +79,6 @@ require 'nav.php';
         </div>
     </div>
 </main>
-
-
-
 <?php require 'footer.php' ?>
 </body>
 </html>

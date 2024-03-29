@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 
 session_start();
 
@@ -15,17 +16,7 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
-// Check if the request method is not GET
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='producten_index.php'> producten </a>";
-    exit;
-}
-
-
 require 'database.php';
-require 'footer.php';
-require 'nav.php';
 
 if (isset($_GET['id'])) {
     $product_id = $_GET['id'];
@@ -36,8 +27,21 @@ if (isset($_GET['id'])) {
     WHERE producten.product_id = :product_id");
     $stmt->bindParam(':product_id', $product_id); // Bind the product_id parameter
     $stmt->execute();
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($stmt->rowCount() > 0) {
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        // No product found with the given ID
+        echo "No prodoct found with this ID <br>";
+        echo "<a href='producten_index.php'>Ga terug</a>";
+        exit;
+    }
+} else {
+    // Redirect to producten_index.php if ID parameter is not set
+    header("Location: producten_index.php");
+    exit;
 }
+    
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +53,7 @@ if (isset($_GET['id'])) {
     <title>Document</title>
 </head>
 <body>
+<?php require 'nav.php'; ?>
     <main>
         <div class="container">
             <?php if (isset($product)) : ?>          
@@ -60,8 +65,11 @@ if (isset($_GET['id'])) {
             <?php endif; ?>
         </div>
     </main>
+ <?php require 'footer.php'; ?>
 </body>
 </html>
+
+<?php ob_end_flush(); // End output buffering and flush the buffer ?>
 
 
 

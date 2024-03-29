@@ -40,8 +40,6 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php include 'nav.php' ?>
-    <?php include 'footer.php' ?>
-
     <main>
         <div class="container">
             <table>
@@ -95,7 +93,8 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tbody>
             </table>
         </div>
-    </main>
+    </main>  
+ <?php include 'footer.php' ?>
 </body>
 </html>
 

@@ -23,60 +23,43 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 require 'database.php';
 
-if (isset($_GET['id']) && isset($_GET['adres_id'])) {
-    $gebruiker_id = $_GET['id']; // Corrected
+if (isset($_GET['id'])) {
+    $gebruiker_id = $_GET['id'];
     
-    // Query to retrieve user records based on gebruiker_id
-    $sql = "SELECT * FROM gebruikers WHERE gebruiker_id = :id";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":id", $gebruiker_id);
     
-    if ($stmt->execute()) {
-        // Check if there are any results
-        if ($stmt->rowCount() > 0) {
-            // If results exist, fetch the user data
-            $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Prepare the SQL statement to fetch the product
+        $sql = "SELECT * FROM gebruikers join adressen on adressen.adres_id = gebruikers.adres_id WHERE gebruiker_id = :gebruiker_id";
+        $stmt = $conn->prepare($sql);
+    
+        // bind the param
+        $stmt->bindParam(":gebruiker_id", $gebruiker_id);
+    
+        // Execute the statement
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() > 0) {
+    
+                $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                
+                            
+            } else {
+                // No product found with the given ID
+                echo "No product found with this ID <br>";
+                echo "<a href='prodocuten_index.php'>Go back</a>";
+                exit; // You may want to exit here to prevent further execution
+            }
         } else {
-            // No user found with the specified gebruiker_id
-            echo "No user found with this ID <br>";
-            echo "<a href='gebruikers_index.php'>Go back</a>";
-            exit;
+            // Error in executing SQL statement
+            echo "Error executing SQL statement";
+            echo "<a href='gebruikers_index.php'>Ga terug</a>";
+            exit; // Exit to prevent further execution
         }
     } else {
-        // Error executing the SQL statement
-        echo "Error executing SQL statement";
-        exit;
-    }
-
-    // Query to retrieve address based on adres_id
-    $sql = "SELECT * FROM adressen";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":adres_id", $adres_id);
-    
-    if ($stmt->execute()) {
-        // Check if there are any results
-        if ($stmt->rowCount() > 0) {
-            // If results exist, fetch the address data
-            $adres = $stmt->fetch(PDO::FETCH_ASSOC);
-        } else {
-            // No address found for the user
-            echo "No address found for this user";
-            exit;
-        }
-    } else {
-        // Error executing the SQL statement
-        echo "Error executing SQL statement";
-        exit;
-    }
-} else {
-    // ID not provided in the request
-    echo "No ID provided in the request";
-    exit;
-}
+        // Redirect to gebruikers_index.php if ID parameter is not set
+        header("Location: gebruikers_index.php");
+        exit; // Exit to prevent further execution
+    }   
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,12 +76,8 @@ if (isset($_GET['id']) && isset($_GET['adres_id'])) {
             <div class="form-panel">       
                 <h1>registeren</h1> 
                 <hr class="separator">
-                <form action="menugang_update.php?id=<?php echo $gebruiker_id ?>" method="POST">
-                
-                
-
-
-                    <div class="input-groep"> 
+                <form action="gebruikers_update.php?id=<?php echo $gebruiker_id ?>" method="POST">
+                    <div class="input-groep">
                         <label for="voornaam">Voornaam</label>
                         <input type="text" id="voornaam" name="voornaam" value="<?php echo $gebruiker['voornaam'] ?>">
                     </div>
@@ -136,17 +115,19 @@ if (isset($_GET['id']) && isset($_GET['adres_id'])) {
                         </select>
                     </div>
                     <div class="input-groep">
-                        <label for="woonplaats">Woonplaats</label>
-                        <input type="text" id="woonplaats" name="woonplaats" value="<?php echo $adres['woonplaats'] ?>">
+                        <label for="woonplaats">Woonplaats</label>              
+                        <input type="text" id="woonplaats" name="woonplaats" value="<?php echo $gebruiker['woonplaats']; ?>">
+                    
                     </div>
                     <div class="input-groep">
-                        <label for="postcode">Postcode</label>
-                        <input type="text" id="postcode" name="postcode" value="<?php echo $adres['postcode']; ?>">
+                        <label for="postcode">Postcode</label>              
+                        <input type="text" id="postcode" name="postcode" value="<?php echo $gebruiker['postcode']; ?>">                
+                    </div>
+                    <div class="input-groep">
+                         <label for="huisnummer">Huisnummer</label>
+                         <input type="number" id="huisnummer" name="huisnummer" value="<?php echo $gebruiker['huisnummer']; ?>">
 
-                    </div>
-                    <div class="input-groep">
-                        <label for="huisnummer">Huisnummer</label>
-                        <input type="number" id="huisnummer" name="huisnummer" value="<?php echo $adres['huisnummer'] ?>">
+                         
                     </div>
                     <div class="input-groep">
                         <button type="submit" class="input-button">Aanmaken</button>
@@ -158,6 +139,3 @@ if (isset($_GET['id']) && isset($_GET['adres_id'])) {
     <?php require 'footer.php'; ?>
 </body>
 </html>
-
-
-

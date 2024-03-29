@@ -1,0 +1,74 @@
+<?php
+session_start();
+
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+// Check if role is not admin, manager or medewerker
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+    echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
+    echo " login als een andere rol, hier <a href='login.php'> login </a>";
+    exit;
+}
+
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug naar <a href='login.php'> login </a>";
+    exit;
+}
+
+require 'database.php';
+
+$stmt = $conn->prepare("SELECT * FROM  tafels");
+$stmt->execute();
+// set the resulting array to associative
+$tafels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <?php include 'nav.php' ?>
+    <?php include 'footer.php' ?>
+
+    <main>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>tafelnummer</th>
+                        <th>personen</th>       
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tafels as $tafel) : ?>
+                        <tr>
+                            <td><?php echo $tafel['tafel_id'] ?></td>
+                            <td><?php echo $tafel['tafelnummer'] ?></td>
+                            <td><?php echo $tafel['aantal_personen'] ?></td>          
+                            <td>
+                              <a href="tafels_detail.php?id=<?php echo $tafel['tafel_id'] ?>">Bekijk</a>
+                              <a href="tafels_edit.php?id=<?php echo $tafel['tafel_id'] ?>">Wijzig</a>
+                              <a href="tafels_delete.php?id=<?php echo $tafel['tafel_id'] ?>">Verwijder</a>
+                            </td>             
+                        </tr> 
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

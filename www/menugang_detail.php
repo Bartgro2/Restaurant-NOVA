@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 
 session_start();
 
@@ -23,20 +24,29 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 require 'database.php';
-require 'footer.php';
-require 'nav.php';
+
 
 if (isset($_GET['id'])) {
     $menugang_id = $_GET['id'];
 
-    
-  $stmt = $conn->prepare("SELECT * FROM menugangen WHERE menugang_id = :menugang_id");
-  $stmt->bindParam(':menugang_id', $menugang_id);
-  $stmt->execute();
-  $menugang = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-}
+    $sql = "SELECT * FROM menugangen WHERE menugang_id = :menugang_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':menugang_id', $menugang_id);
+    $stmt->execute();
 
+    if ($stmt->rowCount() > 0) {
+        $menugang = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        // No menugang found with the given ID
+        echo "No menugang found with this ID <br>";
+        echo "<a href='menugang_index.php'>Ga terug</a>";
+        exit;
+    }
+} else {
+    // Redirect to menugang_index.php if ID parameter is not set
+    header("Location: menugang_index.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,20 +55,27 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Menugang Detail</title>
 </head>
 <body>
+<?php require 'nav.php' ?>
     <main>
-    <div class="container">
-        <?php if (isset($menugang)) : ?>          
-                        <p><?php echo $menugang['naam'] ?></p> <!-- Corrected variable name --> 
-        <?php else : ?>
-            <p>menugang not found.</p>
-        <?php endif; ?>
-    </div>
-</main>
+        <div class="container">
+            <?php if (isset($menugang)) : ?>          
+                <h2><?php echo $menugang['naam'] ?></h2>
+                <p>Description: <?php echo $menugang['description'] ?></p>
+                <!-- Add other fields you want to display -->
+            <?php else : ?>
+                <p>Menugang not found.</p>
+            <?php endif; ?>
+        </div>
+    </main>
+<?php require 'footer.php' ?>    
 </body>
 </html>
+
+<?php ob_end_flush(); // End output buffering and flush the buffer ?>
+
 
 
 

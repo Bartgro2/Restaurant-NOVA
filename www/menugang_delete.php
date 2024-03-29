@@ -15,8 +15,8 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
     exit;
 }
 
-// Check if the request method is not POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
     echo " ga terug <a href='login.php'> login </a>";
     exit;
@@ -39,15 +39,22 @@ if (isset($_GET['id'])) {
         $sql = "DELETE FROM menugangen WHERE menugang_id = :id";
         $stmt = $conn->prepare($sql2);
         $stmt->bindParam(":id", $id);
-        if ($stmt->execute()) {
-            header("Location: menugang_index.php"); // Redirect to menugang_index.php
-            exit; // Make sure to exit after redirecting
-        } else {
-            echo "Error deleting menugang"; // Display an error message if deletion fails
-        }
-    } else {
-        echo "Menugang not found"; // Display a message if the record is not found
-    }
+       
+
+if ($stmt->execute()) {
+    header("Location: menugang_index.php"); // Redirect to tafels_index.php
+    exit; // Make sure to exit after redirecting
+} else {
+    echo "Error deleting menugang "; // Display an error message if deletion fails
+    echo "ga terug naar <a href='menugang_index.php'> menugang </a ";
+}
+} else {
+echo "menugang not found "; // Display a message if the record is not found
+echo "ga terug naar <a href='menugang_index.php'> menugang </a ";
+}
+} else {
+header("Location: menugang_index.php");
+exit;
 }
 ?>
 

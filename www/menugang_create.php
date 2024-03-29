@@ -15,15 +15,8 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
-// Check if the request method is not GET
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='dashboard.php'> dashboard </a>";
-    exit;
-}
 
-require 'nav.php';
-require 'footer.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +28,8 @@ require 'footer.php';
     <title>Document</title>
 </head>
 <body>
-    
-</body>
-</html>
-<main>
+<?php require 'nav.php' ?>
+  <main>
     <div class="account-pagina2">
         <div class="form-panel">    
             <h1>menugang maken</h1> <!-- Form title -->
@@ -54,4 +45,9 @@ require 'footer.php';
             </form>
         </div>
     </div>
-</main>
+</main> 
+<?php require 'footer.php' ?>
+</body>
+</html>
+
+
