@@ -37,6 +37,8 @@ if ($stmt->rowCount() > 0) {
     exit;
 } else {
     echo "Something went wrong";
+    echo "Ga terug naar <a href='menugang_create.php'> menugang </a>";
+    exit();
 }
 
 ?>

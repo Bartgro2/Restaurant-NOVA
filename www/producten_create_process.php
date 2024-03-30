@@ -60,9 +60,13 @@ if ($target_file) {
         exit;
     } else {
         echo "Something went wrong";
+        echo "Ga terug naar <a href='producten_create.php'> producten</a>";
+        exit();
     }
 } else {
     echo "No file uploaded.";
+    echo "Ga terug naar <a href='producten_create.php'> producten</a>";
+    exit();
 }
 
 ob_end_flush(); 

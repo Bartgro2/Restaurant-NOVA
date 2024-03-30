@@ -28,6 +28,8 @@ $stmt->execute();
 // set the resulting array to associative
 $tafels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Store tafels data in session
+$_SESSION['tafels'] = $tafels;
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +59,7 @@ $tafels = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($tafels as $tafel) : ?>
                         <tr>
                             <td><?php echo $tafel['tafel_id'] ?></td>
-                            <td><?php echo $tafel['tafelnummer'] ?></td>
+                            <td><?php echo $tafel['tafel_nummer'] ?></td>
                             <td><?php echo $tafel['aantal_personen'] ?></td>          
                             <td>
                               <a href="tafels_detail.php?id=<?php echo $tafel['tafel_id'] ?>">Bekijk</a>

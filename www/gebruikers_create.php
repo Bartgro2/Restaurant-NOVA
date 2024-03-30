@@ -47,6 +47,8 @@
         <select id="role" name="role">
             <option value="">Selecteer Rol</option>
             <option value="admin">Admin</option>
+            <option value="directeur">Directeur</option>
+            <option value="manager">Manager</option>
             <option value="medewerker">Medewerker</option>
             <option value="klant">Klant</option>
         </select>

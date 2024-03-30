@@ -14,9 +14,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     echo " login als een andere rol, hier <a href='login.php'> login </a>";
     exit;
 }
-
-
-
 ?>
 
 <!DOCTYPE html>

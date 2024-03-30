@@ -28,7 +28,7 @@ require 'database.php';
 if (isset($_GET['id'])) {
     $gebruiker_id = $_GET['id'];
 
-    $sql = "SELECT * FROM gebruiker_id WHERE gebruiker_id = :gebruiker_id";
+    $sql = "SELECT * FROM gebruikers WHERE gebruiker_id = :gebruiker_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':gebruiker_id', $gebruiker_id);
     $stmt->execute();

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 require 'database.php';
 
-$stmt = $conn->prepare("SELECT * FROM gebruikers join adressen on adressen.adres_id = gebruikers.adres_id");
+$stmt = $conn->prepare("SELECT * FROM gebruikers LEFT JOIN adressen on adressen.adres_id = gebruikers.adres_id");
 $stmt->execute();
 // set the resulting array to associative
 $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -7,17 +7,10 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Check if role is not admin, manager, or medewerker
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
-    echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
-    echo " login als een andere rol, hier <a href='login.php'> login </a>";
-    exit;
-}
-
 // Check if the request method is not GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo "You are not allowed to view this page ";
-    echo " ga terug naar <a href='gebruikers_index.php'> gebruikers </a>";
+    echo " ga terug naar <a href='dashboard.php'> dashboard </a>";
     exit;
 }
 
@@ -43,20 +36,20 @@ if (isset($_GET['id'])) {
                 
                             
             } else {
-                // No product found with the given ID
-                echo "No product found with this ID <br>";
-                echo "<a href='prodocuten_index.php'>Go back</a>";
+                // No gebruiker found with the given ID
+                echo "No gebruiker found with this ID <br>";
+                echo "<a href='dashboard.php'>Go back</a>";
                 exit; // You may want to exit here to prevent further execution
             }
         } else {
             // Error in executing SQL statement
             echo "Error executing SQL statement";
-            echo "<a href='gebruikers_index.php'>Ga terug</a>";
+            echo "<a href='dashboard.php'>Ga terug</a>";
             exit; // Exit to prevent further execution
         }
     } else {
-        // Redirect to gebruikers_index.php if ID parameter is not set
-        header("Location: gebruikers_index.php");
+        // Redirect to dashboard.php if ID parameter is not set
+        header("Location: dashboard.php");
         exit; // Exit to prevent further execution
     }   
 ?>
@@ -105,15 +98,17 @@ if (isset($_GET['id'])) {
                         <label for="verzeker_wachtwoord">Verzeker Wachtwoord</label>
                         <input type="password" id="verzeker_wachtwoord" name="verzeker_wachtwoord" value="<?php echo $gebruiker['wachtwoord'] ?>">
                     </div>
-                    <div class="input-groep">
-                        <label for="role">Rol:</label>
-                        <select id="role" name="role">
-                            <option value="admin" <?php echo ($_SESSION['role'] === 'admin') ? 'selected' : ''; ?>>Admin</option>
-                            <option value="manager" <?php echo ($_SESSION['role'] === 'manager') ? 'selected' : ''; ?>>Manager</option>
-                            <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
-                            <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
-                        </select>
-                    </div>
+
+                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'manager' || $_SESSION['role'] === 'directeur') { ?>
+    <!-- Role dropdown only visible to admin, manager, and directeur -->
+    <div class="input-groep">
+        <label for="role">Rol:</label>
+        <select id="role" name="role">
+           
+        </select>
+    </div>
+<?php } ?>
+          
                     <div class="input-groep">
                         <label for="woonplaats">Woonplaats</label>              
                         <input type="text" id="woonplaats" name="woonplaats" value="<?php echo $gebruiker['woonplaats']; ?>">

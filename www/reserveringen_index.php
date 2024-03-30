@@ -23,9 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 require 'database.php';
 
-$stmt = $conn->prepare("SELECT * FROM reserveringen join tafels on tafels.tafel_id = reserveringen.tafel_id");
+$stmt = $conn->prepare("SELECT * FROM reserveringen
+                        JOIN tafels ON tafels.tafel_id = reserveringen.tafel_id
+                        JOIN gebruikers ON gebruikers.gebruiker_id = reserveringen.gebruiker_id");
 $stmt->execute();
-// set the resulting array to associative
 $reserveringen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -39,42 +40,47 @@ $reserveringen = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Document</title>
 </head>
 <body>
-    <?php include 'nav.php' ?>
-    <?php include 'footer.php' ?>
-
+<?php include 'nav.php' ?>
     <main>
         <div class="container">
             <table>
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>tafelnummer</th>
-                        <th>personen</th>
+                                            
+                        <th>voornaam</th>
+                        <th>tussenvoegsel</th>
+                        <th>achternaam</th>
+                        <th>email</th>
                         <th>datum</th>
-                        <th>tijd</th>       
+                        <th>tijd</th>   
+                        <th>personen</th>
+                        <th>tafelnummer</th>
                         <th>Acties</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($reserveringen as $reservering) : ?>
-                        <tr>
-                            <td><?php echo $reservering['id'] ?></td>
-                            <td><?php echo $reservering['tafelnummer'] ?></td>
-                            <td><?php echo $reservering['aantal_personen'] ?></td>
-                            <td><?php echo $reservering['datum'] ?></td>
-                            <td><?php echo $reservering['tijd'] ?></td>
-                            <td>
-                            <td>
-                              <a href="reserveringen_detail.php?id=<?php echo $reservering['reservering_id'] ?>">Bekijk</a>
-                              <a href="reserveringen_edit.php?id=<?php echo $reservering['reservering_id'] ?>">Wijzig</a>
-                              <a href="reserveringen_delete.php?id=<?php echo $reservering['reservering_id'] ?>">Verwijder</a>
-                        </td>
-                            </td>
-                        </tr> 
-                    <?php endforeach; ?>
-                </tbody>
+    <?php foreach ($reserveringen as $reservering) : ?>
+        <tr>
+            
+            <td><?php echo $reservering['voornaam'] ?></td>
+            <td><?php echo $reservering['tussenvoegsel'] ?></td>
+            <td><?php echo $reservering['achternaam'] ?></td>
+            <td><?php echo $reservering['email'] ?></td>
+            <td><?php echo $reservering['datum'] ?></td>
+            <td><?php echo $reservering['tijd'] ?></td>
+            <td><?php echo $reservering['aantal_personen'] ?></td>
+            <td><?php echo $reservering['tafel_nummer'] ?></td>        
+            <td>
+                <a href="reserveringen_detail.php?id=<?php echo $reservering['reservering_id'] ?>">Bekijk</a> 
+                <a href="reserveringen_edit.php?id=<?php echo $reservering['reservering_id'] ?>">Wijzig</a> 
+                <a href="reserveringen_delete.php?id=<?php echo $reservering['reservering_id'] ?>">Verwijder</a>
+            </td>
+        </tr> 
+    <?php endforeach; ?>
+</tbody>
             </table>
         </div>
-    </main>
+    </main>   
+ <?php include 'footer.php' ?>
 </body>
 </html>

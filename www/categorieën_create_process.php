@@ -37,6 +37,8 @@ if ($stmt->rowCount() > 0) {
     exit;
 } else {
     echo "Something went wrong";
+    echo " ga terug <a href='categorieën_create.php'> categorieën </a>";
+    exit;
 }
 
 ?>

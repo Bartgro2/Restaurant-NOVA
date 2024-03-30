@@ -47,14 +47,16 @@ if ($stmt->execute()) {
 } else {
     echo "Error deleting menugang "; // Display an error message if deletion fails
     echo "ga terug naar <a href='menugang_index.php'> menugang </a ";
+    exit();
 }
 } else {
-echo "menugang not found "; // Display a message if the record is not found
-echo "ga terug naar <a href='menugang_index.php'> menugang </a ";
+    echo "menugang not found "; // Display a message if the record is not found
+    echo "ga terug naar <a href='menugang_index.php'> menugang </a ";
+    exit();
 }
 } else {
-header("Location: menugang_index.php");
-exit;
+  header("Location: menugang_index.php");
+  exit;
 }
 ?>
 

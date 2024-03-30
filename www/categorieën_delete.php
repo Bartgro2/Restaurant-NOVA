@@ -44,9 +44,13 @@ if (isset($_GET['id'])) {
             exit; // Make sure to exit after redirecting
         } else {
             echo "Error deleting categorie"; // Display an error message if deletion fails
+            echo " ga terug <a href='categorieën_index.php'> categorieën </a>";
+            exit;
         }
     } else {
         echo "categorie not found"; // Display a message if the record is not found
+        echo " ga terug <a href='categorieën_index.php'> categorieën </a>";
+        exit;
     }
     } else {
     header("Location: categorieën_index.php");

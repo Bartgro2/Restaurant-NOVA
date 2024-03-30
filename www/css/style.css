@@ -247,7 +247,7 @@ section{
   height: 75px;
 }
 
-.input-groep input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="email"], textarea,
+.input-groep input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="email"], input[type="date"], input[type="time"], textarea,
 select {
   width: 100%;
   padding: 12px 20px;

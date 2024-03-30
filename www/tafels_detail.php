@@ -43,8 +43,8 @@ if (isset($_GET['id'])) {
         exit;
     }
 } else {
-    // Redirect to menugang_index.php if ID parameter is not set
-    header("Location: menugang_index.php");
+    // Redirect to tafels_index.php if ID parameter is not set
+    header("Location: tafels_index.php");
     exit;
 }
 ?>
@@ -63,7 +63,7 @@ if (isset($_GET['id'])) {
         <div class="container">
             <?php if (isset($tafel)) : ?>          
                 <h2><?php echo $tafel['aantal_personen'] ?></h2>
-                <p> <?php echo $tafel['tafelnummer'] ?></p>
+                <p> <?php echo $tafel['tafel_nummer'] ?></p>
                 <!-- Add other fields you want to display -->
             <?php else : ?>
                 <p>tafel not found.</p>

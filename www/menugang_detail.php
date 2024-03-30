@@ -63,7 +63,7 @@ if (isset($_GET['id'])) {
         <div class="container">
             <?php if (isset($menugang)) : ?>          
                 <h2><?php echo $menugang['naam'] ?></h2>
-                <p>Description: <?php echo $menugang['description'] ?></p>
+                
                 <!-- Add other fields you want to display -->
             <?php else : ?>
                 <p>Menugang not found.</p>

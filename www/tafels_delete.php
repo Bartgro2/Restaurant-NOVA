@@ -15,6 +15,13 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSIO
     exit;
 }
 
+// Check if the request method is not GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    echo "You are not allowed to view this page ";
+    echo "Ga terug naar <a href='tafels_index.php'> tafels </a>";
+    exit;
+}
+
 
 require 'database.php';
 
@@ -38,9 +45,13 @@ if (isset($_GET['id'])) {
             exit; // Make sure to exit after redirecting
         } else {
             echo "Error deleting tafel"; // Display an error message if deletion fails
+            echo " ga terug <a href='tafels_index.php'> tafels </a>";
+            exit;
         }
     } else {
         echo "Tafel not found"; // Display a message if the record is not found
+        echo " ga terug <a href='tafels_index.php'> tafels </a>";
+        exit;
     }
 } else {
     header("Location: tafels_index.php");

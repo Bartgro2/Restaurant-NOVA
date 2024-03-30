@@ -45,9 +45,14 @@ if (isset($_GET['id'])) {
             exit; // Make sure to exit after redirecting
         } else {
             echo "Error deleting product"; // Display an error message if deletion fails
+            echo "Ga terug naar <a href='producten_index.php'> producten</a>";
+            exit();
+            
         }
     } else {
         echo "Product not found"; // Display a message if the record is not found
+        echo "Ga terug naar <a href='producten_index.php'> producten</a>";
+        exit();
     }
 } else {
     header("Location: producten_index.php");

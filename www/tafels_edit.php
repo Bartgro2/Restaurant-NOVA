@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="input-groep">
                         <label for="nummer">nummer</label>
-                        <input type="number" id="nummer" name="nummer" value="<?php echo $tafel['tafelnummer'] ?>">
+                        <input type="number" id="nummer" name="nummer" value="<?php echo $tafel['tafel_nummer'] ?>">
                     </div>
                     <div class="input-groep">
                         <button type="submit" class="input-button"> bijwerken </button>

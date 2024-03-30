@@ -99,6 +99,7 @@ if (isset($_GET['id'])) {
                     <select name="menugang" id="menugang">
                         <?php foreach($menugangen as $menugang):?>
                             <option value="<?php echo $menugang['menugang_id']; ?>"><?php echo $menugang['naam']; ?></option>
+                            
                         <?php endforeach ?>
                     </select>
                 </div>

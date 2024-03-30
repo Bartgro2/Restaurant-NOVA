@@ -40,6 +40,7 @@ if ($stmt->execute()) {
 } else {
     echo "Error updating menugang";
     echo " ga terug naar <a href='menugang_index.php'> menugang </a>";
+    exit();
 }
 ?>
 
