@@ -51,21 +51,59 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&family=Cabin&family=Oswald&family=Nunito&family=Roboto+Condensed&display=swap">
+
+
     <title>Document</title>
 </head>
 <body>
 <?php require 'nav.php'; ?>
-    <main>
-        <div class="container">
-            <?php if (isset($product)) : ?>          
-                <p><?php echo $product['menugang'] ?></p>
-                <p><?php echo $product['categorie'] ?></p>
-                <!-- Display other product details here -->
+<main>
+    <div class="container">
+        <div class="card">
+            <?php if (isset($product)) : ?> 
+                <div class="card_container">
+                    <img src="<?php echo $product['image'] ?>" alt="Product Image" style="width:100%">
+
+                    <div class="empty-space"></div> <!-- Add empty space -->
+                </div>
+                <div class="card_container">
+                    <section class="card-section">
+                        <div class="card-inner">
+                            <h1 class="product-name"><?php echo $product['naam'] ?></h1>
+                         
+                        <p class="category"><?php echo $product['menugang'] ?></p>
+                       
+                        <?php if ($product['vega'] == 0) : ?>
+                            <i class="fas fa-carrot"></i>
+                        <?php endif; ?> 
+                        </div>
+                        </section>
+                    <div class="empty-space"></div>
+                    <div class="card-section">
+                        <div class="card-inner2"></div>
+                        <p class="price">Inkoopprijs: € <?php echo $product['inkoopprijs'] ?></p>
+                        <div class="empty-space"></div>
+                        <p class="price">Verkoopprijs: € <?php echo $product['verkoopprijs'] ?></p>
+
+                        <p class="stock">Aantal voorraad: <?php echo $product['aantal_voorraad'] ?></p>
+                    </div></div>
+                    <div class="empty-space"></div>
+                    <section class="card-section">
+                        <div class="product_beschrijving">
+                            <p class="description"><?php echo $product['beschrijving'] ?></p>
+                        </div>
+                        </section>
+                </div>
             <?php else : ?>
                 <p>Product not found.</p>
             <?php endif; ?>
         </div>
-    </main>
+    </div>
+</main>
+
+
  <?php require 'footer.php'; ?>
 </body>
 </html>
