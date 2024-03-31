@@ -19,39 +19,46 @@ require 'database.php';
 if (isset($_GET['id'])) {
     $gebruiker_id = $_GET['id'];
     
+    // Prepare the SQL statement to fetch the user
+    $sql = "SELECT * FROM gebruikers WHERE gebruiker_id = :gebruiker_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":gebruiker_id", $gebruiker_id);
     
-        // Prepare the SQL statement to fetch the product
-        $sql = "SELECT * FROM gebruikers join adressen on adressen.adres_id = gebruikers.adres_id WHERE gebruiker_id = :gebruiker_id";
-        $stmt = $conn->prepare($sql);
-    
-        // bind the param
-        $stmt->bindParam(":gebruiker_id", $gebruiker_id);
-    
-        // Execute the statement
-        if ($stmt->execute()) {
-            if ($stmt->rowCount() > 0) {
-    
-                $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-                
-                            
+    // Execute the statement
+    if ($stmt->execute()) {
+        if ($stmt->rowCount() > 0) {
+            $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Fetch address details if available
+            $sql = "SELECT * FROM adressen WHERE adres_id = :adres_id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":adres_id", $gebruiker['adres_id']);
+            
+            if ($stmt->execute()) {
+                $adres = $stmt->fetch(PDO::FETCH_ASSOC);
             } else {
-                // No gebruiker found with the given ID
-                echo "No gebruiker found with this ID <br>";
+                // Error in executing SQL statement for address
+                echo "Error executing SQL statement for address";
                 echo "<a href='dashboard.php'>Go back</a>";
-                exit; // You may want to exit here to prevent further execution
+                exit; // Exit to prevent further execution
             }
         } else {
-            // Error in executing SQL statement
-            echo "Error executing SQL statement";
-            echo "<a href='dashboard.php'>Ga terug</a>";
+            // No user found with the given ID
+            echo "No user found with this ID <br>";
+            echo "<a href='dashboard.php'>Go back</a>";
             exit; // Exit to prevent further execution
         }
     } else {
-        // Redirect to dashboard.php if ID parameter is not set
-        header("Location: dashboard.php");
+        // Error in executing SQL statement for user
+        echo "Error executing SQL statement for user";
+        echo "<a href='dashboard.php'>Go back</a>";
         exit; // Exit to prevent further execution
-    }   
+    }
+} else {
+    // Redirect to dashboard.php if ID parameter is not set
+    header("Location: dashboard.php");
+    exit; // Exit to prevent further execution
+}   
 ?>
 
 <!DOCTYPE html>
@@ -104,25 +111,43 @@ if (isset($_GET['id'])) {
     <div class="input-groep">
         <label for="role">Rol:</label>
         <select id="role" name="role">
-           
+            <?php
+              if ($_SESSION['role'] === 'admin') {
+                // Admin can select any role
+                echo "<option value='admin'>Admin</option>";
+                echo "<option value='directeur'>Directeur</option>";
+                echo "<option value='manager'>Manager</option>";
+                echo "<option value='medewerker'>Medewerker</option>";
+                echo "<option value='klant'>Klant</option>";
+            } elseif ($_SESSION['role'] === 'manager') {
+                // Manager can select only medewerker or klant
+                echo "<option value='klant'>Klant</option>";
+                echo "<option value='medewerker'>Medewerker</option>";
+            } elseif ($_SESSION['role'] === 'directeur') {
+                // Directeur can select any role except admin
+                echo "<option value='manager'>Manager</option>";
+                echo "<option value='medewerker'>Medewerker</option>";
+                echo "<option value='klant'>Klant</option>";
+            }?>
+            
         </select>
     </div>
 <?php } ?>
+
+
           
                     <div class="input-groep">
                         <label for="woonplaats">Woonplaats</label>              
-                        <input type="text" id="woonplaats" name="woonplaats" value="<?php echo $gebruiker['woonplaats']; ?>">
+                        <input type="text" id="woonplaats" name="woonplaats" value="<?php echo isset($adres['woonplaats']) ? $adres['woonplaats'] : ''; ?>">
                     
                     </div>
                     <div class="input-groep">
                         <label for="postcode">Postcode</label>              
-                        <input type="text" id="postcode" name="postcode" value="<?php echo $gebruiker['postcode']; ?>">                
+                        <input type="text" id="postcode" name="postcode" value="<?php echo isset($adres['postcode']) ? $adres['postcode'] : ''; ?>">                
                     </div>
                     <div class="input-groep">
                          <label for="huisnummer">Huisnummer</label>
-                         <input type="number" id="huisnummer" name="huisnummer" value="<?php echo $gebruiker['huisnummer']; ?>">
-
-                         
+                         <input type="number" id="huisnummer" name="huisnummer" value="<?php echo isset($adres['huisnummer']) ? $adres['huisnummer'] : ''; ?>">  
                     </div>
                     <div class="input-groep">
                         <button type="submit" class="input-button">Aanmaken</button>

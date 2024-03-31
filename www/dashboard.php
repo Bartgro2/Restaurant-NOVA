@@ -13,7 +13,7 @@ require 'database.php';
 $stmt = $conn->prepare("SELECT * FROM gebruikers join adressen on adressen.adres_id = gebruikers.adres_id");
 $stmt->execute();
 // set the resulting array to associative
-$gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -41,7 +41,7 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="empty-space"></div>
 
-                <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
+                <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
                 <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
     </div>
     </main>
