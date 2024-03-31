@@ -15,7 +15,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
     exit;
 }
 
-
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
@@ -28,21 +27,36 @@ $id = $_GET['id'];
 
 require 'database.php';
 
-$sql = "UPDATE categorieen
-        SET naam = :naam
-        WHERE categorie_id = :categorie_id";
+// Check if the category name already exists
+$sql_check = "SELECT COUNT(*) AS count FROM categorieen WHERE naam = :naam AND categorie_id != :categorie_id";
+$stmt_check = $conn->prepare($sql_check);
+$stmt_check->bindParam(':naam', $naam);
+$stmt_check->bindParam(':categorie_id', $id);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(':naam', $naam);
-$stmt->bindParam(':categorie_id', $id);
+if ($result_check['count'] > 0) {
+    echo "Category name already exists. Please choose a different name.";
+    echo " ga terug naar <a href='categorieën_index.php'> categorieën </a>";
+    exit;
+}
 
-if ($stmt->execute()) {
+// Update the category
+$sql_update = "UPDATE categorieen SET naam = :naam WHERE categorie_id = :categorie_id";
+$stmt_update = $conn->prepare($sql_update);
+$stmt_update->bindParam(':naam', $naam);
+$stmt_update->bindParam(':categorie_id', $id);
+
+if ($stmt_update->execute()) {
     header("Location: categorieën_index.php"); 
     exit; 
 } else {
-    echo "Error updating categorie "; 
-    echo " ga terug naar categorieën_edit.php"; 
+    echo "Error updating categorie. ";
+    echo " ga terug naar <a href='categorieën_edit.php'> categorieën </a>"; 
+    exit();
 }
 ?>
+
+
 
 

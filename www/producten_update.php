@@ -36,7 +36,19 @@ $aantal_voorraad = $_POST['aantal_voorraad'];
 $image = isset($_FILES['image']) ? $_FILES['image']['name'] : null; // Alleen de bestandsnaam wordt hier opgeslagen
 $product_id = $_GET['id'];
 
+// Check if a product with the same name already exists
+$sql_check = "SELECT COUNT(*) AS count FROM producten WHERE naam = :naam AND product_id != :product_id";
+$stmt_check = $conn->prepare($sql_check);
+$stmt_check->bindParam(':naam', $product_naam);
+$stmt_check->bindParam(':product_id', $product_id);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
+if ($result_check['count'] > 0) {
+    echo "A product with the same name already exists. Please choose a different name.";
+    echo "Ga terug naar <a href='producten_edit.php'> producten </a>";
+    exit;
+}
 
 // Query voor het bijwerken van het product
 $sql = "UPDATE producten
@@ -62,13 +74,13 @@ $stmt->bindParam(':verkoopprijs', $verkoopprijs);
 $stmt->bindParam(':vega', $vega);
 $stmt->bindParam(':aantal_voorraad', $aantal_voorraad);
 $stmt->bindParam(':image', $image);
-die();
+
 if ($stmt->execute()) {
-    header("Location: producten_index.php"); // Redirect naar categorieën_index.php
-    exit; // Zorg ervoor dat je na het doorsturen de code verlaat
+    header("Location: producten_index.php"); 
+    exit; 
 } else {
-    echo "Fout bij het bijwerken van het product"; // Voeg foutafhandeling toe indien nodig
-    echo "Ga terug naar <a href='producten_index.php'> producten </a>";
+    echo "Error updating the product"; 
+    echo "Ga terug naar <a href='producten_edit.php'> producten </a>";
     exit();
 }
 ?>

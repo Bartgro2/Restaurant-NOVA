@@ -28,7 +28,22 @@ $tafel_id = $_GET['id']; // Assuming 'id' is the name of the input field in your
 $tafel_nummer = $_POST['nummer'];
 $aantal_personen = $_POST['personen'];
 
-// Prepare the SQL statement to update the reservering
+// Check if the provided tafelnummer already exists
+$sql_check = "SELECT COUNT(*) AS count FROM tafels WHERE tafelnummer = :tafelnummer AND tafel_id != :tafel_id";
+$stmt_check = $conn->prepare($sql_check);
+$stmt_check->bindParam(':tafelnummer', $tafel_nummer);
+$stmt_check->bindParam(':tafel_id', $tafel_id);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+// If the tafelnummer already exists, prevent the update operation
+if ($result_check['count'] > 0) {
+    echo "Tafelnummer already exists. Please choose a different tafelnummer.";
+    echo " Ga terug naar <a href='tafels_index.php'> tafels </a>";
+    exit;
+}
+
+// Prepare the SQL statement to update the tafel
 $sql = "UPDATE tafels
         SET 
         tafelnummer = :tafelnummer,
@@ -41,13 +56,13 @@ $stmt->bindParam(':tafelnummer', $tafel_nummer);
 $stmt->bindParam(':aantal_personen', $aantal_personen);
 $stmt->bindParam(':tafel_id', $tafel_id);
 
-
 if ($stmt->execute()) {
     header("Location: tafels_index.php");
     exit;
 } else {
     echo "Error updating tafels";
-    echo " ga terug naar <a href='tafels_index.php'> tafels </a>";
+    echo " Ga terug naar <a href='tafels_index.php'> tafels </a>";
 }
 ?>
+
 

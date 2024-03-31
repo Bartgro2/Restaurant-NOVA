@@ -59,9 +59,14 @@ foreach (['voornaam', 'achternaam'] as $nameField) {
 }
 
 if (empty($errors)) {
-    // Check if user already exists
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE email = :email");
-    $stmt->bindParam(':email', $email);
+    // Prepare concatenated data
+    $concatenated_data_email_username = $_POST['email'] . '|' . $_POST['gebruikersnaam'];
+
+    // Check if user already exists with the same email, gebruikersnaam, or their combination
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE CONCAT(email, '|', gebruikersnaam) = :concatenated_data_email_username OR email = :email OR gebruikersnaam = :gebruikersnaam");
+    $stmt->bindParam(':concatenated_data_email_username', $concatenated_data_email_username);
+    $stmt->bindParam(':email', $_POST['email']);
+    $stmt->bindParam(':gebruikersnaam', $_POST['gebruikersnaam']);
     $stmt->execute();
     $count = $stmt->fetchColumn();
 

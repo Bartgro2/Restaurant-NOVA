@@ -27,6 +27,22 @@ $id = $_GET['id'];
 
 require 'database.php';
 
+// Check if the provided "naam" already exists for a menugang
+$sql_check = "SELECT COUNT(*) AS count FROM menugangen WHERE naam = :naam AND menugang_id != :menugang_id";
+$stmt_check = $conn->prepare($sql_check);
+$stmt_check->bindParam(':naam', $naam);
+$stmt_check->bindParam(':menugang_id', $id);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+// If the "naam" already exists, prevent the update operation
+if ($result_check['count'] > 0) {
+    echo "Naam already exists for menugang. Please choose a different naam.";
+    echo " Ga terug naar <a href='menugang_index.php'> menugang </a>";
+    exit;
+}
+
+// Prepare the SQL statement to update the menugang
 $sql = "UPDATE menugangen
         SET naam = :naam
         WHERE menugang_id = :menugang_id";
@@ -44,5 +60,6 @@ if ($stmt->execute()) {
     exit();
 }
 ?>
+
 
 

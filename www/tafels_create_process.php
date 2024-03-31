@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 // Check if the user is not logged in
@@ -27,21 +26,30 @@ require 'database.php';
 $tafelnummer = $_POST['nummer'];
 $aantal_personen = $_POST['personen'];
 
+// Check if the tafel already exists
+$stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM tafels WHERE tafelnummer = :tafelnummer");
+$stmt_check->bindParam(':tafelnummer', $tafelnummer);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-$stmt = $conn->prepare("INSERT INTO tafels (tafelnummer, aantal_personen) VALUES (:tafelnummer, :aantal_personen)");
+if ($result_check['count'] > 0) {
+    echo "Tafel with the same tafelnummer already exists.";
+    echo " ga terug <a href='tafels_index.php'> tafels </a>";
+    exit;
+}
 
-$stmt->bindParam(':tafelnummer', $tafelnummer);
-$stmt->bindParam(':aantal_personen', $aantal_personen);
+// Insert the tafel if it doesn't exist
+$stmt_insert = $conn->prepare("INSERT INTO tafels (tafelnummer, aantal_personen) VALUES (:tafelnummer, :aantal_personen)");
+$stmt_insert->bindParam(':tafelnummer', $tafelnummer);
+$stmt_insert->bindParam(':aantal_personen', $aantal_personen);
+$stmt_insert->execute();
 
-$stmt->execute();
-
-if ($stmt->rowCount() > 0) {
+if ($stmt_insert->rowCount() > 0) {
     header("Location: tafels_index.php");
     exit;
 } else {
     echo "Something went wrong";
-    echo " ga terug <a href='login.php'> login </a>";
+    echo " ga terug <a href='tafels_create.php'> tafels </a>";
     exit;
 }
-
 ?>

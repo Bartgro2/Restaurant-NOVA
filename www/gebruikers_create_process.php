@@ -62,15 +62,21 @@ if ($verzeker_wachtwoord !== $wachtwoord) {
 }
 
 if (empty($errors)) {
-    // Check if user already exists
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE CONCAT(email, '|', voornaam, '|', achternaam, '|', gebruikersnaam) = :concatenated_data");
-    $concatenated_data = $_POST['email'] . '|' . $_POST['voornaam'] . '|' . $_POST['achternaam'] . '|' . $_POST['gebruikersnaam'];
-    $stmt->bindParam(':concatenated_data', $concatenated_data);
+
+    // Prepare concatenated data
+    $concatenated_data_email_username = $_POST['email'] . '|' . $_POST['gebruikersnaam'];
+
+    // Check if user already exists with the same email, gebruikersnaam, or their combination
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE CONCAT(email, '|', gebruikersnaam) = :concatenated_data_email_username OR email = :email OR gebruikersnaam = :gebruikersnaam");
+    $stmt->bindParam(':concatenated_data_email_username', $concatenated_data_email_username);
+    $stmt->bindParam(':email', $_POST['email']);
+    $stmt->bindParam(':gebruikersnaam', $_POST['gebruikersnaam']);
     $stmt->execute();
     $count = $stmt->fetchColumn();
 
-    if ($count > 0) {
-        $errors[] = "User with a combination of the same email, firstname, lastname, username already exists";
+if ($count > 0) {
+    $errors[] = "User with the same email, username, or their combination already exists";
+
     } else {
         // Insert address details
         $sql = "INSERT INTO adressen (woonplaats, postcode, huisnummer) VALUES (:woonplaats, :postcode, :huisnummer)";
@@ -102,12 +108,9 @@ if (empty($errors)) {
                 exit;
             } else {
                 $errors[] = "Error inserting user data. ";
-                echo " ga terug naar <a href='gebruikers_index.php'> registeren </a> ";
-                exit;
             }
         } else {
             $errors[] = "Error inserting address data. ";
-            echo " ga terug naar <a href='gebruikers_create.php'> registeren </a> ";
         }
     }
 }
@@ -116,7 +119,10 @@ if (empty($errors)) {
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo $error . "<br>";
+        
     }
+    echo " ga terug naar <a href='gebruikers_create.php'> registeren </a> ";
+    exit;
 }
 
 ?>

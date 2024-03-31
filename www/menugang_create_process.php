@@ -15,7 +15,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
     exit;
 }
 
-
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
@@ -25,12 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require 'database.php';
 
-$name = $_POST['naam']; // Correct variable name
+$name = $_POST['naam'];
+
+// Check if the menugang already exists
+$stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM menugangen WHERE naam = :naam");
+$stmt_check->bindParam(':naam', $name);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+if ($result_check['count'] > 0) {
+    echo "Menugang with the same name already exists.";
+    echo " ga terug <a href='menugang_index.php'> menugang </a>";
+    exit;
+}
 
 $stmt = $conn->prepare("INSERT INTO menugangen (naam) VALUES (:naam)");
 
-$stmt->bindParam(':naam', $name); // Use the correct variable name here
-
+$stmt->bindParam(':naam', $name);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
@@ -43,3 +53,4 @@ if ($stmt->rowCount() > 0) {
 }
 
 ?>
+

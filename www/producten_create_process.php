@@ -1,6 +1,4 @@
 <?php
-ob_start(); 
-
 session_start();
 
 // Check if the user is not logged in
@@ -16,14 +14,12 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
     exit;
 }
 
-
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
     echo " ga terug naar <a href='producten_index.php'> producten </a>";
     exit;
 }
-
 
 require 'database.php';
 
@@ -36,6 +32,20 @@ $verkoopprijs = $_POST['verkoopprijs'];
 $vega = $_POST['vega'];
 $aantal_voorraad = $_POST['aantal_voorraad'];
 $image = isset($_FILES['image']) ? $_FILES['image'] : null;
+
+// Check if the product already exists
+$stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM producten WHERE naam = :naam AND categorie_id = :categorie AND menugang_id = :menugang");
+$stmt_check->bindParam(':naam', $naam);
+$stmt_check->bindParam(':categorie', $categorie);
+$stmt_check->bindParam(':menugang', $menugang);
+$stmt_check->execute();
+$result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
+
+if ($result_check['count'] > 0) {
+    echo "Product with the same name already exists in the specified category and menugang.";
+    echo " ga terug <a href='producten_index.php'> producten </a>";
+    exit;
+}
 
 // Include file upload handling logic
 include 'producten_create_file_upload.php';
@@ -69,8 +79,6 @@ if ($target_file) {
     echo "Ga terug naar <a href='producten_create.php'> producten</a>";
     exit();
 }
-
-ob_end_flush(); 
 ?>
 
 
