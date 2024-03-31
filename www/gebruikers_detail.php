@@ -29,7 +29,9 @@ require 'database.php';
 if (isset($_GET['id'])) {
     $gebruiker_id = $_GET['id'];
 
-    $sql = "SELECT * FROM gebruikers WHERE gebruiker_id = :gebruiker_id";
+    $sql = "SELECT * FROM gebruikers
+            JOIN adressen on adressen.adres_id = gebruikers.adres_id
+            WHERE gebruiker_id = :gebruiker_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':gebruiker_id', $gebruiker_id);
     $stmt->execute();
@@ -59,19 +61,44 @@ if (isset($_GET['id'])) {
 </head>
 <body>
 <?php require 'nav.php'; ?>
-    <main>
-        <div class="container">
-            <?php if (isset($gebruiker)) : ?>          
-                <h2><?php echo $gebruiker['voornaam'] ?></h2>
-                <p> <?php echo $gebruiker['achternaam'] ?></p>
-                <!-- Add other fields you want to display -->
-            <?php else : ?>
-                <p>gebruiker not found.</p>
-            <?php endif; ?>
+<main>
+  <div class="container"> 
+    <div class="gebruiker-card">
+      <?php if (isset($gebruiker)) : ?>
+        <div class="product-image">
+          <img src="images/img_avatar.png" alt="Avatar" style="width:100%">
         </div>
-    </main>
+        <div class="container-something">
+          <div class="personal-details">
+            <h2><?php echo $gebruiker['voornaam'] ?> <?php echo $gebruiker['tussenvoegsel'] ?> <?php echo $gebruiker['achternaam'] ?></h2> 
+            <p><?php echo $gebruiker['email'] ?></p>
+            <div class="empty-space"></div> 
+          </div>
+          <div class="user-details">
+            <p>Gebruiker:</p>
+            <p>Naam: <?php echo $gebruiker['gebruikersnaam'] ?></p>
+            <p>Rol: <?php echo $gebruiker['rol'] ?></p>
+            <div class="empty-space"></div>
+          </div>
+          <div class="adres-details">
+            <p>Adres:</p>
+            <p>Woonplaats: <?php echo $gebruiker['woonplaats'] ?></p>
+            <p>Postcode: <?php echo $gebruiker['postcode'] ?></p>
+            <p>Huisnummer: <?php echo $gebruiker['huisnummer'] ?></p>
+          </div>
+        </div>
+      <?php else : ?>
+        <p>Gebruiker not found.</p>
+      <?php endif; ?>
+    </div>
+  </div>
+</main>
+
+
+
 <?php require 'footer.php'; ?>
 </body>
 </html>
 
 <?php ob_end_flush(); // End output buffering and flush the buffer ?>
+

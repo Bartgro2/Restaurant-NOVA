@@ -62,10 +62,14 @@ if (isset($_GET['id'])) {
 <?php require 'nav.php' ?>
     <main>
         <div class="container">
-            <?php if (isset($menugang)) : ?>          
-                <h2><?php echo $menugang['naam'] ?></h2>
-                
-                <!-- Add other fields you want to display -->
+        <div class="card">           
+                <div class="card_containers"> 
+                      <?php if (isset($menugang)) : ?>             
+                    <section class="card-section">
+                        <div class="menugang-detail">        
+                          <h1><?php echo $menugang['naam'] ?></h1>                                                                              
+                        </div>                   
+                </div>
             <?php else : ?>
                 <p>Menugang not found.</p>
             <?php endif; ?>

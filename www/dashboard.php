@@ -28,23 +28,38 @@ $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 <body>
 <?php require 'nav.php' ?>
-    <main>
-         <div class="dashboard-container">
-
-        <div class="dashboard-details">
-
-            <h3>Persoonlijke gegevens</h3>
-            <p><?php echo "Voornaam: " . $_SESSION['firstname'];; ?></p>
-            <p><?php echo "achternaam: " . $_SESSION['lastname'];; ?></p>
-            <p><?php echo "tussenvoegsel: " . $_SESSION['infix'];; ?></p>
+<main>
+  <div class="container"> 
+    <div class="dashboard-details">
+      <div class="gebruiker-card">
+        <?php if (isset($gebruiker)) : ?>
+          <div class="product-image">
+            <img src="images/img_avatar.png" alt="Avatar" style="width:100%">
+          </div>
+          <div class="container-something">
+            <div class="personal-details">
+              <h2><?php echo $gebruiker['voornaam'] ?> <?php echo $gebruiker['tussenvoegsel'] ?> <?php echo $gebruiker['achternaam'] ?></h2> 
+              <p><?php echo $gebruiker['email'] ?></p>
+              <div class="empty-space"></div> 
+            </div>
+            <div class="user-details">
+              <p>Gebruiker:</p>
+              <p>Naam: <?php echo $gebruiker['gebruikersnaam'] ?></p>
+              <p>Rol: <?php echo $gebruiker['rol'] ?></p>
+              <div class="empty-space"></div>
+            </div>
+            <div class="adres-details">
             
-        </div>
-        <div class="empty-space"></div>
-
-                <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
-                <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
+            </div>
+          </div>
+        <?php else : ?>
+          <p>Gebruiker not found.</p>
+        <?php endif; ?>
+      </div>
     </div>
-    </main>
+  </div>
+</main>
+
 <?php require 'footer.php' ?>
 </body>
 </html>

@@ -59,19 +59,26 @@ if (isset($_GET['id'])) {
 </head>
 <body>
 <?php require 'nav.php' ?>
-    <main>
-        <div class="container">
-            <?php if (isset($tafel)) : ?>          
-                <h2><?php echo $tafel['aantal_personen'] ?></h2>
-                <p> <?php echo $tafel['tafel_nummer'] ?></p>
-                <!-- Add other fields you want to display -->
+   <main>
+    <div class="container">
+        <div class="card"> <?php if (isset($tafel)) : ?>            
+                <div class="card_containers">              
+                    <section class="card-section">
+                        <div class="tafel-details">        
+                          <h1> tafelnummer: <?php echo $tafel['tafel_nummer'] ?></h1>                 
+                          <p> personen: <?php echo $tafel['aantal_personen'] ?></p>                                    
+                        </div>                   
+                </div>
             <?php else : ?>
                 <p>tafel not found.</p>
             <?php endif; ?>
         </div>
-    </main>
+    </div>
+</main>
 <?php require 'footer.php' ?>    
 </body>
 </html>
 
 <?php ob_end_flush(); // End output buffering and flush the buffer ?>
+
+

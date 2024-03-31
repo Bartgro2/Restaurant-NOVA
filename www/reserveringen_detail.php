@@ -28,7 +28,10 @@ require 'database.php';
 if (isset($_GET['id'])) {
     $reservering_id = $_GET['id'];
 
-    $sql = "SELECT * FROM reserveringen WHERE reservering_id = :reservering_id";
+    $sql = "SELECT * FROM reserveringen
+    JOIN gebruikers on gebruikers.gebruiker_id = reserveringen.gebruiker_id 
+    JOIN tafels on tafels.tafel_id = reserveringen.tafel_id 
+    WHERE reservering_id = :reservering_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':reservering_id', $reservering_id);
     $stmt->execute();
@@ -58,20 +61,42 @@ if (isset($_GET['id'])) {
 </head>
 <body>
 <?php require 'nav.php' ?>
-    <main>
-        <div class="container">
-            <?php if (isset($reservering)) : ?>          
-                <h2><?php echo $reservering['datum'] ?></h2>
-                <p> <?php echo $reservering['tijd'] ?></p>
-                <!-- Add other fields you want to display -->
-            <?php else : ?>
-                <p>reservering not found.</p>
-            <?php endif; ?>
+<main>
+  <div class="container"> 
+    <div class="product-card">
+      <?php if (isset($reservering)) : ?>  
+       <div class="product-image">
+        <img src="images/img_avatar.png" alt="Avatar" style="width:100%">
+       </div>
+        <div class="container-something">
+          <div class="personal-details">
+            <p><?php echo $reservering['voornaam'] ?> <?php echo $reservering['tussenvoegsel'] ?> <?php echo $reservering['achternaam'] ?></p>
+            <p><?php echo $reservering['email']?></p>
+            <div class="empty-space"></div> 
+          </div>
+          <div class="reservation-details">
+            <p>reservering:</p>
+            <p>Datum: <?php echo $reservering['datum'] ?></p> 
+            <p>Tijd: <?php echo $reservering['tijd'] ?></p>
+            <p>Tafelnummer: <?php echo $reservering['tafel_nummer'] ?></p> 
+            <p>Aantal Personen: <?php echo $reservering['aantal_personen'] ?></p>  
+          </div>
         </div>
-    </main>
+      <?php else : ?>
+        <p>Reservering not found.</p>
+      <?php endif; ?>
+    </div>
+  </div>
+</main>
+
+
+
 <?php require 'footer.php' ?>    
 </body>
 </html>
 
 <?php ob_end_flush(); // End output buffering and flush the buffer ?>
+
+
+
 

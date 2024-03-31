@@ -65,11 +65,18 @@ exit;
 <?php require 'nav.php'  ?>
     <main>
     <div class="container">
-        <?php if (isset($categorie)) : ?>          
-                        <p><?php echo $categorie['naam'] ?></p> <!-- Corrected variable name --> 
-        <?php else : ?>
+    <div class="card">           
+                <div class="card-container"> 
+                             <?php if (isset($categorie)) : ?>       
+                    <section class="card-section">
+                        <div class="menugang-detail">        
+                           <h1><?php echo $categorie['naam'] ?></h1>                                                                            
+                        </div>                   
+                </div>
+             <?php else : ?>
             <p>categorie not found.</p>
         <?php endif; ?>
+        </div>     
     </div>
 </main>
 <?php require 'footer.php' ?>
@@ -77,6 +84,3 @@ exit;
 </html>
 
 <?php ob_end_flush(); // End output buffering and flush the buffer ?>
-
-
-
