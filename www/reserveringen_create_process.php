@@ -8,14 +8,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Check if role is not admin, directeur, manager, or medewerker
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
-    echo "You are not authorized to view this page. Please log in with appropriate credentials. ";
-    echo "Log in with a different role <a href='login.php'>here</a>.";
-    exit;
-}
-
-
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
@@ -86,7 +78,6 @@ if (empty($errors)) {
             // Check user role to determine further action
             if ($_SESSION['role'] === 'klant' || !isset($_SESSION['role'])) {
                 // For customers or when role is not set
-                
                 $datum = $_POST['datum'];
                 $tijd = $_POST['tijd'];
 
@@ -118,8 +109,14 @@ if (empty($errors)) {
                 $stmt4->bindParam(':tijd', $tijd);
 
                 if ($stmt4->execute()) {
-                    header("Location: reserveringen.php");
-                    exit;
+                    if ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'directeur' && $_SESSION['role'] != 'manager' && $_SESSION['role'] != 'medewerker') {
+                        // For roles other than admin, directeur, manager, and medewerker
+                        header("Location: reserveringen_index.php");
+                        exit;
+                    } else {                 
+                        header("Location: index.php");
+                        exit;
+                    }
                 } else {
                     $errors[] = "Error inserting table into reserveringen.";
                 }
@@ -135,8 +132,11 @@ if (!empty($errors)) {
     foreach ($errors as $error) {
         echo $error . "<br>";
     }
+    echo '<a href="reserveringen.php">Go back</a>'; 
 }
 ?>
+
+
 
 
 

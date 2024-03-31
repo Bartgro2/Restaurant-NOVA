@@ -26,6 +26,21 @@ require 'database.php';
 $tafelnummer = $_POST['nummer'];
 $aantal_personen = $_POST['personen'];
 
+// Check if nummer and personen are not empty
+if (empty($tafelnummer) && empty($aantal_personen)) {
+    echo "Tafelnummer and aantal personen cannot be empty.";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
+    exit;
+} elseif (empty($tafelnummer)) {
+    echo "Tafelnummer cannot be empty.";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
+    exit;
+} elseif (empty($aantal_personen)) {
+    echo "Aantal personen cannot be empty.";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
+    exit;
+}
+
 // Check if the tafel already exists
 $stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM tafels WHERE tafelnummer = :tafelnummer");
 $stmt_check->bindParam(':tafelnummer', $tafelnummer);
@@ -34,7 +49,7 @@ $result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
 if ($result_check['count'] > 0) {
     echo "Tafel with the same tafelnummer already exists.";
-    echo " ga terug <a href='tafels_index.php'> tafels </a>";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
     exit;
 }
 
@@ -49,7 +64,7 @@ if ($stmt_insert->rowCount() > 0) {
     exit;
 } else {
     echo "Something went wrong";
-    echo " ga terug <a href='tafels_create.php'> tafels </a>";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
     exit;
 }
 ?>

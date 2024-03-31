@@ -33,6 +33,21 @@ $vega = $_POST['vega'];
 $aantal_voorraad = $_POST['aantal_voorraad'];
 $image = isset($_FILES['image']) ? $_FILES['image'] : null;
 
+$requiredFields = ['naam', 'categorie', 'menugang', 'beschrijving', 'inkoopprijs', 'verkoopprijs', 'vega', 'aantal_voorraad'];
+
+foreach ($requiredFields as $field) {
+    // Check if the field is required and not empty
+    if (empty($_POST[$field])) {
+        $errors[] = "Please fill in all fields";
+        break; // Stop checking further fields if one is found empty
+    }
+}
+
+// Validate name format
+if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['naam'])) {
+    $errors[] = "Invalid format for name. Only letters, spaces, hyphens, and apostrophes are allowed.";
+}
+
 // Check if the product already exists
 $stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM producten WHERE naam = :naam AND categorie_id = :categorie AND menugang_id = :menugang");
 $stmt_check->bindParam(':naam', $naam);

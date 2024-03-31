@@ -77,6 +77,12 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Wijzig</a>
                                     <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
                                 <?php endif; ?>
+                                <!-- Directeur actions: View, Edit & Delete all users except for other admins and directeurs -->
+                                <?php if ($_SESSION['role'] === 'directeur' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || $gebruiker['rol'] !== 'directeur' && $gebruiker['rol'] !== 'admin')) : ?>
+                                    <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
+                                    <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Wijzig</a>
+                                    <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
+                                <?php endif; ?>
                                 <?php if ($_SESSION['role'] === 'manager' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || $gebruiker['rol'] !== 'manager' && $gebruiker['rol'] !== 'admin')) : ?>
                                     <!-- Manager actions: View, Edit & Delete all users except for other admins and managers -->
                                     <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>

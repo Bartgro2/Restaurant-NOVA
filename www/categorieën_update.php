@@ -25,6 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $naam = $_POST['naam'];
 $id = $_GET['id'];
 
+// Check if naam is empty or contains invalid characters
+if (empty($naam) || !preg_match("/^[a-zA-Z0-9\s]*$/", $naam)) {
+    if (empty($naam)) {
+        echo "Naam cannot be empty.";
+    } else {
+        echo "Invalid format for naam. Only alphanumeric characters and spaces are allowed.";
+    }
+    echo " Ga terug <a href='categorieën_create.php'> categorieën </a>";
+    exit;
+}
+
 require 'database.php';
 
 // Check if the category name already exists
@@ -56,6 +67,7 @@ if ($stmt_update->execute()) {
     exit();
 }
 ?>
+
 
 
 

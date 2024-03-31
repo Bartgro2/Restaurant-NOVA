@@ -20,12 +20,23 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
     echo " ga terug <a href='menugang.php'> menugang </a>";
+    exit; // <-- Add this line
 }
 
 $naam = $_POST['naam'];
 $id = $_GET['id'];
 
 require 'database.php';
+
+if (empty($naam) || !preg_match("/^[a-zA-Z0-9\s]*$/", $naam)) {
+    if (empty($naam)) {
+        echo "Naam cannot be empty.";
+    } else {
+        echo "Invalid format for naam. Only alphanumeric characters and spaces are allowed.";
+    }
+    echo " Ga terug <a href='categorieën_create.php'> categorieën </a>";
+    exit;
+}
 
 // Check if the provided "naam" already exists for a menugang
 $sql_check = "SELECT COUNT(*) AS count FROM menugangen WHERE naam = :naam AND menugang_id != :menugang_id";

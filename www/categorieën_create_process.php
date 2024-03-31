@@ -24,12 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require 'database.php';
 
-$name = $_POST['naam'];
+$naam = $_POST['naam'];
+
+// Check if naam is empty or contains invalid characters
+if (empty($naam) || !preg_match("/^[a-zA-Z0-9\s]*$/", $naam)) {
+    if (empty($naam)) {
+        echo "Naam cannot be empty.";
+    } else {
+        echo "Invalid format for naam. Only alphanumeric characters and spaces are allowed.";
+    }
+    echo " Ga terug <a href='categorieën_create.php'> categorieën </a>";
+    exit;
+}
+
 
 // Check if the provided category name already exists
 $sql_check = "SELECT COUNT(*) AS count FROM categorieen WHERE naam = :naam";
 $stmt_check = $conn->prepare($sql_check);
-$stmt_check->bindParam(':naam', $name);
+$stmt_check->bindParam(':naam', $naam);
 $stmt_check->execute();
 $result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
@@ -42,7 +54,7 @@ if ($result_check['count'] > 0) {
 
 // Insert the category name into the database
 $stmt = $conn->prepare("INSERT INTO categorieen (naam) VALUES (:naam)");
-$stmt->bindParam(':naam', $name);
+$stmt->bindParam(':naam', $naam);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
@@ -55,4 +67,5 @@ if ($stmt->rowCount() > 0) {
 }
 
 ?>
+
 

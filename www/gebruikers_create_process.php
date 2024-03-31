@@ -104,16 +104,20 @@ if ($count > 0) {
             $stmt2->execute();
 
             if ($stmt2->rowCount() > 0) {
-                header("Location: login.php");
-                exit;
+                if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager' || $_SESSION['role'] === 'medewerker') {
+                    header("Location: gebruikers_index.php"); 
+                    exit;
+                } else {                 
+                    // For other roles, redirect to login.php
+                    header("Location: login.php");
+                    exit;
+                }
             } else {
                 $errors[] = "Error inserting user data. ";
             }
-        } else {
-            $errors[] = "Error inserting address data. ";
         }
     }
-}
+}            
 
 // Display errors or redirect
 if (!empty($errors)) {

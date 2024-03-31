@@ -28,6 +28,21 @@ $tafel_id = $_GET['id']; // Assuming 'id' is the name of the input field in your
 $tafel_nummer = $_POST['nummer'];
 $aantal_personen = $_POST['personen'];
 
+// Check if nummer and personen are not empty
+if (empty($tafel_nummer) && empty($aantal_personen)) {
+    echo "Tafelnummer and aantal personen cannot be empty.";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
+    exit;
+} elseif (empty($tafel_nummer)) {
+    echo "Tafelnummer cannot be empty.";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
+    exit;
+} elseif (empty($aantal_personen)) {
+    echo "Aantal personen cannot be empty.";
+    echo " Ga terug <a href='tafels_create.php'> tafels </a>";
+    exit;
+}
+
 // Check if the provided tafelnummer already exists
 $sql_check = "SELECT COUNT(*) AS count FROM tafels WHERE tafelnummer = :tafelnummer AND tafel_id != :tafel_id";
 $stmt_check = $conn->prepare($sql_check);
@@ -61,8 +76,9 @@ if ($stmt->execute()) {
     exit;
 } else {
     echo "Error updating tafels";
-    echo " Ga terug naar <a href='tafels_index.php'> tafels </a>";
+    echo " Ga terug naar <a href='tafels_edit.php'> tafels </a>";
 }
 ?>
+
 
 

@@ -24,11 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require 'database.php';
 
-$name = $_POST['naam'];
+$naam = $_POST['naam'];
+
+if (empty($naam) || !preg_match("/^[a-zA-Z0-9\s]*$/", $naam)) {
+    if (empty($naam)) {
+        echo "Naam cannot be empty.";
+    } else {
+        echo "Invalid format for naam. Only alphanumeric characters and spaces are allowed.";
+    }
+    echo " Ga terug <a href='menugang_create.php'> menugang </a>"; // Fixed redirection link
+    exit;
+}
 
 // Check if the menugang already exists
 $stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM menugangen WHERE naam = :naam");
-$stmt_check->bindParam(':naam', $name);
+$stmt_check->bindParam(':naam', $naam);
 $stmt_check->execute();
 $result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
@@ -40,7 +50,7 @@ if ($result_check['count'] > 0) {
 
 $stmt = $conn->prepare("INSERT INTO menugangen (naam) VALUES (:naam)");
 
-$stmt->bindParam(':naam', $name);
+$stmt->bindParam(':naam', $naam);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {

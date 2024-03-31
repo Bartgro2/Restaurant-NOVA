@@ -15,13 +15,12 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
     exit;
 }
 
-  
-  // Check if the request method is not POST
-  if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-      echo "You are not allowed to view this page ";
-      echo " ga terug naar <a href='producten_index.php'> producten </a>";
-      exit;
-  }
+// Check if the request method is not POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug naar <a href='producten_index.php'> producten </a>";
+    exit;
+}
 
 require 'database.php';
 
@@ -36,6 +35,31 @@ $aantal_voorraad = $_POST['aantal_voorraad'];
 $image = isset($_FILES['image']) ? $_FILES['image']['name'] : null; // Alleen de bestandsnaam wordt hier opgeslagen
 $product_id = $_GET['id'];
 
+$errors = [];
+
+// Check if all required fields are filled
+$requiredFields = ['naam', 'categorie', 'menugang', 'beschrijving', 'inkoopprijs', 'verkoopprijs', 'vega', 'aantal_voorraad'];
+foreach ($requiredFields as $field) {
+    if (empty($_POST[$field])) {
+        $errors[] = "Please fill in all fields";
+        break;
+    }
+}
+
+// Validate name format
+if (!preg_match("/^[a-zA-Z-' ]*$/", $product_naam)) {
+    $errors[] = "Invalid format for name. Only letters, spaces, hyphens, and apostrophes are allowed.";
+}
+
+// If there are errors, display them and exit
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo $error . "<br>";
+    }
+    echo "Ga terug naar <a href='producten_edit.php?id=" . $product_id . "'> producten </a>";
+    exit;
+}
+
 // Check if a product with the same name already exists
 $sql_check = "SELECT COUNT(*) AS count FROM producten WHERE naam = :naam AND product_id != :product_id";
 $stmt_check = $conn->prepare($sql_check);
@@ -46,7 +70,7 @@ $result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
 if ($result_check['count'] > 0) {
     echo "A product with the same name already exists. Please choose a different name.";
-    echo "Ga terug naar <a href='producten_edit.php'> producten </a>";
+    echo "Ga terug naar <a href='producten_edit.php?id=" . $product_id . "'> producten </a>";
     exit;
 }
 
@@ -80,10 +104,11 @@ if ($stmt->execute()) {
     exit; 
 } else {
     echo "Error updating the product"; 
-    echo "Ga terug naar <a href='producten_edit.php'> producten </a>";
+    echo "Ga terug naar <a href='producten_edit.php?id=" . $product_id . "'> producten </a>";
     exit();
 }
 ?>
+
 
 
 
