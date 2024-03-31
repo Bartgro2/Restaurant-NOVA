@@ -109,7 +109,7 @@ if (empty($errors)) {
         $stmt->bindParam(':wachtwoord', $hashed_password);
 
         // Check if the user is directeur, admin, or manager
-        if ($_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'manager') {
+        if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager') {
             // If so, set their role to the selected role from the form
             $stmt->bindParam(':rol', $_POST['role']);
         } else {
@@ -143,7 +143,7 @@ if (!empty($errors)) {
     foreach ($errors as $error) {
         echo $error . "<br>";
     }
-    if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') { 
+    if ($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'directeur' || $_SESSION['role'] !== 'manager' || $_SESSION['role'] !== 'medewerker') { 
         header("Location: gebruikers_index.php"); // Redirect to gebruikers_index.php
         exit; // Make sure to exit after redirecting
     } else {
@@ -152,7 +152,3 @@ if (!empty($errors)) {
     }
 }
 ?>
-
-
-
-

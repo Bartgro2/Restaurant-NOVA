@@ -8,10 +8,10 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Check if role is not admin, manager or medewerker
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
-    echo "You are not allowed to view this page, please login as admin, manager, or medewerker ";
-    echo " ga terug naar <a href='login.php'> tafel </a>";
+// Check if role is not admin, directeur, manager, or medewerker
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+    echo "You are not authorized to view this page. Please log in with appropriate credentials. ";
+    echo "Log in with a different role <a href='login.php'>here</a>.";
     exit;
 }
 

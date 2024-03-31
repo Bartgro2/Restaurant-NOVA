@@ -106,33 +106,32 @@ if (isset($_GET['id'])) {
                         <input type="password" id="verzeker_wachtwoord" name="verzeker_wachtwoord" value="<?php echo $gebruiker['wachtwoord'] ?>">
                     </div>
 
-                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'manager' || $_SESSION['role'] === 'directeur') { ?>
-    <!-- Role dropdown only visible to admin, manager, and directeur -->
+                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager') { ?>
+    <!-- Role dropdown only visible to admin, directeur and manager  -->
     <div class="input-groep">
         <label for="role">Rol:</label>
         <select id="role" name="role">
-            <?php
-              if ($_SESSION['role'] === 'admin') {
-                // Admin can select any role
-                echo "<option value='admin'>Admin</option>";
-                echo "<option value='directeur'>Directeur</option>";
-                echo "<option value='manager'>Manager</option>";
-                echo "<option value='medewerker'>Medewerker</option>";
-                echo "<option value='klant'>Klant</option>";
-            } elseif ($_SESSION['role'] === 'manager') {
-                // Manager can select only medewerker or klant
-                echo "<option value='klant'>Klant</option>";
-                echo "<option value='medewerker'>Medewerker</option>";
-            } elseif ($_SESSION['role'] === 'directeur') {
-                // Directeur can select any role except admin
-                echo "<option value='manager'>Manager</option>";
-                echo "<option value='medewerker'>Medewerker</option>";
-                echo "<option value='klant'>Klant</option>";
-            }?>
-            
+            <?php if ($_SESSION['role'] === 'admin') : ?>
+                <!-- Admin can select any role -->
+                <option value="admin" <?php echo ($_SESSION['role'] === 'admin') ? 'selected' : ''; ?>>Admin</option>
+                <option value="directeur" <?php echo ($_SESSION['role'] === 'directeur') ? 'selected' : ''; ?>>Directeur</option>
+                <option value="manager" <?php echo ($_SESSION['role'] === 'manager') ? 'selected' : ''; ?>>Manager</option>
+                <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
+                <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
+            <?php elseif ($_SESSION['role'] === 'directeur') : ?>
+                <!-- Directeur can select any role except admin -->
+                <option value="manager" <?php echo ($_SESSION['role'] === 'manager') ? 'selected' : ''; ?>>Manager</option>
+                <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
+                <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
+            <?php elseif ($_SESSION['role'] === 'manager') : ?>
+                <!-- Manager can select only medewerker or klant -->
+                <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
+                <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
+            <?php endif; ?>
         </select>
     </div>
 <?php } ?>
+
 
 
           

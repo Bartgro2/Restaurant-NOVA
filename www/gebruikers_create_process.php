@@ -1,7 +1,15 @@
 <?php
 
+// Check if the request method is not POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "You are not allowed to view this page ";
+    echo " ga terug naar <a href='login.php'> login </a>";
+    exit;
+}
+
 // Include database connection
 require 'database.php';
+
 
 function test_input($data) {
     $data = trim($data);

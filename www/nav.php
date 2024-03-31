@@ -17,7 +17,7 @@ if (isset($_SESSION['user_id'])) {
         <ul> 
             <!-- Home and Menu links visible to all users -->
             <li><a href="index.php" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>Home</a></li>
-            <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
+            <li><a href="#" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
             <!-- Reservering link -->
             <li><a href="reserveringen_create.php" <?php if ($current_page == 'reserveringen_create.php') echo 'class="active"'; ?>>Reservering</a></li>
 
