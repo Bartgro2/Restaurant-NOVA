@@ -42,7 +42,11 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <?php require 'nav.php'; ?>
     <main>
+    <div class="container">
+        <div class="product-container">
+     
     <div class="account-pagina">
+        
         <div class="form-panel">       
             <h1>Product maken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
@@ -97,6 +101,8 @@ $menugangen = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
     </div>
+</div>
+</div>
 </main>
 <?php require 'footer.php'; ?>
 </body>

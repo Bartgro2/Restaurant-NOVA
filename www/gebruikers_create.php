@@ -14,6 +14,8 @@ session_start();
 <body>
 <?php require 'nav.php'; ?>
     <main>
+    <div class="container">
+    <div class="gebruikers-container">
     <div class="account-pagina">
         <div class="form-panel">       
             <h1>registeren</h1> 
@@ -75,6 +77,8 @@ session_start();
     </div>
 </form>
         </div>
+    </div>
+    </div>
     </div>
 </main>
 <?php require 'footer.php'; ?>

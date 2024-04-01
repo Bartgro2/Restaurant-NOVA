@@ -45,9 +45,7 @@ $reserveringen = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include 'nav.php' ?>
     <main>
         <div class="container">
-            <div class="reserveringen-container">
-                
-           
+            <div class="reserveringen-container">        
             <div class="table-wrapper">
             <table>
                 <thead>

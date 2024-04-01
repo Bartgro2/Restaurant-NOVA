@@ -30,7 +30,9 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
 <body>
 <?php require 'nav.php' ?>
     <main>
-    <div class="account-pagina2">
+    <div class="container">
+        <div class="tafel-container">
+    <div class="account-pagina">
         <div class="form-panel">    
             <h1>tafel maken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
@@ -48,6 +50,8 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
                     </div> 
             </form>
         </div>
+    </div>
+    </div>
     </div>
 </main>
 <?php require 'footer.php' ?>

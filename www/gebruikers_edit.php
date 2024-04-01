@@ -72,6 +72,8 @@ if (isset($_GET['id'])) {
 <body>
     <?php require 'nav.php'; ?>
     <main>
+        <div class="container">
+        <div class="gebruiker-container">
         <div class="account-pagina">
             <div class="form-panel">       
                 <h1>registeren</h1> 
@@ -130,11 +132,7 @@ if (isset($_GET['id'])) {
             <?php endif; ?>
         </select>
     </div>
-<?php } ?>
-
-
-
-          
+<?php } ?>      
                     <div class="input-groep">
                         <label for="woonplaats">Woonplaats</label>              
                         <input type="text" id="woonplaats" name="woonplaats" value="<?php echo isset($adres['woonplaats']) ? $adres['woonplaats'] : ''; ?>">
@@ -153,6 +151,8 @@ if (isset($_GET['id'])) {
                     </div>
                 </form>
             </div>
+        </div>
+        </div>
         </div>
     </main>
     <?php require 'footer.php'; ?>

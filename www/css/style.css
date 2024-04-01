@@ -126,15 +126,9 @@ section{
 
 }
 
-.container {
-  width: 960px;
-  margin: 0 auto;
-}
+
 
 /* table styling  */
-
-
-
 .reserveringen-container .table-wrapper,
 .producten-container .table-wrapper,
 .categorie-container .table-wrapper,
@@ -177,8 +171,6 @@ th {
   background-color: #f2f2f2;
   text-align: left;
 }
-
-
 
 .search-bar {
   width: 800px;
@@ -273,18 +265,29 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1100px;
+  min-height: 500px;
   border-radius: 4px;
-  width: 600px;
 }
 
-.account-pagina2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 600px;
-  border-radius: 4px;
-  width: 600px;
+.product-container .account-pagina{
+  height: 1100px;
+}
+
+.menugang-container .account-pagina,
+.categorie-container .account-pagina{
+  height: 240px;
+}
+
+.tafel-container .account-pagina {
+  height: 312px; 
+}
+
+.reserveringen-container .account-pagina{
+  height: 715;
+}
+
+.gebruikers-container .account-pagina {
+  height: 1016px; 
 }
 
 .form-panel {

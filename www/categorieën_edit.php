@@ -64,7 +64,9 @@ if (isset($_GET['id'])) {
 <body>
 <?php require 'nav.php' ?>  
 <main>
-    <div class="account-pagina2">
+    <div class="container">
+    <div class="categorie-container">   
+    <div class="account-pagina">
         <div class="form-panel">    
             <h1>categorie bijwerken</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
@@ -78,7 +80,9 @@ if (isset($_GET['id'])) {
                     </div> 
             </form>
         </div>
-    </div>
+    </div> 
+  </div> 
+</div>
 </main>
 <?php require 'footer.php' ?>
 </body>

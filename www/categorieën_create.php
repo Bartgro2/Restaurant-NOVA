@@ -32,7 +32,9 @@ require 'database.php';
 <body>
 <?php require 'nav.php'; ?>
     <main>
-    <div class="account-pagina2">
+    <div class="container">
+    <div class="categorie-container">
+    <div class="account-pagina">
         <div class="form-panel">
            <!-- New div wrapper for vertical centering -->
                 <h1>categorie maken</h1> <!-- Form title -->
@@ -47,7 +49,9 @@ require 'database.php';
                     </div> 
                 </form>
             </div>
-        </div>
+        </div> 
+    </div>  
+  </div>
 </main>
 <?php require 'footer.php' ?>
 </body>

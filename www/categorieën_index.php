@@ -44,7 +44,6 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 <?php include 'nav.php' ?>
-
         <main>
               <div class="container">
                 <div class="categorie-container">
