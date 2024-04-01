@@ -96,33 +96,6 @@ footer {
   margin: 0 auto;
 }
 
-main {
-  display: flex;
-  justify-content: center; /* Horizontally center the container */
-  height: auto;
-}
-
-/* table styling  */
-
-.container table{
-  margin-top: 40px;
-}
-
-table {
-  width: 60%;
-  border-collapse: collapse;
-
-}
-
-th, td {
-  padding: 12px; 
-  border: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-  text-align: left;
-}
 
 /* index.php  */ 
 section{
@@ -137,7 +110,58 @@ section{
 
 }
 
-.white-section p {
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+/* table styling  */
+
+.table-wrapper{
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  min-height: 580px; /* reserveringen_index, producten_index, categorie_index, menugang  = minheight 580px */ 
+  /* gebruikers_index = 800px */ /* tafel_index = 600px */
+  max-height: 2200px;
+}
+
+.reserveringen-container .table-wrapper,
+.producten-container .table-wrapper,
+.categorie-container .table-wrapper,
+.menugang-container .table-wrapper {
+  min-height: 580px; /* Specific min-height for these pages */
+}
+
+.gebruikers-container .table-wrapper {
+  min-height: 800px; /* Specific min-height for this page */
+}
+
+.tafel-container .table-wrapper {
+  min-height: 600px; /* Specific min-height for this page */
+}
+
+
+
+table{
+  width: 80%; /* Adjust as needed */
+  max-width: 800px; /* Set maximum width */
+  border-collapse: collapse;
+  border: 2px solid #ddd;
+}
+
+th, td {
+  padding: 12px; 
+  border: 1px solid #ddd;
+  height: 80px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.action p {
   font-size: 18px; 
   line-height: 1.6; 
   color: #333; 
@@ -262,18 +286,30 @@ select {
   border-top: 1px solid #ccc; 
 }
 
+.container .dashboard-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set height to 100% of the viewport height */
+}
+
 .dashboard-container {
-  width: 960px;
-  margin: 25px auto;
   padding: 20px;
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   border-radius: 4px;
   max-height: 500px;
+  width: 80%; /* Adjust the width as needed */
+  max-width: 800px; /* Set maximum width */
 }
 
 .dashboard-details {
   padding-top: 20px;
+  height: 500px;
 }
 
 .dashboard-details p {
@@ -282,6 +318,46 @@ select {
 
 .dashboard-details h3 {
   padding-bottom: 5px;
+}
+
+.product-image img {
+  max-width: 100%; /* Ensure the image doesn't exceed its container width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 50%; /* Make the image round */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Example of making the image circular with a border */
+.product-image img.circular {
+  border-radius: 50%;
+  border: 3px solid #fff; /* Add a white border */
+}
+
+/* Example of adding a border to the image */
+.product-image img.with-border {
+  border: 2px solid #ccc; /* Add a border around the image */
+}
+
+/* Example of adding a grayscale effect to the image */
+.product-image img.grayscale {
+  filter: grayscale(100%); /* Convert the image to grayscale */
+}
+
+
+.product-image-container {
+  width: 120px; /* Set width and height to create a circular container */
+  height: 120px;
+  border-radius: 50%; /* Make the container circular */
+  overflow: hidden; /* Hide overflowing content */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  background-color: #f9f9f9; /* Optional: Add a background color */
+}
+
+.circular-img {
+  width: 100%; /* Ensure the image takes up the entire container */
+  height: auto;
 }
 
 .empty-space{
@@ -542,6 +618,9 @@ select {
   font-style: italic;
   color: #666;
 }
+
+
+
 
    
 

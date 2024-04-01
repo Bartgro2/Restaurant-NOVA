@@ -42,7 +42,9 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include 'nav.php' ?>
     <main>
-        <div class="container">
+    <div class="container">
+        <div class="gebruikers-container">
+        <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -71,7 +73,7 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo $gebruiker['huisnummer'] ?></td>
                             <td><?php echo $gebruiker['rol'] ?></td>
                             <td>
-                                <?php if ($_SESSION['role'] === 'admin' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || $gebruiker['rol'] !== 'admin')) : ?>
+<?php if ($_SESSION['role'] === 'admin' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || $gebruiker['rol'] !== 'admin')) : ?>
                                     <!-- Admin actions: View, Edit, and delete all users except for other admins -->
                                     <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
                                     <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Wijzig</a>
@@ -85,10 +87,10 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php endif; ?>
                                 <?php if ($_SESSION['role'] === 'manager' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || $gebruiker['rol'] !== 'manager' && $gebruiker['rol'] !== 'admin')) : ?>
                                     <!-- Manager actions: View, Edit & Delete all users except for other admins and managers -->
-                                    <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
-                                    <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Wijzig</a>
-                                    <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
-                                <?php endif; ?>
+                            <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
+                            <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Wijzig</a>
+                            <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
+<?php endif; ?>
                                     <!-- Medewerker actions: View and edit own profile only, including klanten -->
                                <?php if ($_SESSION['role'] === 'medewerker' && ($_SESSION['user_id'] === $gebruiker['gebruiker_id'] || ($gebruiker['rol'] !== 'manager' && $gebruiker['rol'] !== 'admin' && $_SESSION['role'] !== 'medewerker'))) : ?>
                                     <a href="gebruikers_detail.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a> 
@@ -100,10 +102,15 @@ $gebruikers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tbody>
             </table>
         </div>
-    </main>  
+    </div>
+  </div>
+</main>
+ 
  <?php include 'footer.php' ?>
 </body>
 </html>
+
+
 
 
 

@@ -45,6 +45,8 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include 'nav.php' ?>  
         <main>
             <div class="container">
+                <div class="product-container">          
+            <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -84,6 +86,8 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </main>
     </div> 
+    </div>
+</div>
    <?php include 'footer.php' ?>
 </body>
 </html>

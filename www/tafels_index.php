@@ -45,32 +45,52 @@ $_SESSION['tafels'] = $tafels;
     <?php include 'footer.php' ?>
 
     <main>
-        <div class="container">
-            <table>
-                <thead>
+    <div class="container">
+        <div class="tafel-container">
+        <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>tafelnummer</th>
+                    <th>personen</th>       
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($tafels as $tafel) : ?>
                     <tr>
-                        <th>id</th>
-                        <th>tafelnummer</th>
-                        <th>personen</th>       
-                        <th>Acties</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($tafels as $tafel) : ?>
-                        <tr>
-                            <td><?php echo $tafel['tafel_id'] ?></td>
-                            <td><?php echo $tafel['tafel_nummer'] ?></td>
-                            <td><?php echo $tafel['aantal_personen'] ?></td>          
-                            <td>
-                              <a href="tafels_detail.php?id=<?php echo $tafel['tafel_id'] ?>">Bekijk</a>
-                              <a href="tafels_edit.php?id=<?php echo $tafel['tafel_id'] ?>">Wijzig</a>
-                              <a href="tafels_delete.php?id=<?php echo $tafel['tafel_id'] ?>">Verwijder</a>
-                            </td>             
-                        </tr> 
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                        <td><?php echo $tafel['tafel_id'] ?></td>
+                        <td><?php echo $tafel['tafel_nummer'] ?></td>
+                        <td><?php echo $tafel['aantal_personen'] ?></td>          
+                        <td>
+                          <a href="tafels_detail.php?id=<?php echo $tafel['tafel_id'] ?>">Bekijk</a>
+                          <a href="tafels_edit.php?id=<?php echo $tafel['tafel_id'] ?>">Wijzig</a>
+                          <a href="tafels_delete.php?id=<?php echo $tafel['tafel_id'] ?>">Verwijder</a>
+                        </td>             
+                    </tr> 
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+</main>
+
 </body>
 </html>
+
+.reserveringen-container .table-wrapper,
+.producten-container .table-wrapper,
+.categorie-container .table-wrapper,
+.menugang-container .table-wrapper {
+  min-height: 580px; /* Specific min-height for these pages */
+}
+
+.gebruikers-container .table-wrapper {
+  min-height: 800px; /* Specific min-height for this page */
+}
+
+.tafel-container .table-wrapper {
+  min-height: 600px; /* Specific min-height for this page */
+}

@@ -29,16 +29,16 @@ $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
 <body>
 <?php require 'nav.php' ?>
 <main>
-  <div class="container"> 
-    <div class="dashboard-details">
-      <div class="gebruiker-card">
-        <?php if (isset($gebruiker)) : ?>
-          <div class="product-image">
-            <img src="images/img_avatar.png" alt="Avatar" style="width:100%">
-          </div>
-          <div class="container-something">
-            <div class="personal-details">
-              <h2><?php echo $gebruiker['voornaam'] ?> <?php echo $gebruiker['tussenvoegsel'] ?> <?php echo $gebruiker['achternaam'] ?></h2> 
+  <div class="container">
+    <div class="dashboard-container">
+    
+      <div class="dashboard-details">
+        <div class="product-image-container">
+          <img src="images/img_avatar.png" alt="Avatar" class="circular-img">
+        </div>
+        <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Bekijk</a>
+        <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>">Verwijder</a>
+        <h2><?php echo $gebruiker['voornaam'] ?> <?php echo $gebruiker['tussenvoegsel'] ?> <?php echo $gebruiker['achternaam'] ?></h2> 
               <p><?php echo $gebruiker['email'] ?></p>
               <div class="empty-space"></div> 
             </div>
@@ -47,18 +47,12 @@ $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
               <p>Naam: <?php echo $gebruiker['gebruikersnaam'] ?></p>
               <p>Rol: <?php echo $gebruiker['rol'] ?></p>
               <div class="empty-space"></div>
-            </div>
-            <div class="adres-details">
-            
-            </div>
-          </div>
-        <?php else : ?>
-          <p>Gebruiker not found.</p>
-        <?php endif; ?>
       </div>
     </div>
   </div>
 </main>
+
+
 
 <?php require 'footer.php' ?>
 </body>
