@@ -282,29 +282,61 @@ th {
   height: 312px; 
 }
 
-.reserveringen-container .account-pagina{
-  height: 715;
-}
-
 .gebruikers-container .account-pagina {
   height: 1016px; 
 }
 
-.form-panel {
-  background-color: #fff;
+/* reserveringen  */
+
+/* Adjust the height of the container */
+.reserveringen-container {
+  height: 600px; /* Allow the container to adjust its height based on content */ /* Limit the maximum height to 80% of the viewport height */
+}
+
+/* Adjust the height of the inner page content */
+.reserveringen-container .account-pagina {
+  height: 100%; /* Occupy the entire height of the container */
+}
+
+/* Adjust the width and height of the form panel */
+/* Center the form panel horizontally and vertically */
+.reserveringen-container .form-panel {
+  width: 90%; /* Make the form panel responsive by setting a percentage width */
+  max-width: 600px; /* Limit the maximum width of the form panel */
+  margin: auto; /* Center the form panel horizontally */
+  padding: 20px; /* Add some padding for better readability */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Light gray background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Arrange children vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+}
+
+/* Center the form title */
+.reserveringen-container .form-panel h1 {
+  text-align: center;
+}
+
+/* Adjust the styles of input groups */
+.reserveringen-container .input-groep {
+  padding: 5px;
+  width: 100%; /* Occupy the full width */
+}
+
+/* Adjust the styles of input elements */
+.reserveringen-container .input-groep input[type="text"],
+.reserveringen-container .input-groep input[type="email"],
+.reserveringen-container .input-groep input[type="date"],
+.reserveringen-container .input-groep input[type="time"],
+.reserveringen-container .input-groep select {
+  width: 100%; /* Occupy the full width of the input group */
+  padding: 12px; /* Add padding for better spacing */
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 20px;
-}
-
-.form-panel h1 {
-  text-align: center;
-  padding: 10px 0;
-}
-
-.input-groep {
-  width: 100%; /* Full width for input group */
-  padding: 6px 0px;
+  box-sizing: border-box;
 }
 
 .input-groep button{
@@ -317,35 +349,48 @@ th {
   cursor: pointer;
 }
 
-.input-groep button:hover{
-  background-color: lightblue;
+.reserveringen-container .input-groep button:hover {
+  background-color: #0056b3; /* Darken the background color on hover */
 }
 
-.input-groep label {
-  display: block;
-  padding-bottom: 5px;
-  font-size: 18px; /* Adjust the font size as needed */
-  font-weight: bold; /* Optionally make the label text bold */
+/* Additional styles specific to the reserveringen panel */
+.reserveringen-container .white-space {
+  height: 20px;
 }
 
-.input-groep textarea{
-  resize:  none;
+.reserveringen-container .input-container {
+  display: flex;
+  justify-content: space-between; /* Distribute space between elements */
+}
+
+.reserveringen-container .input-groep {
+  width: 100%;
+  display: flex;
+  flex-direction: row; /* Change to column layout */
+}
+
+/* Adjust height for specific inputs */
+.reserveringen-container .input-groep #voornaam,
+.reserveringen-container .input-groep #tussenvoegsel,
+.reserveringen-container .input-groep #achternaam {
+  width: 100%;
+}
+
+.reserveringen-container .input-groep #voornaam p,
+.reserveringen-container .input-groep #tussenvoegsel p,
+.reserveringen-container .input-groep #achternaam p {
+  padding: 10px;
+}
+
+.reserveringen-container .input-groep textarea {
+  resize: none;
   height: 75px;
 }
 
-.input-groep input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="email"], input[type="date"], input[type="time"], textarea,
-select {
-  width: 100%;
-  padding: 12px 20px;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.separator {
+.reserveringen-container .separator {
   border-top: 1px solid #ccc; 
 }
+
 
 /* dashboard */
 
