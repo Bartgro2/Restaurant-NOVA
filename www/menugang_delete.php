@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
     if ($stmt->rowCount() > 0) {
         // Delete the record
         $sql = "DELETE FROM menugangen WHERE menugang_id = :id";
-        $stmt = $conn->prepare($sql2);
+        $stmt = $conn->prepare($sql);
         $stmt->bindParam(":id", $id);
        
 
