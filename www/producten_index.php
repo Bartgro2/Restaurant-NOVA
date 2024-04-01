@@ -30,6 +30,31 @@ JOIN menugangen ON menugangen.menugang_id = producten.menugang_id");
 $stmt->execute();
 // set the resulting array to associative
 $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+if (isset($_GET['submit'])) {
+
+    $zoekterm = $_GET['zoekveld'];
+
+    if (empty($zoekterm)) {
+        header("location: producten_index.php");
+        exit;
+    }
+
+    // Prepare the SQL query with placeholders to prevent SQL injection
+    $sql = "SELECT *, producten.naam as naam, menugangen.naam as menugang, categorieen.naam as categorie FROM producten
+            JOIN categorieen ON categorieen.categorie_id = producten.categorie_id
+            JOIN menugangen ON menugangen.menugang_id = producten.menugang_id  WHERE menugang LIKE :search OR categorie LIKE :search OR vega LIKE :search OR inkooprijs LIKE :search OR verkoopprijs LIKE :search OR aantal_voorraad LIKE :search";
+
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $searchTerm = '%' . $_GET['search'] . '%'; // Add wildcards to search for partial matches
+    $stmt->bindParam(':search', $searchTerm, PDO::PARAM_STR);
+
+// Execute the statement
+$stmt->execute();
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,8 +76,8 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="table-wrapper"> 
                 <div class="search-bar">
                     <div class="search-container">
-                        <form action="/action_page.php">
-                            <input type="text" class="test" placeholder="Search.." name="search">
+                        <form action="producten_index.php">
+                            <input type="text"  placeholder="Search.." name="search">
                             <button type="submit"><i class="fas fa-search"></i> </button>
                         </form>
                     </div>
