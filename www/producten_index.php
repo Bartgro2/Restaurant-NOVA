@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 // Check if the user is not logged in
@@ -38,59 +37,56 @@ $producten = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous">
+
     <title>Document</title>
 </head>
 <body>
-<?php include 'nav.php' ?>  
-        <main>
-            <div class="container">
-                <div class="product-container">          
-            <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>naam</th>
-                        <th>menugang</th>
-                        <th>categorie</th>
-                        <th>beschrijving</th>
-                        <th>inkoopprijs</th>
-                        <th>verkoopprijs</th>
-                        <th>vega</th>
-                        <th>aantal</th>
-                        <th>Acties</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($producten as $product) : ?>
-                    <tr>
-                        <td><?php echo $product['product_id'] ?></td>
-                        <td><?php echo $product['naam'] ?></td>
-                        <td><?php echo $product['menugang'] ?></td>
-                        <td><?php echo $product['categorie'] ?></td>
-                        <td><?php echo $product['beschrijving'] ?></td>
-                        <td><?php echo $product['inkoopprijs'] ?></td>
-                        <td><?php echo $product['verkoopprijs'] ?></td>
-                        <td><?php echo $product['vega'] ?></td>
-                        <td><?php echo $product['aantal_voorraad'] ?></td>
-                        <!-- Geen Acties kolom omdat deze niet wordt geselecteerd in de query -->
-                        <td>
-                            <a href="producten_detail.php?id=<?php echo $product['product_id'] ?>">Bekijk</a>
-                            <a href="producten_edit.php?id=<?php echo $product['product_id'] ?>">Wijzig</a>
-                            <a href="producten_delete.php?id=<?php echo $product['product_id'] ?>">Verwijder</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </main>
-    </div> 
+<?php include 'nav.php' ?>   
+<main>
+    <div class="container">
+        <div class="product-container">
+            <div class="table-wrapper"> 
+                <div class="search-bar">
+                    <div class="search-container">
+                        <form action="/action_page.php">
+                            <input type="text" class="test" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fas fa-search"></i> </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="product-tabel">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>naam</th>
+                                <th>menugang</th>
+                                <th>categorie</th>
+                                <th>beschrijving</th>
+                                <th>inkoopprijs</th>
+                                <th>verkoopprijs</th>
+                                <th>vega</th>
+                                <th>aantal</th>
+                                <th>Acties</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body content here -->
+                        </tbody>
+                    </table>            
+                </div>             
+            </div>
+        </div>
     </div>
-</div>
-   <?php include 'footer.php' ?>
+</main>
+<?php include 'footer.php' ?>
 </body>
 </html>
+
 
 
 
