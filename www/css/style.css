@@ -426,69 +426,56 @@ th {
 }
 
 
-
-/* reserveringen  */
 .input-groep label {
   display: block;
   margin-bottom: 5px;
 }
 
-/* Adjust the height of the container */
-.reserveringen-container {
-  height: 600px; /* Allow the container to adjust its height based on content */ /* Limit the maximum height to 80% of the viewport height */
-}
-
-/* Adjust the height of the inner page content */
 .reserveringen-container .account-pagina {
-  height: 100%; /* Occupy the entire height of the container */
+  height: 800px;
+  margin-top: -50px; 
 }
 
-/* Adjust the width and height of the form panel */
-/* Center the form panel horizontally and vertically */
 .form-panel {
-  width: 90%; /* Make the form panel responsive by setting a percentage width */
-  max-width: 600px; /* Limit the maximum width of the form panel */
-  margin: auto; /* Center the form panel horizontally */
-  padding: 20px; /* Add some padding for better readability */
+  width: 90%; 
+  max-width: 600px; 
+  margin: auto; 
+  padding: 20px; 
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9; /* Light gray background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
-  display: flex; /* Use flexbox */
-  flex-direction: column; /* Arrange children vertically */
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  background-color: #f9f9f9; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
 }
 
-/* Center the form title */
 .form-panel h1 {
   text-align: center;
 }
 
-/* Adjust the styles of input groups */
 .input-groep {
   padding: 5px;
-  width: 100%; /* Occupy the full width */
+  width: 100%; 
 }
 
-/* Adjust the styles of input elements */
 .input-groep input[type="text"],
 .input-groep input[type="email"],
 .input-groep input[type="date"],
 .input-groep input[type="time"],
 .input-groep select {
-  width: 100%; /* Occupy the full width of the input group */
-  padding: 12px; /* Add padding for better spacing */
+  width: 100%; 
+  padding: 12px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-/* Adjust the styles of buttons */
 .input-groep button {
-  width: 100%; /* Occupy the full width of the input group */
-  height: 40px; /* Set a fixed height for buttons */
-  margin-top: 10px; /* Add some space between buttons and other elements */
+  width: 100%; 
+  height: 40px; 
+  margin-top: 10px; 
   color: #fff;
   background-color: #007bff;
   border: none;
@@ -499,9 +486,6 @@ th {
 .input-groep button:hover {
   background-color: #0056b3; /* Darken the background color on hover */
 }
-
-
-
 
 .reserveringen-panel .form-panel .input-groep{
   display: inline-block;
@@ -578,31 +562,6 @@ th {
   background-color: #0056b3; /* Darken the background color on hover */
 }
 
-/* Adjust the height of the container */
-.reserveringen-container {
-  height: 600px; /* Allow the container to adjust its height based on content */ /* Limit the maximum height to 80% of the viewport height */
-}
-
-/* Adjust the height of the inner page content */
-.reserveringen-container .account-pagina {
-  height: 100%; /* Occupy the entire height of the container */
-}
-
-
-.reserveringen-container .form-panel {
-  width: 90%; 
-  max-width: 600px; 
-  margin: auto; 
-  padding: 20px; 
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-}
 
 /* Center the form title */
 .reserveringen-container .form-panel h1 {

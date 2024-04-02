@@ -18,10 +18,12 @@ if (isset($_SESSION['user_id'])) {
             <!-- Home and Menu links visible to all users -->
             <li><a href="index.php" <?php if ($current_page == 'index.php') echo 'class="active"'; ?>>Home</a></li>
             <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
+
             <!-- Reservering link -->
-           <?php if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') : ?>
-                <li><a href="reserveringen_create.php" <?php if ($current_page == 'reserveringen_create.php') echo 'class="active"'; ?>>Reservering</a></li>
+            <?php if (!isset($_SESSION['user_id']) || (isset($_SESSION['role']) && $_SESSION['role'] === 'klanten')) : ?>
+             <li><a href="reserveringen_create.php" <?php if ($current_page == 'reserveringen_create.php') echo 'class="active"'; ?>>Reservering</a></li>
             <?php endif; ?>
+
 
 
             <!-- Dashboard link visible to all roles -->

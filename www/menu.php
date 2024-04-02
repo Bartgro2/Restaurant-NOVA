@@ -76,7 +76,7 @@ $menu_categorie = $stmt->fetch(PDO::FETCH_ASSOC);
                                         <p><?php echo $menu_item['menu_naam']?></p>
                                     </div>
                                     <div class="menu-price">
-                                        <p>Price: € <?php echo $menu_item['verkoopprijs']?></p>
+                                        <p>Prijs: € <?php echo $menu_item['verkoopprijs']?></p>
                                     </div>
                                     <div class="menu-vega">
                                         <?php if($menu_item['vega'] == '0'): ?>
