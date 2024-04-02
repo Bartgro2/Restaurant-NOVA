@@ -80,17 +80,3 @@ $_SESSION['tafels'] = $tafels;
 </body>
 </html>
 
-.reserveringen-container .table-wrapper,
-.producten-container .table-wrapper,
-.categorie-container .table-wrapper,
-.menugang-container .table-wrapper {
-  min-height: 580px; /* Specific min-height for these pages */
-}
-
-.gebruikers-container .table-wrapper {
-  min-height: 800px; /* Specific min-height for this page */
-}
-
-.tafel-container .table-wrapper {
-  min-height: 600px; /* Specific min-height for this page */
-}
