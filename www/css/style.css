@@ -113,11 +113,7 @@ position: absolute;
 }
 
 
-/* general  */ 
-section{
-  width: 1500px;
-  text-align: center; 
-}
+
 
 .white-section {
   background-color: #ffffff; 
@@ -126,11 +122,15 @@ section{
 
 }
 
+.producten-container .table-wrapper{
+   height: 1300px;
+   margin: 0 auto;
 
+}
 
 /* table styling  */
 .reserveringen-container .table-wrapper,
-.producten-container .table-wrapper,
+
 .categorie-container .table-wrapper,
 .menugang-container .table-wrapper {
   min-height: 580px; /* Specific min-height for these pages */
@@ -151,7 +151,6 @@ section{
   align-items: center; /* Horizontally center */
   min-height: 580px; 
   max-height: 2200px;
-  gap: 20px;
 }
 
 table {
@@ -172,8 +171,24 @@ th {
   text-align: left;
 }
 
+.description-cell {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description-cell:hover {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+
+
 .search-bar {
   width: 800px;
+  margin: 20px;
 }
 
 .search-bar input[type=text] {
@@ -219,8 +234,28 @@ th {
   color: #111;
 }
 
+
+
 /* index.php */
-.white-section button {
+
+.restuarant-about{
+  padding-top: 50px;
+  text-align: center;
+}
+
+.white-section-container {
+  height: auto; /* Adjust the height as needed */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+
+
+
+.white-section-container button {
   border: none;
   color: white;
   padding: 15px 32px;
@@ -235,14 +270,15 @@ th {
   top: -10px; /* Verplaats de knoppen 10 pixels omhoog */
 }
 
-.white-section button:hover {
+
+.white-section-container button:hover {
   background-color: #333; /* Slightly less black */
 }
 
 .hero-image {
   height: 200px;
   width: 1500px;
-  background-image: url(images/snack.jpg);
+  background-image: url(/images/pavlova.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -317,11 +353,11 @@ th {
 /* Adjust the styles of input elements within the tafel container */
 .tafel-container .input-groep input[type="text"],
 .tafel-container .input-groep input[type="number"] {
-  width: 100%; /* Occupy the full width of the input group */
-  padding: 12px; /* Add padding for better spacing */
-  border: 1px solid #ccc; /* Add a border with a light gray color */
-  border-radius: 4px; /* Add rounded corners */
-  box-sizing: border-box; /* Include padding and border in the element's total width/height */
+  width: 100%; 
+  padding: 12px; 
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+  box-sizing: border-box; 
 }
 
 /* Adjust the height of the container */
@@ -336,10 +372,10 @@ th {
 
 /* Adjust the width and height of the form panel */
 .tafel-container .form-panel {
-  width: 90%; /* Make the form panel responsive by setting a percentage width */
-  max-width: 400px; /* Limit the maximum width of the form panel */
-  margin: auto; /* Center the form panel horizontally */
-  padding: 20px; /* Add some padding for better readability */
+  width: 90%; 
+  max-width: 400px;
+  margin: auto; 
+  padding: 20px; 
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9; /* Light gray background color */
@@ -1349,9 +1385,9 @@ th {
 /* Global styles */
 
 .menu-card {
-  height: 1600px;
+  height: 1700px; /* Increased height */
   padding: 20px;
-  margin-bottom: 20px; /* Add white space at the bottom */
+  margin-bottom: 40px; /* Add white space at the bottom */
 }
 
 .category {
@@ -1429,9 +1465,10 @@ th {
   margin-top: 10px;
 }
 
-.fa-leaf{
+.fa-leaf {
   font-size: 16px;
 }
+
 
 
 

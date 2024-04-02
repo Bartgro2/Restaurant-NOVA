@@ -72,7 +72,7 @@ $stmt->execute();
 <?php include 'nav.php' ?>   
 <main>
     <div class="container">
-        <div class="product-container">
+        <div class="producten-container">
             <div class="table-wrapper"> 
                 <div class="search-bar">
                     <div class="search-container">
@@ -91,33 +91,34 @@ $stmt->execute();
                                 <th>naam</th>
                                 <th>menugang</th>
                                 <th>categorie</th>
-                                <th>beschrijving</th>
                                 <th>inkoopprijs</th>
                                 <th>verkoopprijs</th>
                                 <th>vega</th>
-                                <th>aantal</th>
+                                <th>beschrijving</th>
+                                <th>aantal</th>     
                                 <th>Acties</th> 
                             </tr>
                         </thead>
                         <tbody>
                         <?php foreach ($producten as $product): ?>
-                            <tr>
-                                <td><?= $product['product_id'] ?></td>
-                                <td><?= $product['naam'] ?></td>
-                                <td><?= $product['menugang'] ?></td>
-                                <td><?= $product['categorie'] ?></td>
-                                <td><?= $product['beschrijving'] ?></td>
-                                <td><?= $product['inkoopprijs'] ?></td>
-                                <td><?= $product['verkoopprijs'] ?></td>
-                                <td><?= $product['vega'] ?></td>
-                                <td><?= $product['aantal_voorraad'] ?></td>
-                                <td>
-                                    <a href="producten_detail.php?id=<?= $product['product_id'] ?>">Bekijk</a>
-                                    <a href="producten_edit.php?id=<?= $product['product_id'] ?>">Wijzig</a>
-                                    <a href="producten_delete.php?id=<?= $product['product_id'] ?>">Verwijder</a>
-                                </td> <!-- Add actions here -->
-                            </tr>
-                        <?php endforeach; ?>
+    <tr>
+        <td><?php echo $product['product_id']; ?></td>
+        <td><?php echo $product['naam']; ?></td>
+        <td><?php echo $product['menugang']; ?></td>
+        <td><?php echo $product['categorie']; ?></td>
+        <td><?php echo $product['inkoopprijs']; ?></td>
+        <td><?php echo $product['verkoopprijs']; ?></td>
+        <td><?php echo $product['vega']; ?></td>
+        <td class="description-cell"><?php echo $product['beschrijving'] ?></td>
+        <td><?php echo $product['aantal_voorraad']; ?></td>
+        <td>
+            <a href="producten_detail.php?id=<?php echo $product['product_id']; ?>">Bekijk</a>
+            <a href="producten_edit.php?id=<?php echo $product['product_id']; ?>">Wijzig</a>
+            <a href="producten_delete.php?id=<?php echo $product['product_id']; ?>">Verwijder</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+
                         </tbody>
                     </table>            
                 </div>             
