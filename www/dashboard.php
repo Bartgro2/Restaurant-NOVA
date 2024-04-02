@@ -72,8 +72,6 @@ $reservering = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
   </div>
 </main>
-
-
 <?php require 'footer.php' ?>
 </body>
 </html>
