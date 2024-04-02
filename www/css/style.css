@@ -269,9 +269,36 @@ th {
   border-radius: 4px;
 }
 
-.product-container .account-pagina{
-  height: 1100px;
+
+/* Adjust the styles of special alignment container */
+.special-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
+
+/* Adjust the styles of input groups within special alignment container */
+.special-container .input-groep {
+  width: calc(50% - 5px); /* Set width to 50% for special alignment */
+}
+
+.special-container .input-groep label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.special-container .input-groep input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.special-container .input-groep input[type="password"] {
+  width: calc(100% - 10px); /* Adjust width for password input */
+}
+
+
 
 .menugang-container .account-pagina,
 .categorie-container .account-pagina{
@@ -279,12 +306,90 @@ th {
 }
 
 .tafel-container .account-pagina {
+  height: 312px; /* Set the height of the tafel container */
+}
+
+/* Adjust the styles of input groups within the tafel container */
+.tafel-container .input-groep {
+  padding: 6px 0px; /* Adjust padding */
+}
+
+/* Adjust the styles of input elements within the tafel container */
+.tafel-container .input-groep input[type="text"],
+.tafel-container .input-groep input[type="number"] {
+  width: 100%; /* Occupy the full width of the input group */
+  padding: 12px; /* Add padding for better spacing */
+  border: 1px solid #ccc; /* Add a border with a light gray color */
+  border-radius: 4px; /* Add rounded corners */
+  box-sizing: border-box; /* Include padding and border in the element's total width/height */
+}
+
+/* Adjust the height of the container */
+.tafel-container {
+  height: 600px; /* Adjust the height as needed */
+}
+
+/* Adjust the height of the inner page content */
+.tafel-container .account-pagina {
+  height: 100%; /* Occupy the entire height of the container */
+}
+
+/* Adjust the width and height of the form panel */
+.tafel-container .form-panel {
+  width: 90%; /* Make the form panel responsive by setting a percentage width */
+  max-width: 400px; /* Limit the maximum width of the form panel */
+  margin: auto; /* Center the form panel horizontally */
+  padding: 20px; /* Add some padding for better readability */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Light gray background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Arrange children vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+}
+
+/* Center the form title */
+.tafel-container .form-panel h1 {
+  text-align: center;
+}
+
+/* Adjust the styles of input groups */
+.tafel-container .input-groep {
+  padding: 5px;
+  width: 100%; /* Occupy the full width */
+}
+
+/* Adjust the styles of input elements */
+.tafel-container .input-groep input[type="text"],
+.tafel-container .input-groep input[type="number"] {
+  width: 100%; /* Occupy the full width of the input group */
+  padding: 12px; /* Add padding for better spacing */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Adjust the styles of buttons */
+.tafel-container .input-groep button {
+  width: 100%; /* Occupy the full width of the input group */
+  height: 40px; /* Set a fixed height for buttons */
+  margin-top: 10px; /* Add some space between buttons and other elements */
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+.tafel-container .account-pagina {
   height: 312px; 
 }
 
-.gebruikers-container .account-pagina {
-  height: 1016px; 
-}
+
 
 /* reserveringen  */
 .input-groep label {
@@ -424,19 +529,18 @@ th {
 
 
 .input-groep button {
-  width: 100%; /* Occupy the full width of the input group */
-  height: 40px; /* Set a fixed height for buttons */
-  color: #fff; /* Text color */
-  background-color: #007bff; /* Background color */
-  border: none; /* Remove border */
-  border-radius: 4px; /* Add rounded corners */
-  cursor: pointer; /* Set cursor to pointer on hover */
+  width: 100%; 
+  height: 40px; 
+  color: #fff; 
+  background-color: #007bff; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
 }
 
 .reserveringen-container .input-groep button:hover {
   background-color: #0056b3; /* Darken the background color on hover */
 }
-
 
 /* Adjust the height of the container */
 .reserveringen-container {
@@ -448,21 +552,20 @@ th {
   height: 100%; /* Occupy the entire height of the container */
 }
 
-/* Adjust the width and height of the form panel */
-/* Center the form panel horizontally and vertically */
+
 .reserveringen-container .form-panel {
-  width: 90%; /* Make the form panel responsive by setting a percentage width */
-  max-width: 600px; /* Limit the maximum width of the form panel */
-  margin: auto; /* Center the form panel horizontally */
-  padding: 20px; /* Add some padding for better readability */
+  width: 90%; 
+  max-width: 600px; 
+  margin: auto; 
+  padding: 20px; 
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9; /* Light gray background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
-  display: flex; /* Use flexbox */
-  flex-direction: column; /* Arrange children vertically */
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  background-color: #f9f9f9; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 /* Center the form title */
@@ -482,8 +585,8 @@ th {
 .reserveringen-container .input-groep input[type="date"],
 .reserveringen-container .input-groep input[type="time"],
 .reserveringen-container .input-groep select {
-  width: 100%; /* Occupy the full width of the input group */
-  padding: 12px; /* Add padding for better spacing */
+  width: 100%; 
+  padding: 12px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -491,13 +594,16 @@ th {
 
 .input-groep button{
   width: 100%;
-  height: 40px; /* Adjust height as needed */
+  height: 40px; 
   color: #fff;
   background-color: #007bff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
+
+
+
 
 .reserveringen-container .input-groep button:hover {
   background-color: #0056b3; /* Darken the background color on hover */
@@ -566,6 +672,334 @@ th {
   box-sizing: border-box; /* Include padding and border in the element's total width/height */
 }
 
+
+/* Set the height of the containers */
+.tafel-container,
+.menugang-container,
+.categorie-container,
+.login-container{
+  height: 600px; /* Set the height as needed */
+}
+
+/* Adjust the styles of input groups within the containers */
+.tafel-container .input-groep,
+.menugang-container .input-groep,
+.categorie-container .input-groep,
+.login-container .input-groep{
+  display: flex;
+  flex-direction: column; /* Display label above input */
+  margin-bottom: 15px; /* Add spacing between input groups */
+}
+
+/* Adjust the styles of input elements within the containers */
+.tafel-container .input-groep input[type="text"],
+.tafel-container .input-groep input[type="number"],
+.menugang-container .input-groep input[type="text"],
+.menugang-container .input-groep input[type="number"],
+.categorie-container .input-groep input[type="text"],
+.categorie-container .input-groep input[type="number"],
+.login-container .input-groep input[type="text"],
+.login-container .input-groep input[type="password"]
+ {
+  width: calc(100% - 24px); /* Occupy the full width of the input group, subtracting padding and border */
+  padding: 12px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+  font-size: 16px; 
+}
+
+/* Adjust the styles of buttons within the containers */
+.tafel-container .input-groep button,
+.menugang-container .input-groep button,
+.categorie-container .input-groep button,
+.login-container .input-groep button
+{
+  width: calc(100% - 24px); 
+  height: 40px; 
+  margin-top: 20px; 
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; 
+  transition: background-color 0.3s ease; 
+}
+
+/* Adjust button hover effect within the containers */
+.tafel-container .input-groep button:hover,
+.menugang-container .input-groep button:hover,
+.categorie-container .input-groep button:hover,
+.login-container .input-groep button:hover
+{
+  background-color: #0056b3; 
+}
+
+/* Adjust label style within the containers */
+.tafel-container .input-groep label,
+.menugang-container .input-groep label,
+.categorie-container .input-groep label,
+.login-container .input-groep label
+{
+  font-size: 18px; 
+  font-weight: bold; 
+  margin-bottom: 5px; 
+}
+
+/* Center the form title within the containers */
+.tafel-container .form-panel h1,
+.menugang-container .form-panel h1,
+.categorie-container .form-panel h1,
+.login-container .form-panel h1
+{
+  text-align: center;
+  margin-bottom: 20px; 
+  color: #007bff; 
+}
+
+/* Set the height of the account-pagina within the containers */
+.tafel-container .account-pagina,
+.menugang-container .account-pagina,
+.categorie-container .account-pagina,
+.login-container .account-pagina
+ {
+  height: 100%; /* Occupy the entire height of the container */
+}
+
+
+/* Set the height of the container */
+.product-container {
+  height: 80vh; /* Adjusted height to 80% of the viewport height */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+/* Adjust the styles of the form panel */
+.product-container .form-panel {
+  width: 90%; 
+  max-width: 600px; 
+  padding: 20px; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+}
+
+/* Center the form title */
+.product-container .form-panel h1 {
+  text-align: center;
+}
+
+/* Adjust the styles of input groups */
+.product-container .input-groep {
+  padding: 5px;
+  width: 100%; /* Occupy the full width */
+}
+
+/* Adjust the styles of input elements */
+.product-container .input-groep input[type="text"],
+.product-container .input-groep input[type="number"],
+.product-container .input-groep textarea,
+.product-container .input-groep select {
+  width: calc(100% - 24px); /* Occupy the full width minus padding and border */
+  padding: 12px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Adjust the styles of buttons */
+.product-container .input-groep button {
+  width: 93%;
+  height: 40px; 
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; 
+  transition: background-color 0.3s ease; 
+}
+
+/* Adjust the hover effect of buttons */
+.product-container .input-groep button:hover {
+  background-color: #0056b3; /* Darken the background color on hover */
+}
+
+/* Additional styles specific to the product panel */
+.product-container .white-space {
+  height: 20px;
+}
+
+.product-container .separator {
+  border-top: 1px solid #ccc; /* Add separator */
+}
+
+/* Adjust width for specific inputs */
+.product-container .input-groep #inkoopprijs,
+.product-container .input-groep #verkoopprijs {
+  width: 85%; /* Occupy the full width */
+}
+
+
+/* Adjust the height of the container */
+.gebruikers-container {
+  height: auto; /* Change to auto to fit content */
+}
+
+/* Adjust the styles of the form panel */
+.gebruikers-container .gebruikers-panel .special-form-panel {
+  width: 90%; 
+  max-width: 600px; 
+  margin: auto; 
+  padding: 20px; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+/* Adjust the styles of input groups */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep {
+  padding: 5px;
+  width: 100%; /* Occupy the full width */
+}
+
+.gebruikers-panel{
+  margin-top: 5px;
+}
+
+/* Adjust the styles of input elements */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="text"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="email"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="date"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="time"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep select,
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="password"] {
+  width: calc(100% - 10px); /* Adjusted width */
+  padding: 12px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Adjust the styles of password input container */
+.gebruikers-container .gebruikers-panel .special-form-panel .special-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Add some space below */
+}
+
+/* Additional styles specific to the gebruikers panel */
+.gebruikers-container .gebruikers-panel .white-space {
+  height: 20px;
+}
+
+/* Styling for the submit button */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep button {
+  width: 100%;
+  height: 40px; 
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for the submit button */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep button:hover {
+  background-color: #0056b3; /* Darken the background color on hover */
+}
+
+/* Separator line */
+.gebruikers-container .gebruikers-panel .special-form-panel .separator {
+  border-top: 1px solid #ccc; 
+}
+
+
+/* Adjust the height of the container */
+.gebruikers-container {
+  height: auto /* Change to auto to fit content */
+}
+
+/* Adjust the styles of the form panel */
+.gebruikers-container .gebruikers-panel .special-form-panel {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Adjust the styles of input groups */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep {
+  padding: 5px;
+  width: 100%;
+}
+
+/* Adjust the styles of input elements */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="text"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="email"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="date"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="time"],
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep select,
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep input[type="password"] {
+  width: calc(100% - 10px);
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Adjust the styles of password input container */
+.gebruikers-container .gebruikers-panel .special-form-panel .special-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Additional styles specific to the gebruikers panel */
+.gebruikers-container .gebruikers-panel .white-space {
+  height: 10px; /* Reduced height for spacing */
+}
+
+/* Styling for the submit button */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep button {
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for the submit button */
+.gebruikers-container .gebruikers-panel .special-form-panel .input-groep button:hover {
+  background-color: #0056b3;
+}
+
+/* Separator line */
+.gebruikers-container .gebruikers-panel .special-form-panel .separator {
+  border-top: 1px solid #ccc;
+}
+
 /* dashboard */
 
 .container .dashboard-container {
@@ -574,9 +1008,9 @@ th {
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Stack elements vertically */
   align-items: center;
-  height: 100vh; /* Set height to 100% of the viewport height */
+  height: 500px;
 }
 
 .dashboard-container {
@@ -584,14 +1018,15 @@ th {
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-height: 500px;
   width: 80%; /* Adjust the width as needed */
   max-width: 800px; /* Set maximum width */
 }
 
 .dashboard-details {
-  padding-top: 20px;
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 .dashboard-details p {
@@ -603,48 +1038,62 @@ th {
 }
 
 .product-image img {
-  max-width: 100%; /* Ensure the image doesn't exceed its container width */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 50%; /* Make the image round */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-}
-
-/* Example of making the image circular with a border */
-.product-image img.circular {
+  max-width: 100%;
+  height: auto;
   border-radius: 50%;
-  border: 3px solid #fff; /* Add a white border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Example of adding a border to the image */
-.product-image img.with-border {
-  border: 2px solid #ccc; /* Add a border around the image */
-}
-
-/* Example of adding a grayscale effect to the image */
-.product-image img.grayscale {
-  filter: grayscale(100%); /* Convert the image to grayscale */
-}
-
 
 .product-image-container {
-  width: 120px; /* Set width and height to create a circular container */
+  width: 120px;
   height: 120px;
-  border-radius: 50%; /* Make the container circular */
-  overflow: hidden; /* Hide overflowing content */
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align items to the top */
-  background-color: #f9f9f9; /* Optional: Add a background color */
+  align-items: center; /* Center the image vertically */
 }
 
 .circular-img {
-  width: 100%; /* Ensure the image takes up the entire container */
+  width: 100%;
   height: auto;
 }
 
-.empty-space{
-  height: 100px;
+.reservation-details {
+  width: 350px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
+
+.section-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.extra {
+  display: flex;
+  justify-content: center; /* Center the links horizontally */
+}
+
+.extra a {
+  margin: 0 10px; /* Add spacing between the links */
+}
+
+
+
+
 
 
 /* product */

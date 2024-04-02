@@ -100,7 +100,24 @@ $stmt->execute();
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Table body content here -->
+                        <?php foreach ($producten as $product): ?>
+                            <tr>
+                                <td><?= $product['product_id'] ?></td>
+                                <td><?= $product['naam'] ?></td>
+                                <td><?= $product['menugang'] ?></td>
+                                <td><?= $product['categorie'] ?></td>
+                                <td><?= $product['beschrijving'] ?></td>
+                                <td><?= $product['inkoopprijs'] ?></td>
+                                <td><?= $product['verkoopprijs'] ?></td>
+                                <td><?= $product['vega'] ?></td>
+                                <td><?= $product['aantal_voorraad'] ?></td>
+                                <td>
+                                    <a href="producten_detail.php?id=<?= $product['product_id'] ?>">Bekijk</a>
+                                    <a href="producten_edit.php?id=<?= $product['product_id'] ?>">Wijzig</a>
+                                    <a href="producten_delete.php?id=<?= $product['product_id'] ?>">Verwijder</a>
+                                </td> <!-- Add actions here -->
+                            </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>            
                 </div>             
@@ -109,6 +126,7 @@ $stmt->execute();
     </div>
 </main>
 <?php include 'footer.php' ?>
+</body>
 </body>
 </html>
 

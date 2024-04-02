@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 
 // Check if the user is not logged in
@@ -18,7 +16,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,32 +26,33 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
 </head>
 <body>
 <?php require 'nav.php' ?>
-    <main>
+<main>
     <div class="container">
         <div class="tafel-container">
-    <div class="account-pagina">
-        <div class="form-panel">    
-            <h1>tafel maken</h1> <!-- Form title -->
-            <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="tafels_create_process.php" method="POST">
-                    <div class="input-groep">
-                        <label for="personen">personen</label>
-                        <input type="number" id="personen" name="personen">
-                    </div>
-                    <div class="input-groep">
-                        <label for="nummer">nummer</label>
-                        <input type="number" id="nummer" name="nummer">
-                    </div>                    
-                    <div class="input-groep">
-                        <button type="submit" class="input-button"> aanmaken </button>
-                    </div> 
-            </form>
+            <div class="account-pagina">
+                <div class="form-panel">    
+                    <h1>Tafel maken</h1> <!-- Form title -->
+                    <hr class="separator"> <!-- Add horizontal line as a separator -->
+                    <form action="tafels_create_process.php" method="POST">
+                        <div class="input-groep">
+                            <label for="personen">Personen</label>
+                            <input type="number" id="personen" name="personen">
+                        </div>
+                        <div class="input-groep">
+                            <label for="nummer">Nummer</label>
+                            <input type="number" id="nummer" name="nummer">
+                        </div>                    
+                        <div class="input-groep">
+                            <button type="submit" class="input-button">Aanmaken</button>
+                        </div> 
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
 </main>
 <?php require 'footer.php' ?>
 </body>
 </html>
+
 

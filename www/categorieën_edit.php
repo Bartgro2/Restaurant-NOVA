@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
     <div class="categorie-container">   
     <div class="account-pagina">
         <div class="form-panel">    
-            <h1>categorie bijwerken</h1> <!-- Form title -->
+            <h1>categorie</h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
             <form action="categorieën_update.php?id=<?php echo $categorie_id ?>" method="POST">
                     <div class="input-groep">
@@ -76,7 +76,7 @@ if (isset($_GET['id'])) {
                         <input type="text" id="naam" name="naam" value="<?php echo $categorie['naam'] ?>">
                     </div>
                     <div class="input-groep">
-                        <button type="submit" class="input-button"> bijwerken </button>
+                        <button type="submit" class="input-button"> Aanpassen </button>
                     </div> 
             </form>
         </div>

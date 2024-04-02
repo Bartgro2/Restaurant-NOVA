@@ -52,15 +52,14 @@ foreach (['voornaam', 'achternaam'] as $nameField) {
 
 if (empty($errors)) {
     // Prepare concatenated data
-    $concatenated_data_email_username = $_POST['email'] . '|' . $_POST['gebruikersnaam'];
+    $email = $_POST['email'];
 
-    // Check if user already exists with the same email, gebruikersnaam, or their combination
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE CONCAT(email, '|', gebruikersnaam) = :concatenated_data_email_username OR email = :email OR gebruikersnaam = :gebruikersnaam");
-    $stmt->bindParam(':concatenated_data_email_username', $concatenated_data_email_username);
-    $stmt->bindParam(':email', $_POST['email']);
-    $stmt->bindParam(':gebruikersnaam', $_POST['gebruikersnaam']);
-    $stmt->execute();
-    $count = $stmt->fetchColumn();
+     // Check if user already exists with the same email
+     $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE email = :email");
+     $stmt->bindParam(':email', $email);
+     $stmt->execute();
+     $count = $stmt->fetchColumn();
+
 
     if ($count > 0) {
         $errors[] = "User with the same email already exists";
@@ -132,7 +131,7 @@ if (!empty($errors)) {
     foreach ($errors as $error) {
         echo $error . "<br>";
     }
-    echo '<a href="reserveringen.php">Go back</a>'; 
+    echo '<a href="reserveringen_index.php">Go back</a>'; 
 }
 ?>
 

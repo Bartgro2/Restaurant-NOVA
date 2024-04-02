@@ -27,12 +27,12 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
 </head>
 <body>
 <?php require 'nav.php' ?>
-  <main>
+<main>
     <div class="container">
-    <div class="menugang-container">
+        <div class="menugang-container">
     <div class="account-pagina">
         <div class="form-panel">    
-            <h1>menugang maken</h1> <!-- Form title -->
+            <h1>menugang </h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
             <form action="menugang_create_process.php" method="POST">
                     <div class="input-groep">
@@ -40,17 +40,18 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
                         <input type="text" id="naam" name="naam">
                     </div>
                     <div class="input-groep">
-                        <button type="submit" class="input-button"> aanmaken </button>
+                        <button type="submit" class="input-button"> Aanmaken </button>
                     </div> 
             </form>
         </div>
-    </div>  
-</div> 
+    </div>    
 </div>
+    </div>
 </main>
-
 <?php require 'footer.php' ?>
 </body>
 </html>
+
+
 
 

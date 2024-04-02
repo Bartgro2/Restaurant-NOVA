@@ -72,89 +72,82 @@ if (isset($_GET['id'])) {
 <body>
     <?php require 'nav.php'; ?>
     <main>
-        <div class="container">
-        <div class="gebruiker-container">
-        <div class="account-pagina">
-            <div class="form-panel">       
-                <h1>registeren</h1> 
-                <hr class="separator">
-                <form action="gebruikers_update.php?id=<?php echo $gebruiker_id ?>" method="POST">
-                    <div class="input-groep">
-                        <label for="voornaam">Voornaam</label>
-                        <input type="text" id="voornaam" name="voornaam" value="<?php echo $gebruiker['voornaam'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="tussenvoegsel">Tussenvoegsel</label>
-                        <input type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php echo $gebruiker['tussenvoegsel'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="achternaam">Achternaam</label>
-                        <input type="text" id="achternaam" name="achternaam" value="<?php echo $gebruiker['achternaam'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="<?php echo $gebruiker['email'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="gebruikersnaam">Gebruikersnaam</label>
-                        <input type="text" id="gebruikersnaam" name="gebruikersnaam" value="<?php echo $gebruiker['gebruikersnaam'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="wachtwoord">Wachtwoord</label>
-                        <input type="password" id="wachtwoord" name="wachtwoord" value="<?php echo $gebruiker['wachtwoord'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="verzeker_wachtwoord">Verzeker Wachtwoord</label>
-                        <input type="password" id="verzeker_wachtwoord" name="verzeker_wachtwoord" value="<?php echo $gebruiker['wachtwoord'] ?>">
-                    </div>
+    <div class="container">
+        <div class="gebruikers-container">
+            <div class="account-pagina">
+                <div class="gebruikers-panel">
+                    <div class="form-panel special-form-panel">
+                        <h1>Bijwerken</h1>
+                        <hr class="separator">
+                        <form action="gebruikers_create_process.php" method="POST">
+                            <div class="input-container">
+                                <div class="input-groep">
+                                    <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" value="<?php echo ($gebruiker['voornaam']); ?>">
+                                </div>
+                                <div class="input-groep">
+                                    <input type="text" id="tussenvoegsel" name="tussenvoegsel" placeholder="Tussenvoegsel" value="<?php echo ($gebruiker['tussenvoegsel']); ?>">                                    
+                                </div>
+                                <div class="input-groep">
+                                    <input type="text" id="achternaam" name="achternaam" placeholder="Achternaam" value="<?php echo ($gebruiker['achternaam']); ?>">
+                                </div>
+                            </div>
+                            <div class="input-groep">
+                                <input type="email" id="email" name="email" placeholder="Email" value="<?php echo isset($gebruiker['email']) ? $gebruiker['email'] : ''; ?>">
+                            </div>
+                            <div class="input-groep">
+                                <input type="text" id="gebruikersnaam" name="gebruikersnaam" placeholder="Gebruikersnaam" value="<?php echo ($gebruiker['gebruikersnaam']);?>">
+                            </div>
+                            <div class="special-container">
+                                <div class="input-groep">
+                                    <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord">
+                                </div>
+                                <div class="input-groep">
+                                    <input type="password" id="verzeker_wachtwoord" name="verzeker_wachtwoord" placeholder="Verzeker Wachtwoord">
+                                </div>
+                            </div>
+                            <div class="input-groep">
+    <select id="role" name="role">
+        
+        <?php 
+         if ($_SESSION['role'] === 'admin') {
+             $allowed_roles = ['admin', 'directeur', 'manager', 'medewerker', 'klant'];
+         } elseif ($_SESSION['role'] === 'directeur') {
+             $allowed_roles = ['directeur', 'manager', 'medewerker', 'klant'];
+         } elseif ($_SESSION['role'] === 'manager') {
+             $allowed_roles = ['manager', 'medewerker', 'klant'];
+         } else {
+             $allowed_roles = ['klant'];
+         }
+         
+         foreach ($allowed_roles as $role) {
+             echo "<option value='$role'" . ($gebruiker['rol'] === $role ? ' selected' : '') . ">$role</option>";
+         }
+         ?>
+         
+    </select>
+</div>
 
-                    <?php if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager') { ?>
-    <!-- Role dropdown only visible to admin, directeur and manager  -->
-    <div class="input-groep">
-        <label for="role">Rol:</label>
-        <select id="role" name="role">
-            <?php if ($_SESSION['role'] === 'admin') : ?>
-                <!-- Admin can select any role -->
-                <option value="admin" <?php echo ($_SESSION['role'] === 'admin') ? 'selected' : ''; ?>>Admin</option>
-                <option value="directeur" <?php echo ($_SESSION['role'] === 'directeur') ? 'selected' : ''; ?>>Directeur</option>
-                <option value="manager" <?php echo ($_SESSION['role'] === 'manager') ? 'selected' : ''; ?>>Manager</option>
-                <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
-                <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
-            <?php elseif ($_SESSION['role'] === 'directeur') : ?>
-                <!-- Directeur can select any role except admin -->
-                <option value="manager" <?php echo ($_SESSION['role'] === 'manager') ? 'selected' : ''; ?>>Manager</option>
-                <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
-                <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
-            <?php elseif ($_SESSION['role'] === 'manager') : ?>
-                <!-- Manager can select only medewerker or klant -->
-                <option value="medewerker" <?php echo ($_SESSION['role'] === 'medewerker') ? 'selected' : ''; ?>>Medewerker</option>
-                <option value="klant" <?php echo ($_SESSION['role'] === 'klant') ? 'selected' : ''; ?>>Klant</option>
-            <?php endif; ?>
-        </select>
-    </div>
-<?php } ?>      
-                    <div class="input-groep">
-                        <label for="woonplaats">Woonplaats</label>              
-                        <input type="text" id="woonplaats" name="woonplaats" value="<?php echo isset($adres['woonplaats']) ? $adres['woonplaats'] : ''; ?>">
-                    
+                            <div class="input-container">
+                                <div class="input-groep">
+                                    <input type="text" id="woonplaats" name="woonplaats" placeholder="Woonplaats" value="<?php echo ($adres !== false && isset($adres['woonplaats'])) ? $adres['woonplaats'] : ''; ?>">
+                                </div>
+                                <div class="input-groep">
+                                    <input type="number" id="huisnummer" name="huisnummer" placeholder="Huisnummer" value="<?php echo isset($adres['huisnummer']) ? $adres['huisnummer'] : ''; ?>">
+                                </div>
+                            </div>
+                            <div class="input-groep">
+                                <button type="submit" class="input-button">Aanpassen</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="input-groep">
-                        <label for="postcode">Postcode</label>              
-                        <input type="text" id="postcode" name="postcode" value="<?php echo isset($adres['postcode']) ? $adres['postcode'] : ''; ?>">                
-                    </div>
-                    <div class="input-groep">
-                         <label for="huisnummer">Huisnummer</label>
-                         <input type="number" id="huisnummer" name="huisnummer" value="<?php echo isset($adres['huisnummer']) ? $adres['huisnummer'] : ''; ?>">  
-                    </div>
-                    <div class="input-groep">
-                        <button type="submit" class="input-button">Aanmaken</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-        </div>
-        </div>
-    </main>
+    </div>
+</main>
+
+
+
     <?php require 'footer.php'; ?>
 </body>
 </html>

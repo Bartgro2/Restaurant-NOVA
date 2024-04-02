@@ -1,19 +1,6 @@
 <?php
 
-session_start();
 
-// Check if the user is not logged in
-if (!isset($_SESSION['user_id'])) {
-  header("Location: login.php");
-  exit;
-}
-
-// Check if role is not admin, directeur, manager, or medewerker
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
-  echo "You are not authorized to view this page. Please log in with appropriate credentials. ";
-  echo "Log in with a different role <a href='login.php'>here</a>.";
-  exit;
-}
 
 
 // Check if the request method is not POST

@@ -74,19 +74,18 @@ if (isset($_GET['id'])) {
 <main>
     <div class="container">
         <div class="menugang-container">
-
-    
     <div class="account-pagina">
         <div class="form-panel">    
-            <h1>menugang bijwerken</h1> <!-- Form title -->
+            <h1>menugang </h1> <!-- Form title -->
             <hr class="separator"> <!-- Add horizontal line as a separator -->
             <form action="menugang_update.php?id=<?php echo $menugang_id ?>" method="POST">
+
                     <div class="input-groep">
                         <label for="naam">naam</label>
                         <input type="text" id="naam" name="naam" value="<?php echo $menugang['naam'] ?>">
                     </div>
                     <div class="input-groep">
-                        <button type="submit" class="input-button"> bijwerken </button>
+                        <button type="submit" class="input-button"> Bijwerken </button>
                     </div> 
             </form>
         </div>

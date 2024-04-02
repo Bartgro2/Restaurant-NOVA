@@ -15,18 +15,22 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESS
     exit;
 }
 
-
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
     echo " ga terug <a href='menugang.php'> menugang </a>";
-    exit; // <-- Add this line
+    exit;
 }
 
-$naam = $_POST['naam'];
-$id = $_GET['id'];
-
 require 'database.php';
+
+$naam = $_POST['naam'];
+$id = isset($_GET['id']) ? $_GET['id'] : null; // Check if id is set in $_GET
+
+if (empty($id)) {
+    echo "No menugang ID provided.";
+    exit;
+}
 
 if (empty($naam) || !preg_match("/^[a-zA-Z0-9\s]*$/", $naam)) {
     if (empty($naam)) {
@@ -71,6 +75,5 @@ if ($stmt->execute()) {
     exit();
 }
 ?>
-
 
 

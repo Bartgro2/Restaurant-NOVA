@@ -73,28 +73,48 @@ if (isset($_GET['id'])) {
 <main>
     <div class="container">
         <div class="tafel-container">
-    <div class="account-pagina">
-        <div class="form-panel">    
-            <h1>tafel bijwerken</h1> <!-- Form title -->
-            <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="tafels_update.php?id=<?php echo $tafel_id ?>" method="POST">
-                    <div class="input-groep">
-                        <label for="personen">personen</label>
-                        <input type="number" id="personen" name="personen" value="<?php echo $tafel['aantal_personen'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <label for="nummer">nummer</label>
-                        <input type="number" id="nummer" name="nummer" value="<?php echo $tafel['tafel_nummer'] ?>">
-                    </div>
-                    <div class="input-groep">
-                        <button type="submit" class="input-button"> bijwerken </button>
-                    </div> 
-            </form>
+            <div class="account-pagina">
+                <div class="form-panel">    
+                    <h1>Tafel maken</h1> <!-- Form title -->
+                    <hr class="separator"> <!-- Add horizontal line as a separator -->
+                    <form action="tafels_create_process.php" method="POST">
+                        <div class="input-groep">
+                            <label for="personen">Personen</label>
+                            <input type="number" id="personen" name="personen">
+                        </div>
+                        <div class="input-groep">
+                            <label for="nummer">Nummer</label>
+                            <input type="number" id="nummer" name="nummer">
+                        </div>                    
+                        <div class="input-groep">
+                            <button type="submit" class="input-button">Aanmaken</button>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+            <div class="account-pagina">
+                <div class="form-panel">    
+                    <h1>Tafel bijwerken</h1> <!-- Form title -->
+                    <hr class="separator"> <!-- Add horizontal line as a separator -->
+                    <form action="tafels_update.php?id=<?php echo $tafel_id ?>" method="POST">
+                        <div class="input-groep">
+                            <label for="personen">Personen</label>
+                            <input type="number" id="personen" name="personen" value="<?php echo $tafel['aantal_personen'] ?>">
+                        </div>
+                        <div class="input-groep">
+                            <label for="nummer">Nummer</label>
+                            <input type="number" id="nummer" name="nummer" value="<?php echo $tafel['tafel_nummer'] ?>">
+                        </div>
+                        <div class="input-groep">
+                            <button type="submit" class="input-button">Bijwerken</button>
+                        </div> 
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
 </main>
+
 <?php require 'footer.php' ?>
 </body>
 </html>

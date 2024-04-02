@@ -1,5 +1,10 @@
 <?php
+// Start the session if it's not already started
+
+ob_start(); // Start output buffering
+
 session_start();
+
 
 // Check if the user is not logged in
 if (!isset($_SESSION['user_id'])) {
@@ -8,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Check if role is not admin, directeur, manager, or medewerker
-if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+if (!in_array($_SESSION['role'], ['admin', 'directeur', 'manager', 'medewerker'])) {
     echo "You are not authorized to view this page. Please log in with appropriate credentials. ";
     echo "Log in with a different role <a href='login.php'>here</a>.";
     exit;
@@ -94,6 +99,9 @@ if ($target_file) {
     echo "Ga terug naar <a href='producten_create.php'> producten</a>";
     exit();
 }
+
+ob_end_flush(); 
 ?>
+
 
 

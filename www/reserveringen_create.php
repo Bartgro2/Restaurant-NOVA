@@ -60,19 +60,15 @@ $tafels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
                 <div class="input-groep">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" placeholder="email">
                 </div>
                 <div class="input-groep">
-                    <label for="datum">Datum</label>
                     <input type="date" name="datum" id="datum">
                 </div>
                 <div class="input-groep">
-                    <label for="tijd">Tijd</label>
                     <input type="time" name="tijd" id="tijd">
                 </div>
                 <div class="input-groep">
-                    <label class="input-label" for="tafel_nummer">Tafel</label>
                     <select name="tafel_id" id="tafel_id">
                         <?php foreach($tafels as $table): ?>
                             <option value="<?php echo $table['tafel_id']; ?>">
@@ -82,7 +78,7 @@ $tafels = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </select>
                 </div>
                 <div class="input-groep">
-                    <button type="submit" class="input-button">Bewerken</button>
+                    <button type="submit" class="input-button">reserveren</button>
                 </div>
             <?php
             } else { // For guests or customers
@@ -112,7 +108,7 @@ $tafels = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="time" name="tijd" id="tijd">
                 </div>
                 <div class="input-groep">
-                    <button type="submit" class="input-button">Bevestig</button>
+                    <button type="submit" class="input-button">reserveren</button>
                 </div> 
             <?php
             }

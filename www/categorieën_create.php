@@ -37,7 +37,7 @@ require 'database.php';
     <div class="account-pagina">
         <div class="form-panel">
            <!-- New div wrapper for vertical centering -->
-                <h1>categorie maken</h1> <!-- Form title -->
+                <h1>categorie </h1> <!-- Form title -->
                 <hr class="separator"> <!-- Add horizontal line as a separator -->
                 <form action="categorieën_create_process.php" method="POST">
                     <div class="input-groep">

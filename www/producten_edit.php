@@ -74,60 +74,63 @@ if (isset($_GET['id'])) {
 <body>
 <?php require 'nav.php' ?>
 <main>
-    <div class="account-pagina">
-        <div class="form-panel">    
-            <h1>categorie bijwerken</h1> <!-- Form title -->
-            <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="producten_update.php?id=<?php echo $product_id ?>" method="POST">
-            <div class="input-groep">
-                    <label for="naam">Naam</label>
-                    <input type="text" id="naam" name="naam" value="<?php echo $product['naam'] ?>">
-                </div>
-            <div class="input-groep">
-                    <label for="beschrijving">Beschrijving</label>
-                    <textarea name="beschrijving" id="beschrijving" cols="30" rows="10"><?php echo $product['beschrijving'] ?></textarea>
-                </div>
-                <div class="input-groep">
-                    <label for="categorie">Categorie</label>
-                    <select name="categorie" id="categorie">
-                        <?php foreach($categories as $categorie):?>
-                            <option value="<?php echo $categorie['categorie_id']; ?>"><?php echo $categorie['naam']; ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <div class="input-groep">
-                    <label for="menugang">Menugang</label>
-                    <select name="menugang" id="menugang">
-                        <?php foreach($menugangen as $menugang):?>
-                            <option value="<?php echo $menugang['menugang_id']; ?>"><?php echo $menugang['naam']; ?></option>
-                            
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <div class="input-groep">
-                    <label for="inkoopprijs">Inkoopprijs</label>
-                    <input type="number" id="inkoopprijs" name="inkoopprijs" value="<?php echo $product['inkoopprijs'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="verkoopprijs">Verkoopprijs</label>
-                    <input type="number" id="verkoopprijs" name="verkoopprijs" value="<?php echo $product['inkoopprijs'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="aantal_voorraad">Aantal voorraad</label>
-                    <input type="number" id="aantal_voorraad" name="aantal_voorraad" value="<?php echo $product['aantal_voorraad'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="vega">Vegetarisch</label>
-                    <input type="number" id="vega" name="vega" value="<?php echo $product['vega'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="image">Afbeelding</label>
-                     <input type="file" name="image" id="image">
-                </div>
-                <div class="input-groep">
-                    <button type="submit" class="input-button">bewerken</button>
-                </div>
-            </form>
+    <div class="container">
+        <div class="account-pagina">
+            <div class="form-panel">    
+                <h1>categorie bijwerken</h1> <!-- Form title -->
+                <hr class="separator"> <!-- Add horizontal line as a separator -->
+                <form action="producten_update.php?id=<?php echo $product_id ?>" method="POST">
+                    <div class="input-groep">
+                        <label for="naam">Naam</label>
+                        <input type="text" id="naam" name="naam" value="<?php echo $product['naam'] ?>">
+                    </div>
+                    <div class="input-groep">
+                        <label for="beschrijving">Beschrijving</label>
+                        <textarea name="beschrijving" id="beschrijving" cols="30" rows="10"><?php echo $product['beschrijving'] ?></textarea>
+                    </div>
+                    <div class="input-groep">
+                        <label for="categorie">Categorie</label>
+                        <select name="categorie" id="categorie">
+                            <?php foreach($categories as $categorie):?>
+                                <option value="<?php echo $categorie['categorie_id']; ?>"><?php echo $categorie['naam']; ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="input-groep">
+                        <label for="menugang">Menugang</label>
+                        <select name="menugang" id="menugang">
+                            <?php foreach($menugangen as $menugang):?>
+                                <option value="<?php echo $menugang['menugang_id']; ?>"><?php echo $menugang['naam']; ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-groep">
+                            <label for="inkoopprijs">Inkoopprijs</label>
+                            <input type="number" id="inkoopprijs" name="inkoopprijs" value="<?php echo $product['inkoopprijs'] ?>">
+                        </div>
+                        <div class="input-groep">
+                            <label for="verkoopprijs">Verkoopprijs</label>
+                            <input type="number" id="verkoopprijs" name="verkoopprijs" value="<?php echo $product['inkoopprijs'] ?>">
+                        </div>
+                    </div>
+                    <div class="input-groep">
+                        <label for="aantal_voorraad">Aantal voorraad</label>
+                        <input type="number" id="aantal_voorraad" name="aantal_voorraad" value="<?php echo $product['aantal_voorraad'] ?>">
+                    </div>
+                    <div class="input-groep">
+                        <label for="vega">Vegetarisch</label>
+                        <input type="number" id="vega" name="vega" value="<?php echo $product['vega'] ?>">
+                    </div>
+                    <div class="input-groep">
+                        <label for="image">Afbeelding</label>
+                        <input type="file" name="image" id="image">
+                    </div>
+                    <div class="input-groep">
+                        <button type="submit" class="input-button">bewerken</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </main>

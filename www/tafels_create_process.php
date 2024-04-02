@@ -42,8 +42,8 @@ if (empty($tafelnummer) && empty($aantal_personen)) {
 }
 
 // Check if the tafel already exists
-$stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM tafels WHERE tafelnummer = :tafelnummer");
-$stmt_check->bindParam(':tafelnummer', $tafelnummer);
+$stmt_check = $conn->prepare("SELECT COUNT(*) AS count FROM tafels WHERE tafel_nummer = :tafel_nummer");
+$stmt_check->bindParam(':tafel_nummer', $tafel_nummer);
 $stmt_check->execute();
 $result_check = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
@@ -54,8 +54,8 @@ if ($result_check['count'] > 0) {
 }
 
 // Insert the tafel if it doesn't exist
-$stmt_insert = $conn->prepare("INSERT INTO tafels (tafelnummer, aantal_personen) VALUES (:tafelnummer, :aantal_personen)");
-$stmt_insert->bindParam(':tafelnummer', $tafelnummer);
+$stmt_insert = $conn->prepare("INSERT INTO tafels (tafel_nummer, aantal_personen) VALUES (:tafel_nummer, :aantal_personen)");
+$stmt_insert->bindParam(':tafel_nummer', $tafel_nummer);
 $stmt_insert->bindParam(':aantal_personen', $aantal_personen);
 $stmt_insert->execute();
 

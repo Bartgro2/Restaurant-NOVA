@@ -76,51 +76,50 @@ if (isset($_GET['id'])) {
 <body>
 <?php require 'nav.php' ?>
 <main>
-    <div class="account-pagina">
-        <div class="form-panel">    
-            <h1>categorie bijwerken</h1> <!-- Form title -->
+<div class="container">
+        <div class="reserveringen-container">
+        <div class="account-pagina">
+            <div class="reserveringen-panel">
+            <div class="form-panel"> 
+            <h1>reserveren</h1> <!-- Form title -->
+            
             <hr class="separator"> <!-- Add horizontal line as a separator -->
-            <form action="reserveringen_update.php?id=<?php echo $reservering_id ?>" method="POST">
-                <div class="input-groep">
-                    <label for="voornaam">Voornaam</label>
-                    <input type="text" id="voornaam" name="voornaam" value="<?php echo $reservering['voornaam'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="tussenvoegsel">Tussenvoegsel</label>
-                    <input type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php echo $reservering['tussenvoegsel'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="achternaam">Achternaam</label>
-                    <input type="text" id="achternaam" name="achternaam" value="<?php echo $reservering['achternaam'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo $reservering['email'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="datum">datum</label>
-                    <input type="date" name="datum" id="datum" value="<?php echo $reservering['datum'] ?>">
-                </div>
-                <div class="input-groep">
-                    <label for="tijd">tijd</label>
-                    <input type="time" name="tijd" id="tijd" value="<?php echo $reservering['tijd'] ?>">
-                </div>
-                <div class="input-groep">
-    <label class="input-label" for="tafel_nummer">Tafel</label>
-    <select name="tafel_id" id="tafel_id">
-        <?php foreach($tafels as $table): ?>
-            <option value="<?php echo $table['tafel_id']; ?>">
-                Tafel <?php echo $table['tafel_nummer']; ?> - <?php echo $table['aantal_personen']; ?> personen
-            </option>
-        <?php endforeach; ?>
-    </select>
-</div>
-                <div class="input-groep">
-                    <button type="submit" class="input-button">bewerken</button>
-                </div>
-            </form>
-        </div>
+            <div class="white-space"></div>
+            <form action="reserveringen_update.php?id=<?php echo $reservering_id ?>" method="POST">        
+           
+                <div class="input-container">
+    <div class="input-groep">
+        <input type="text" id="voornaam" name="voornaam" value="<?php echo $reservering['voornaam']; ?>" placeholder="Voornaam">
     </div>
+    <div class="input-groep">
+       <input type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php echo $reservering['tussenvoegsel']; ?>" placeholder="Tussenvoegsel">
+    </div>
+    <div class="input-groep">
+       <input type="text" id="achternaam" name="achternaam" value="<?php echo $reservering['achternaam']; ?>" placeholder="Achternaam">
+    </div>
+</div>
+
+                <div class="input-groep">
+                   <input type="email" id="email" name="email" value="<?php echo $reservering['email']; ?>" placeholder="Email">
+                </div>
+                <div class="input-groep">
+                    <input type="date" name="datum" id="datum" value="<?php echo $reservering['datum']; ?>">
+                </div>
+                <div class="input-groep">
+                    <input type="time" name="tijd" id="tijd" value="<?php echo $reservering['tijd']; ?>">
+                </div>
+                <div class="input-groep">
+                    <select name="tafel_id" id="tafel_id">
+                        <?php foreach($tafels as $table): ?>
+                            <option value="<?php echo $table['tafel_id']; ?>">
+                                Tafel <?php echo $table['tafel_nummer']; ?> - <?php echo $table['aantal_personen']; ?> personen
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="input-groep">
+                    <button type="submit" class="input-button">Aanpassen</button>
+                </div>
 </main>
 <?php require 'footer.php' ?>
 </body>
