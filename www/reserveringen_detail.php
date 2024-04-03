@@ -1,6 +1,4 @@
 <?php
-ob_start(); // Start output buffering
-
 session_start();
 
 // Check if the user is not logged in
@@ -94,8 +92,6 @@ if (isset($_GET['id'])) {
 <?php require 'footer.php' ?>    
 </body>
 </html>
-
-<?php ob_end_flush(); // End output buffering and flush the buffer ?>
 
 
 

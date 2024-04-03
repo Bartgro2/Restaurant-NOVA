@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 require 'database.php';
 
 $stmt = $conn->prepare("SELECT * FROM reserveringen
-                        JOIN tafels ON tafels.tafel_id = reserveringen.tafel_id
+                        LEFT JOIN tafels ON tafels.tafel_id = reserveringen.tafel_id
                         JOIN gebruikers ON gebruikers.gebruiker_id = reserveringen.gebruiker_id
                         ORDER BY voornaam");
 $stmt->execute();

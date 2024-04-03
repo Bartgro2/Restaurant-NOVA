@@ -10,18 +10,21 @@ if (!isset($_SESSION['user_id'])) {
 
 require 'database.php';
 
-$stmt = $conn->prepare("SELECT * FROM gebruikers join adressen on adressen.adres_id = gebruikers.adres_id");
-$stmt->execute();
-// set the resulting array to associative
+// Haal de gebruiker op
+$stmt = $conn->prepare("SELECT * FROM gebruikers join adressen on adressen.adres_id = gebruikers.adres_id WHERE gebruiker_id = ?");
+$stmt->execute([$_SESSION['user_id']]);
 $gebruiker = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$stmt = $conn->prepare("SELECT * FROM reserveringen join tafels on tafels.tafel_id = reserveringen.tafel_id");
-$stmt->execute();
-// set the resulting array to associative
+// Controleer of de gebruiker bestaat
+if (!$gebruiker) {
+    echo "User not found.";
+    exit;
+}
+
+// Haal de reservering op van de huidige gebruiker
+$stmt = $conn->prepare("SELECT * FROM reserveringen join tafels on tafels.tafel_id = reserveringen.tafel_id WHERE gebruiker_id = ?");
+$stmt->execute([$_SESSION['user_id']]);
 $reservering = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-
 
 ?>
 
@@ -62,8 +65,6 @@ $reservering = $stmt->fetch(PDO::FETCH_ASSOC);
      <p>Geen reservering.</p>
     <?php } ?>
 
-
-
         <div class="extra">
           <a href="gebruikers_edit.php?id=<?php echo $gebruiker['gebruiker_id'] ?>"><i class="fas fa-edit"></i>Edit</a>
           <a href="gebruikers_delete.php?id=<?php echo $gebruiker['gebruiker_id'] ?>" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fas fa-trash-alt"></i>Delete</a>
@@ -75,4 +76,5 @@ $reservering = $stmt->fetch(PDO::FETCH_ASSOC);
 <?php require 'footer.php' ?>
 </body>
 </html>
+
 
