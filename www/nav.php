@@ -20,7 +20,7 @@ if (isset($_SESSION['user_id'])) {
             <li><a href="menu.php" <?php if ($current_page == 'menu.php') echo 'class="active"'; ?>>Menu</a></li>
 
             <!-- Reservering link -->
-            <?php if (!isset($_SESSION['user_id']) || (isset($_SESSION['role']) && $_SESSION['role'] === 'klanten')) : ?>
+            <?php if (!isset($_SESSION['user_id']) || (isset($_SESSION['role']) && $_SESSION['role'] === 'klant')) : ?>
              <li><a href="reserveringen_create.php" <?php if ($current_page == 'reserveringen_create.php') echo 'class="active"'; ?>>Reservering</a></li>
             <?php endif; ?>
 
