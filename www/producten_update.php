@@ -56,7 +56,7 @@ if (!empty($errors)) {
     foreach ($errors as $error) {
         echo $error . "<br>";
     }
-    echo "Ga terug naar <a href='producten_edit.php?id=" . $product_id . "'> producten </a>";
+    echo "Ga terug naar <a href='producten_edit.php'> producten </a>";
     exit;
 }
 

@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
                     <div class="form-panel special-form-panel">
                         <h1>Bijwerken</h1>
                         <hr class="separator">
-                        <form action="gebruikers_create_process.php" method="POST">
+                        <form action="gebruikers_update.php" method="POST">
                             <div class="input-container">
                                 <div class="input-groep">
                                     <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" value="<?php echo ($gebruiker['voornaam']); ?>">
@@ -106,26 +106,25 @@ if (isset($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="input-groep">
-    <select id="role" name="role">
-        
+    <select id="rol" name="rol">
         <?php 
-         if ($_SESSION['role'] === 'admin') {
-             $allowed_roles = ['admin', 'directeur', 'manager', 'medewerker', 'klant'];
-         } elseif ($_SESSION['role'] === 'directeur') {
-             $allowed_roles = ['directeur', 'manager', 'medewerker', 'klant'];
-         } elseif ($_SESSION['role'] === 'manager') {
-             $allowed_roles = ['manager', 'medewerker', 'klant'];
-         } else {
-             $allowed_roles = ['klant'];
-         }
-         
-         foreach ($allowed_roles as $role) {
-             echo "<option value='$role'" . ($gebruiker['rol'] === $role ? ' selected' : '') . ">$role</option>";
-         }
-         ?>
-         
+        if ($_SESSION['role'] === 'admin') {
+            $allowed_roles = ['admin', 'directeur', 'manager', 'medewerker', 'klant'];
+        } elseif ($_SESSION['role'] === 'directeur') {
+            $allowed_roles = ['directeur', 'manager', 'medewerker', 'klant'];
+        } elseif ($_SESSION['role'] === 'manager') {
+            $allowed_roles = ['manager', 'medewerker', 'klant'];
+        } else {
+            $allowed_roles = ['klant'];
+        }
+        
+        foreach ($allowed_roles as $role) {
+            echo "<option value='$role'" . ($gebruiker['rol'] === $role ? ' selected' : '') . ">$role</option>";
+        }
+        ?>
     </select>
 </div>
+
 
                             <div class="input-container">
                                 <div class="input-groep">
@@ -133,6 +132,9 @@ if (isset($_GET['id'])) {
                                 </div>
                                 <div class="input-groep">
                                     <input type="number" id="huisnummer" name="huisnummer" placeholder="Huisnummer" value="<?php echo isset($adres['huisnummer']) ? $adres['huisnummer'] : ''; ?>">
+                                </div>
+                                <div class="input-groep">
+                                    <input type="text" id="postcode" name="postcode" placeholder="postcode" value="<?php echo isset($adres['postcode']) ? $adres['postcode'] : ''; ?>">
                                 </div>
                             </div>
                             <div class="input-groep">

@@ -51,8 +51,8 @@ foreach (['voornaam', 'achternaam'] as $nameField) {
 }
 
 if (empty($errors)) {
-    // Prepare concatenated data
-    $email = $_POST['email'];
+     // Prepare concatenated data
+     $email = $_POST['email'];
 
      // Check if user already exists with the same email
      $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE email = :email");

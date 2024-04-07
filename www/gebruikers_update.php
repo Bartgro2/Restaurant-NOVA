@@ -1,6 +1,4 @@
 <?php
-require 'database.php';
-
 session_start();
 
 // Check if the user is not logged in
@@ -9,12 +7,21 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Check if role is not admin, directeur, manager, or medewerker
+if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
+    echo "You are not authorized to view this page. Please log in with appropriate credentials. ";
+    echo "Log in with a different role <a href='login.php'>here</a>.";
+    exit;
+}
+
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo "You are not allowed to view this page ";
-    echo "Ga terug naar <a href='dashboard.php'> dashboard </a>";
+    echo " ga terug naar <a href='reserveringen_index.php'> reserveringen </a>";
     exit;
 }
+
+require 'database.php';
 
 // Sanitize and validate form fields
 function test_input($data) {
@@ -26,7 +33,8 @@ function test_input($data) {
 
 $errors = [];
 
-$requiredFields = ['voornaam', 'achternaam', 'email', 'role', 'woonplaats', 'postcode', 'huisnummer', 'gebruikersnaam', 'wachtwoord', 'verzeker_wachtwoord'];
+// Sanitize and validate form fields
+$requiredFields = ['voornaam', 'achternaam', 'email', 'role', 'woonplaats', 'postcode', 'huisnummer', 'gebruikersnaam', 'wachtwoord'];
 
 foreach ($requiredFields as $field) {
     // Check if the field is required and not empty, except for tussenvoegsel
@@ -36,25 +44,30 @@ foreach ($requiredFields as $field) {
     }
 }
 
+// Check for email format
 $email = test_input($_POST["email"]);
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Invalid email format";
 }
 
+// Validate firstname, lastname, and username
 foreach (['voornaam', 'achternaam'] as $nameField) {
     if (!preg_match("/^[a-zA-Z-' ]*$/", $_POST[$nameField])) {
         $errors[] = "Only letters and white space allowed for " . ($nameField == 'voornaam' ? 'voornaam' : 'achternaam');
     }
 }
 
+// Validate username
 if (!preg_match("/^[a-zA-Z0-9\s]*$/", $_POST['gebruikersnaam'])) {
     $errors[] = "Only letters, numbers, and white space allowed for gebruikersnaam";
 }
 
+// Validate tussenvoegsel if present
 if (!empty($_POST['tussenvoegsel']) && !preg_match("/^[a-zA-Z-' ]*$/", $_POST['tussenvoegsel'])) {
     $errors[] = "Only letters and white space allowed for tussenvoegsel";
 }
 
+// Verify if the passwords match
 $wachtwoord = $_POST['wachtwoord'];
 $verzeker_wachtwoord = $_POST['verzeker_wachtwoord'];
 if ($verzeker_wachtwoord !== $wachtwoord) {
@@ -62,92 +75,114 @@ if ($verzeker_wachtwoord !== $wachtwoord) {
 }
 
 if (empty($errors)) {
+    $voornaam = $_POST['voornaam'];
+    $tussenvoegsel = $_POST['tussenvoegsel'];
+    $achternaam = $_POST['achternaam'];
+    $gebruikersnaam = $_POST['gebruikersnaam'];
+    $email = $_POST['email'];
+    $wachtwoord = $_POST['wachtwoord'];
+    $rol =  $_SESSION['role'];
+    $woonplaats =  $_POST['woonplaats'];
+    $postcode =  $_POST['postcode'];
+    $huisnummer =  $_POST['huisnummer'];
+    $gebruiker_id = $_POST['id'];
 
-    // Prepare concatenated data
-    $concatenated_data_email_username = $_POST['email'] . '|' . $_POST['gebruikersnaam'];
+    // Retrieve the address ID based on the user ID
+    $sql = "SELECT * FROM adressen
+            JOIN gebruikers ON gebruikers.adres_id = adressen.adres_id
+            WHERE gebruiker_id = :gebruiker_id";
 
-    // Check if user already exists with the same email, gebruikersnaam, or their combination
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM gebruikers WHERE CONCAT(email, '|', gebruikersnaam) = :concatenated_data_email_username OR email = :email OR gebruikersnaam = :gebruikersnaam");
-    $stmt->bindParam(':concatenated_data_email_username', $concatenated_data_email_username);
-    $stmt->bindParam(':email', $_POST['email']);
-    $stmt->bindParam(':gebruikersnaam', $_POST['gebruikersnaam']);
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':gebruiker_id', $gebruiker_id);
     $stmt->execute();
-    $count = $stmt->fetchColumn();
+    $adres = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($count > 0) {
-        $errors[] = "User with a combination of the same email, firstname, lastname, username already exists";
-    } else {
-        $voornaam = $_POST['voornaam'];
-        $tussenvoegsel = $_POST['tussenvoegsel'];
-        $achternaam = $_POST['achternaam'];
-        $gebruikersnaam = $_POST['gebruikersnaam'];
-        $email = $_POST['email'];
-        $wachtwoord = $_POST['wachtwoord'];
-        $gebruiker_id = $_GET['id'];
-        $woonplaats = $_POST['woonplaats'];
-        $postcode = $_POST['postcode'];
-        $huisnummer = $_POST['huisnummer'];
+    if ($adres) {
+        $adres_id = $adres['adres_id']; // Assuming 'adres_id' is the primary key of the 'adressen' table
 
-        // Update the user
-        $hashed_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
-        $sql = "UPDATE gebruikers
-        JOIN adressen ON gebruikers.adres_id = adressen.adres_id
-        SET gebruikers.voornaam = :voornaam,
-            gebruikers.tussenvoegsel = :tussenvoegsel,
-            gebruikers.achternaam = :achternaam,
-            gebruikers.email = :email,
-            gebruikers.gebruikersnaam = :gebruikersnaam,
-            gebruikers.wachtwoord = :wachtwoord,
-            gebruikers.rol = :rol,
-            adressen.woonplaats = :woonplaats,
-            adressen.postcode = :postcode,
-            adressen.huisnummer = :huisnummer
-        WHERE gebruikers.gebruiker_id = :gebruiker_id";
+        // Update the address details
+        $sql = "UPDATE adressen
+                SET woonplaats = :woonplaats,
+                    postcode = :postcode,
+                    huisnummer = :huisnummer
+                WHERE adres_id = :adres_id";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':voornaam', $voornaam);
-        $stmt->bindParam(':tussenvoegsel', $tussenvoegsel);
-        $stmt->bindParam(':achternaam', $achternaam);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':gebruikersnaam', $gebruikersnaam);
-        $stmt->bindParam(':wachtwoord', $hashed_password);
-
-        // Check if the user is directeur, admin, or manager
-        if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager') {
-            // If so, set their role to the selected role from the form
-            $stmt->bindParam(':rol', $_POST['role']);
-        } else {
-            // For other roles, set their role to their current role
-            $stmt->bindParam(':rol', $_SESSION['role']);
-        }
-
         $stmt->bindParam(':woonplaats', $woonplaats);
         $stmt->bindParam(':postcode', $postcode);
         $stmt->bindParam(':huisnummer', $huisnummer);
-        $stmt->bindParam(':gebruiker_id', $gebruiker_id);
+        $stmt->bindParam(':adres_id', $adres_id);
         $stmt->execute();
 
-        // Check if both updates were successful
+        // Check if the address update was successful
         if ($stmt->rowCount() > 0) {
-            if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') { 
-                header("Location: gebruikers_index.php"); // Redirect to gebruikers_index.php
-                exit; // Make sure to exit after redirecting
+            // Proceed with updating the user
+            $sql = "UPDATE gebruikers
+                    SET adres_id = :adres_id,
+                        voornaam = :voornaam,
+                        tussenvoegsel = :tussenvoegsel,
+                        achternaam = :achternaam,
+                        email = :email,
+                        gebruikersnaam = :gebruikersnaam,
+                        wachtwoord = :wachtwoord";
+            
+            // Update role only if the user has admin, directeur, or manager role
+            if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager') {
+                if (isset($_POST['rol'])) {
+                    $sql .= ", role = :rol";
+                }
+            }
+            
+            $sql .= " WHERE gebruiker_id = :gebruiker_id";
+
+            $hashed_password = password_hash($wachtwoord, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':adres_id', $adres_id);
+            $stmt->bindParam(':voornaam', $voornaam);
+            $stmt->bindParam(':tussenvoegsel', $tussenvoegsel);
+            $stmt->bindParam(':achternaam', $achternaam);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':gebruikersnaam', $gebruikersnaam);
+            $stmt->bindParam(':wachtwoord', $hashed_password);
+            $stmt->bindParam(':gebruiker_id', $gebruiker_id);
+            
+            // Bind role parameter if it exists
+            if ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'directeur' || $_SESSION['role'] === 'manager') {
+                if (isset($_SESSION['role'])) {
+                    $stmt->bindParam(':rol', $_SESSION['role']);
+                }
+            }
+            
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                // User updated successfully
+                header("Location: gebruikers_index.php");
+                exit;
             } else {
-                header("Location: dashboard.php"); // Redirect to dashboard.php
-                exit; // Make sure to exit after redirecting
+                // Error updating user
+                echo "Error updating user details. ";
+                echo " ga terug naar  </a>";
+                exit;
             }
         } else {
-            $errors[] = "Error updating user";
+            // Error updating address
+            echo "Error updating address details. ";
+            echo " ga terug naar ";
+            exit;
         }
+    } else {
+        // Error retrieving address
+        echo "Error retrieving address details. ";
+        echo " ga terug naar ";
+        exit;
     }
-}
-
-// If there are errors, display them
-if (!empty($errors)) {
+} else {
+    // Display errors
     foreach ($errors as $error) {
         echo $error . "<br>";
     }
-    if ($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'directeur' || $_SESSION['role'] !== 'manager' || $_SESSION['role'] !== 'medewerker') { 
+    if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'directeur' && $_SESSION['role'] !== 'manager' && $_SESSION['role'] !== 'medewerker') {
         header("Location: gebruikers_index.php"); // Redirect to gebruikers_index.php
         exit; // Make sure to exit after redirecting
     } else {
@@ -156,3 +191,4 @@ if (!empty($errors)) {
     }
 }
 ?>
+

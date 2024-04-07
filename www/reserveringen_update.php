@@ -35,7 +35,7 @@ function test_input($data) {
 $errors = [];
 
 $requiredFields = ['voornaam', 'achternaam', 'email', 'tijd', 'datum', 'tafel_id']; // Add 'tafel_id' to required fields
-
+var_dump($requiredFields);
 foreach ($requiredFields as $field) {
     // Check if the field is required and not empty, except for tussenvoegsel
     if ($field !== 'tussenvoegsel' && empty($_POST[$field])) {
@@ -43,6 +43,8 @@ foreach ($requiredFields as $field) {
         break; // Stop checking further fields if one is found empty
     }
 }
+
+
 
 $email = test_input($_POST["email"]);
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -62,11 +64,11 @@ if (!empty($_POST['tussenvoegsel']) && !preg_match("/^[a-zA-Z-' ]*$/", $_POST['t
 if (empty($errors)) {
     // Retrieve necessary form data
     $voornaam = $_POST['voornaam'];
-    $tussenvoegsel = $_POST['tussenvoegsel'];
+$tussenvoegsel = $_POST['tussenvoegsel'];
     $achternaam = $_POST['achternaam'];
     $email = $_POST['email'];
     $tijd = $_POST['tijd'];
-    $datum = $_POST['datum'];
+    $datum = $_POST['datum']; 
     $reservering_id = $_GET['id'];
     $tafel_id = $_POST['tafel_id'];
 
